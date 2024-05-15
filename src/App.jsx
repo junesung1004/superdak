@@ -1,12 +1,16 @@
 
+import { Outlet } from 'react-router-dom'
 import './App.css'
+import Header from './components/Header'
+
 
 function App() {
 
 
   return (
     <>
-    <p>main page</p>
+    <Header />
+    <Outlet />
     </>
   )
 }
