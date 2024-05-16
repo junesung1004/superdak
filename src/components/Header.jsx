@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom"
-import styled from "styled-components"
 import { FaUserCircle } from "react-icons/fa";
 import { BiCart  } from "react-icons/bi";
-import './Header.css'
+import {Nav} from './HeaderStyle'
+
 
 
 
@@ -49,9 +49,3 @@ export default function Header() {
   )
 }
 
-const Nav = styled.nav`
-  display:flex;
-  justify-content:center;
-  border-bottom: 1px solid gray;
-  
-`

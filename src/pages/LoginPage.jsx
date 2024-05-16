@@ -1,8 +1,7 @@
 
 import styled from 'styled-components'
-import './LoginPage.css'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 
@@ -14,6 +13,8 @@ const User = {
 
 
 export default function LoginPage() {
+
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -55,6 +56,7 @@ export default function LoginPage() {
     e.preventDefault();
     if(email === User.email && password === User.password) {
       alert('로그인에 성공했습니다.')
+      navigate('/')
     } else {
       alert('등록되지 않은 회원입니다.')
     }
@@ -75,7 +77,7 @@ export default function LoginPage() {
         회원 로그인
       </div>
 
-      <form className="contentWrap">
+      <ContentWrap>
         {/* 이메일 입력창 */}
           <div className="inputTitle">
             <label htmlFor="email">이메일 주소</label>
@@ -129,12 +131,12 @@ export default function LoginPage() {
           >
             로그인</button>
         </div>
-      </form>
-      <div className='joinWrap'>
+      </ContentWrap>
+      <JoinWrap>
         <span>계정이 없으신가요?</span>
         <Link to={'/join'}><span className='join'>회원가입</span></Link>
         
-      </div>
+      </JoinWrap>
     </LoginContainer>
   )
 }
@@ -148,4 +150,98 @@ const LoginContainer = styled.div`
   margin: auto;
   overflow: hidden;
   padding: 10px;
+  .titleWrap {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #262626;
+}
+`
+
+const ContentWrap = styled.form`
+   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .inputTitle {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    label {
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    .inputWrap {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid #e2e0e0;
+      height: 60px;
+      padding-left: 30px;
+      svg {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+      .checkBtn {
+        cursor: pointer;
+        width: 150px;
+        border: none;
+        padding: 8px;
+        background-color:rgb(108, 175, 234);
+        color: white;
+        font-weight: bold;
+        border-radius: 8px;
+      }
+      input {
+        width: 100%;
+        outline: none;
+        border: none;
+        height: 1rem;
+        font-size: 0.9rem;
+        font-weight: 400;
+      &::placeholder {
+        color: #dadada;
+        }
+      }
+      &:focus-within {
+        border: 1px solid #9e30f4;
+      }
+    }
+  
+  }
+  .errorMessageWrap {
+    color: #ef0000;
+
+  }
+  .button {
+    margin-top: 20px;
+    cursor: pointer;
+    width: 100%;
+    height: 48px;
+    border: none;
+    font-weight: 700;
+    background-color: rgba(104, 228, 226, 0.6);
+    border-radius: 8px;
+    color: black;
+  }
+  .button:disabled {
+    background-color: #dadada;
+    color: white;
+  }
+`
+
+const JoinWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  .join {
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(108, 175, 234);
+  }
 `

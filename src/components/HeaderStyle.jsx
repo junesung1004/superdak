@@ -1,4 +1,10 @@
-.header-container {
+import styled from "styled-components";
+
+export const Nav = styled.nav`
+  display:flex;
+  justify-content:center;
+  border-bottom: 1px solid gray;
+  .header-container {
   position: relative;
   width:100%;
   max-width:1400px;
@@ -9,27 +15,26 @@
   .logo-cont {
     display:flex;
     align-items:center;
-   img {
+    img {
     width:120px;
     height:120px;
-   }
-   span {
+  }
+    span {
     font-size:2rem;
     font-weight:bold;
-   }
+  }
   }
   .header-user-logo {
     display: flex;
     gap:20px;
     .user-logo {
       .user-form {
-/*         
         &:hover {
         width: 150px;
         height: 70px;
         padding: 10px;
         border: 1px solid black;
-        } */
+        }
       }
       svg {
         width:2rem;
@@ -64,5 +69,5 @@
       }
     }
   }
-  
 }
+`
