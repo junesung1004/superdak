@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import {LoginContainer, ContentWrap, ButtonWrap} from './JoinPageStyle'
+import { joinEmail } from '../api/api';
 
 
 
@@ -67,10 +68,21 @@ export default function JoinPage() {
   }
 
   
-  const handleJoinEvent = (e) => {
+  const handleJoinEvent = async(e) => {
     e.preventDefault();
-    alert('회원가입에 성공했습니다.')
-    navigate('/')
+    try{
+      const userData = await joinEmail(email, password)
+      console.log("userData 로그인페이지: ", userData)
+      if(userData.error === 'auth/email-already-in-use') {
+        alert('이미 사용 중인 이메일입니다. 다른 이메일을 사용해주세요.');
+      } else {
+        alert('회원가입에 성공하였습니다.')
+        navigate('/login')
+      }
+    } catch(err){
+      console.error("회원가입 에러 : ", err)
+      alert('회원가입에 실패했습니다.');
+    }
   }
 
   //emailvalid 와 passwordvalid가 마운트될때 버튼 활성화

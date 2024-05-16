@@ -1,13 +1,25 @@
-
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  databaseURL : NEXT_PUBLIC_FIREBASE_DB_URL,
-  // storageBucket: "superdak-f9e5b.appspot.com",
-  // messagingSenderId: "147630142018",
-  // appId: "1:147630142018:web:2a4018fc9c322ab014b3db",
-  // measurementId: "G-400CYKP69L"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
 };
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig); //firebaseConfig를 기반으로 firebase설정 초기값을 초기화
+const auth = getAuth(app); // 초기화된 앱을 기반으로 firebase인증 객체 생성(사용자 인증 관리)
+
+//이메일, 비밀번호 회원가입 api
+
+export async function joinEmail(email, password) {
+  try {
+    const userData = await createUserWithEmailAndPassword(auth, email, password);
+    console.log("userData : ", userData)
+    return userData;
+  } catch (err) {
+    console.error("error : ", err);
+  }
+}
