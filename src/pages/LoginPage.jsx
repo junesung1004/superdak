@@ -5,12 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import {LoginContainer, ContentWrap, JoinWrap} from './LoginPageStyle'
+import { loginEmail } from '../api/api';
 
-//더미데이터
-const User = {
-  email: 'test@gmail.com',
-  password : 'qwer1234!!'
-}
 
 
 export default function LoginPage() {
@@ -53,15 +49,27 @@ export default function LoginPage() {
     }
   }
 
-  const handleLoginEvent = (e) => {
+  const handleLoginEvent = async (e) => {
     e.preventDefault();
-    if(email === User.email && password === User.password) {
-      alert('로그인에 성공했습니다.')
-      navigate('/')
-    } else {
-      alert('등록되지 않은 회원입니다.')
+    try {
+      const userData = await loginEmail(email, password);
+      console.log("로그인 유저 : ", userData);
+      if (userData) {
+        alert("로그인에 성공했습니다.");
+        navigate("/");
+      } else {
+        alert("아이디 또는 비밀번호가 잘못되었습니다.");
+      }
+    } catch (err) {
+      // Firebase가 반환하는 에러코드를 확인하여 이미 가입된 이메일인지 확인할 수 있습니다.
+      if (err.code === "auth/user-not-found") {
+        alert("가입되지 않은 이메일입니다.");
+      } else {
+        console.error("로그인 에러 : ", err);
+      }
     }
-  }
+  };
+  
 
   //emailvalid 와 passwordvalid가 마운트될때 버튼 활성화
   useEffect(()=> {
@@ -72,17 +80,13 @@ export default function LoginPage() {
     setNotAllow(true)
   },[emailValid, passwordValid])
 
-  const go = () => {
-
-  }
-
   return (
     <LoginContainer>
       <div className="title-wrap">
         회원 로그인
       </div>
 
-      <ContentWrap onSubmit={go}>
+      <ContentWrap>
         {/* 이메일 입력창 */}
           <div className="input-title">
             <label htmlFor="email">이메일 주소</label>
