@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const Nav = styled.nav`
   display:flex;
   justify-content:center;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #dedede;
   .header-container {
-  position: relative;
   width:100%;
   max-width:1400px;
   display:flex;
@@ -26,14 +25,38 @@ export const Nav = styled.nav`
   }
   .header-user-logo {
     display: flex;
-    gap:20px;
+    gap:60px;
     .user-logo {
-      .user-form {
-        &:hover {
-        width: 150px;
-        height: 70px;
-        padding: 10px;
+      cursor: pointer;
+      position: relative;
+      &:hover {
+        .sub-menu{
+          visibility: visible;
+          li {
+          cursor: pointer;
+        }
+        }
+        }
+      .sub-menu {
+        visibility: hidden;
+        display:flex;
+        gap:20px;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        width:150px;
+        height:160px;
         border: 1px solid black;
+        border-radius: 8px;
+        font-weight:bold;
+        position:absolute;
+        left:-60px;
+        background-color:white;
+        div {
+          border:1px solid #dedede;
+          padding:12px 24px;
+          border-radius: 8px;
         }
       }
       svg {
@@ -46,7 +69,7 @@ export const Nav = styled.nav`
 
 @media (max-width:768px) {
   .header-container {
-    padding: 2rem 2rem;
+    padding: 2rem 3rem;
     .logo-cont {
       display:flex;
       align-items:center;

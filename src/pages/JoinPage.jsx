@@ -1,9 +1,9 @@
 
-import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
+import {LoginContainer, ContentWrap, ButtonWrap} from './JoinPageStyle'
 
 
 
@@ -84,27 +84,28 @@ export default function JoinPage() {
 
   return (
     <LoginContainer>
-      <div className="titleWrap">
+      <div className="title-wrap">
         <h1>회원가입</h1>
         <p>회원이 되어 다양한 혜택을 경험해 보세요!</p>
       </div>
 
       <ContentWrap>
         {/* 이메일 입력창 */}
-          <div className="inputTitle">
+          <div className="input-title">
             <label htmlFor="email">이메일 주소</label>
-            <div className='inputWrap'>
-            <FaUser />
-            <input id={'email'} 
-            type="text" 
-            name="email" 
-            placeholder="test@gmail.com"
-            value={email}
-            onChange={handleEmailChange}
-            />
+            <div className='input-wrap'>
+              <FaUser />
+              <input id={'email'} 
+              type="text" 
+              name="email" 
+              placeholder="test@gmail.com"
+              value={email}
+              onChange={handleEmailChange}
+              />
+              <button className='check-btn'>중복확인</button>
             </div>
           </div>
-        <div className="errorMessageWrap">
+        <div className="error-message-wrap">
           {
             !emailValid && email.length > 0 && (
               <div>올바른 이메일을 입력해주세요.</div>
@@ -113,10 +114,10 @@ export default function JoinPage() {
         </div>
 
         {/* 비밀번호 입력창 */}
-        <div className="inputTitle">
+        <div className="input-title">
         
           <label htmlFor="password">비밀번호</label>
-          <div className='inputWrap'>
+          <div className='input-wrap'>
           <RiLockPasswordLine />
           <input id={'password'} 
           type="password" name="password" 
@@ -126,7 +127,7 @@ export default function JoinPage() {
           />
           </div>
         </div>
-        <div className="errorMessageWrap">
+        <div className="error-message-wrap">
           {
             !passwordValid && password.length > 0 && (
               <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
@@ -135,10 +136,10 @@ export default function JoinPage() {
         </div>
 
         {/* 비밀번호 재입력 확인창 */}
-        <div className="inputTitle">
+        <div className="input-title">
         
           <label htmlFor="confirmPw">비밀번호 확인</label>
-          <div className='inputWrap'>
+          <div className='input-wrap'>
           <RiLockPasswordLine />
           <input id={'confirmPw'} 
           type="password" name="confirmPw" 
@@ -148,7 +149,7 @@ export default function JoinPage() {
           />
           </div>
         </div>
-        <div className="errorMessageWrap">
+        <div className="error-message-wrap">
           {
             !confirmPwValid && confirmPw.length > 0 && (
               <div>비밀번호가 일치하지 않습니다.</div>
@@ -160,14 +161,14 @@ export default function JoinPage() {
         <ButtonWrap>
           <button type='button' 
           disabled={notAllow}
-          className='joinButton'
+          className='join-button'
           onClick={handleJoinEvent}
           >
             가입하기</button>
 
         <button type='button' 
           disabled={notAllow}
-          className='cancleButton'
+          className='cancle-button'
           >
             <Link to={'/login'}>
             취소하기
@@ -180,108 +181,3 @@ export default function JoinPage() {
   )
 }
 
-const LoginContainer = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  width:100%;
-  max-width:400px;
-  margin: auto;
-  overflow: hidden;
-  padding: 10px;
-  .titleWrap {
-  margin-top: 50px;
-  color: #262626;
-  h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom:10px;
-  }
-  p {
-    font-size: 0.8rem
-  }
-}
-`
-
-const ContentWrap = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  .inputTitle {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    label {
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 400;
-    }
-    .inputWrap {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border-radius: 8px;
-      padding: 10px;
-      border: 1px solid #e2e0e0;
-      height: 60px;
-      padding-left: 30px;
-      svg {
-        width: 1.2rem;
-        height: 1.2rem;
-      }
-      .checkBtn {
-        cursor: pointer;
-        width: 150px;
-        border: none;
-        padding: 8px;
-        background-color:rgb(108, 175, 234);
-        color: white;
-        font-weight: bold;
-        border-radius: 8px;
-      }
-      input {
-        width: 100%;
-        outline: none;
-        border: none;
-        height: 1rem;
-        font-size: 0.9rem;
-        font-weight: 400;
-      &::placeholder {
-        color: #dadada;
-        }
-      }
-      &:focus-within {
-        border: 1px solid #9e30f4;
-      }
-    }
-  
-  }
-  .errorMessageWrap {
-    color: #ef0000;
-
-  }
-  
-`
-
-const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-button {
-    cursor: pointer;
-    width: 150px;
-    height: 48px;
-    border: none;
-    font-weight: 700;
-    background-color: rgba(104, 228, 226, 0.6);
-    border-radius: 8px;
-    color: black;
-  }
-  .joinButton:disabled {
-    background-color: #dadada;
-    color: white;
-  }
-`

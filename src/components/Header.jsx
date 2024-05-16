@@ -29,12 +29,14 @@ export default function Header() {
         
         <div className="header-user-logo">
             <li className="user-logo">
-              <NavLink to={'/login'} style={getLinkStyle}>
                 <FaUserCircle />
-              </NavLink>
-              <ul className="user-form on" >
-                <li>로그인</li>
-                <li>회원가입</li>
+              <ul className="sub-menu" >
+                <div>
+                <Link to={'/login'}><li>로그인</li></Link>
+                </div>
+                <div>
+                <Link to={'/join'}><li>회원가입</li></Link>
+                </div>
               </ul>
             </li>
           
