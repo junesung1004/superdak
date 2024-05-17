@@ -12,6 +12,9 @@ import JoinPage from './pages/JoinPage'
 import LoginPage from './pages/LoginPage'
 import CartPage from './pages/CartPage'
 import ProductListPage from './pages/ProductListPage'
+import NotFoundPage from './pages/NotFoundPage.jsx'
+import MyPage from './pages/MyPage.jsx'
+import UploadPage from './pages/UploadPage.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -26,6 +29,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='join' element={<JoinPage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='cart' element={<CartPage />} />
+          <Route path='mypage' element={<MyPage />} />
+          <Route path='upload' element={<UploadPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
   </BrowserRouter>

@@ -1,6 +1,7 @@
 import { Link} from "react-router-dom"
 import {Nav} from './HeaderStyle'
 import LoginInfo from "./LoginInfo"
+import SearchBar from "./SearchBar"
 
 
 
@@ -22,7 +23,7 @@ export default function Header() {
         </li>
 
         {/* 검색 서치바 */}
-        <div><li><input type="text" /></li></div>
+        <SearchBar />
         
         {/* 로그인 인포 */}
         <LoginInfo />

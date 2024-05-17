@@ -183,7 +183,7 @@ export default function JoinPage() {
           disabled={notAllow}
           className='cancle-button'
           >
-            <Link to={'/login'}>
+            <Link to={'/'}>
             취소하기
             </Link>
           </button>

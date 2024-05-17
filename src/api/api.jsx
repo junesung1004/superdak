@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { getDatabase } from 'firebase/database'
+import { adminUser } from '../service/admin'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -12,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig); //firebaseConfig를 기반으로 firebase설정 초기값을 초기화
 const auth = getAuth(app); // 초기화된 앱을 기반으로 firebase인증 객체 생성(사용자 인증 관리)
 const provider = new GoogleAuthProvider(); //구글 로그인 기능을 사용할때 추가하는 프로바이더 객체 생성
-
+const database = getDatabase();
 
 //이메일, 비밀번호 회원가입 api
 export async function joinEmail(email, password) {
@@ -56,7 +58,8 @@ export  function onUserLoginState(callback) {
   onAuthStateChanged (auth, async(user) => {
     if (user) {
       try {
-        callback(user)
+        const updateUser = await adminUser(user)
+        callback(updateUser)
       } catch(err) {
         console.log("로그인 유지 에러 : ", err)
         callback(user)
@@ -77,3 +80,6 @@ export async function logOut() {
     console.error("로그아웃 에러 : ", err)
   }
 }
+
+
+export {database}

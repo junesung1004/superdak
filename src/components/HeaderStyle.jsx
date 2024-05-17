@@ -1,12 +1,24 @@
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  display:flex;
-  justify-content:center;
+
   border-bottom: 1px solid #dedede;
+
+  button {
+    border: none;
+    background-color: white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
   .header-container {
   width:100%;
   max-width:1400px;
+  margin: 0 auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -26,6 +38,16 @@ export const Nav = styled.nav`
   
 }
 
+@media (max-width:980px) {
+  .header-container {
+    .logo-cont {
+      span {
+      display: none;
+      }
+    }
+  }
+}
+
 @media (max-width:768px) {
   .header-container {
     padding: 2rem 3rem;
@@ -33,21 +55,11 @@ export const Nav = styled.nav`
       display:flex;
       align-items:center;
       img {
-      width:50px;
-      height:50px;
+      width:100px;
+      height:100px;
       }
       span {
       display: none;
-      }
-    }
-    .header-user-logo {
-      display: flex;
-      gap:20px;
-      .user-logo {
-        svg {
-          width:1.5rem;
-          height:1.5rem
-        }
       }
     }
   }
