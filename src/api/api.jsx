@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -38,7 +38,7 @@ export async function loginEmail(email, password) {
 
 //구글 자동 로그인 방지
 provider.setCustomParameters({
-  prompt : 'select_accout'
+  prompt : 'select_account'
 })
 
 //구글 로그인 api
@@ -51,3 +51,29 @@ export async function googleLogin() {
   }
 }
 
+//로그인 유지(새로고침 해도 로그인 유지) api
+export  function onUserLoginState(callback) {
+  onAuthStateChanged (auth, async(user) => {
+    if (user) {
+      try {
+        callback(user)
+      } catch(err) {
+        console.log("로그인 유지 에러 : ", err)
+        callback(user)
+      }
+    } else {
+      //user 없다면 로그아웃 
+      callback(null)
+    }
+  })
+}
+
+
+// 구글, 이메일 로그인 후 로그아웃 api
+export async function logOut() {
+  try {
+    await signOut(auth)
+  } catch(err) {
+    console.error("로그아웃 에러 : ", err)
+  }
+}

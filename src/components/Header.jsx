@@ -1,18 +1,15 @@
-import { Link, NavLink } from "react-router-dom"
-import { FaUserCircle } from "react-icons/fa";
-import { BiCart  } from "react-icons/bi";
+import { Link} from "react-router-dom"
 import {Nav} from './HeaderStyle'
+import LoginInfo from "./LoginInfo"
+
 
 
 
 
 export default function Header() {
 
-  const getLinkStyle = ({isActive}) => {
-    return {
-      borderBottom : isActive ? '3px solid pink' : 'none',
-    }
-  }
+  
+
   
   return (
     <Nav>
@@ -27,25 +24,8 @@ export default function Header() {
         {/* 검색 서치바 */}
         <div><li><input type="text" /></li></div>
         
-        <div className="header-user-logo">
-            <li className="user-logo">
-                <FaUserCircle />
-              <ul className="sub-menu" >
-                <div>
-                <Link to={'/login'}><li>로그인</li></Link>
-                </div>
-                <div>
-                <Link to={'/join'}><li>회원가입</li></Link>
-                </div>
-              </ul>
-            </li>
-          
-            <li className="user-logo">
-              <NavLink to={'/cart'} style={getLinkStyle}>
-                <BiCart />
-              </NavLink>
-            </li>
-        </div>
+        {/* 로그인 인포 */}
+        <LoginInfo />
       </ul>
     </Nav>
   )

@@ -56,9 +56,10 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       const userData = await loginEmail(email, password);
-      console.log("로그인 유저 : ", userData);
+      
       if (userData) {
         alert("로그인에 성공했습니다.");
+        console.log("로그인 유저 : ", userData);
         navigate("/");
       } else {
         alert("아이디 또는 비밀번호가 잘못되었습니다.");
@@ -79,6 +80,7 @@ export default function LoginPage() {
       const userData = await googleLogin()
       if(userData) {
         alert('구글 로그인에 성공했습니다.')
+        console.log("로그인 유저 : ", userData);
         navigate('/')
       }
     } catch(err) {

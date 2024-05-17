@@ -1,7 +1,11 @@
 
 
+
 export default function HomePage() {
+
   return (
-    <div>HomePage</div>
+    <div>
+      메인 홈 page
+    </div>
   )
 }
