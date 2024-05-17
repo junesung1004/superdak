@@ -94,3 +94,10 @@ export const JoinWrap = styled.div`
     color: rgb(108, 175, 234);
   }
 `
+
+export const GoogleLoginButton = styled.div`
+  img {
+    width: 100%;
+    cursor: pointer;
+  }
+`

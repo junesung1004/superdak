@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -11,6 +11,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig); //firebaseConfig를 기반으로 firebase설정 초기값을 초기화
 const auth = getAuth(app); // 초기화된 앱을 기반으로 firebase인증 객체 생성(사용자 인증 관리)
+const provider = new GoogleAuthProvider(); //구글 로그인 기능을 사용할때 추가하는 프로바이더 객체 생성
+
 
 //이메일, 비밀번호 회원가입 api
 export async function joinEmail(email, password) {
@@ -34,4 +36,18 @@ export async function loginEmail(email, password) {
   }
 }
 
+//구글 자동 로그인 방지
+provider.setCustomParameters({
+  prompt : 'select_accout'
+})
+
+//구글 로그인 api
+export async function googleLogin() {
+  try {
+    const userData = await signInWithPopup(auth, provider)
+    return userData
+  } catch(err) {
+    console.error("구글 로그인 에러 : ", err)
+  }
+}
 

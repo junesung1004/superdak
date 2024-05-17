@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
-import {LoginContainer, ContentWrap, JoinWrap} from './LoginPageStyle'
-import { loginEmail } from '../api/api';
+import {LoginContainer, ContentWrap, JoinWrap, GoogleLoginButton} from './LoginPageStyle'
+import { googleLogin, loginEmail } from '../api/api';
 
 
 
@@ -21,6 +21,7 @@ export default function LoginPage() {
 
   const [notAllow, setNotAllow] = useState(true)
 
+  // 이메일 입력창
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
     //console.log("email : ", e.target.value)
@@ -35,6 +36,7 @@ export default function LoginPage() {
       }
   }
 
+  // 비밀번호 입력창
   const handlePasswordChange = (e) => {
     setPassword(e.target.value)
     //console.log("password : ", e.target.value)
@@ -49,6 +51,7 @@ export default function LoginPage() {
     }
   }
 
+  // 이메일, 비밀번호 입력 후 로그인 로직
   const handleLoginEvent = async (e) => {
     e.preventDefault();
     try {
@@ -69,6 +72,19 @@ export default function LoginPage() {
       }
     }
   };
+
+  // 구글 로그인
+  const googleLoginEvent = async() => {
+    try {
+      const userData = await googleLogin()
+      if(userData) {
+        alert('구글 로그인에 성공했습니다.')
+        navigate('/')
+      }
+    } catch(err) {
+      console.error("구글 로그인 에러 : ", err)
+    }
+  }
   
 
   //emailvalid 와 passwordvalid가 마운트될때 버튼 활성화
@@ -141,10 +157,14 @@ export default function LoginPage() {
             로그인</button>
         </div>
       </ContentWrap>
+      <GoogleLoginButton>
+        <img src="google.png" alt="구글 로그인 버튼" 
+        onClick={googleLoginEvent}
+        />
+      </GoogleLoginButton>
       <JoinWrap>
         <span>계정이 없으신가요?</span>
         <Link to={'/join'}><span className='join'>회원가입</span></Link>
-        
       </JoinWrap>
     </LoginContainer>
   )
