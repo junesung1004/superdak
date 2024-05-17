@@ -13,10 +13,10 @@ export default function HomePage() {
       <Swiper
       loop={true}
       slidesPerView= {1}
-      autoplay={{delay: 2000}}
+      autoplay={{delay: 1500}}
       speed={3000}
       modules={[Autoplay, EffectFade]}
-      effect = 'fade'
+      // effect = "fade"
       >
         <SwiperSlide>
           <img src="main-image-1.gif" alt="메인 슬라이더 이미지1" />

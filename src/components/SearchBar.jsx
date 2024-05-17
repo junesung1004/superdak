@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {SearchBarContainer} from './SearchBarStyle'
+import { FaSearch } from "react-icons/fa"
 
 
 export default function SearchBar() {
@@ -13,13 +14,15 @@ export default function SearchBar() {
   return (
     <SearchBarContainer>
       <form>
+        <div className="input-wrap">
         <input type="text" 
         id="search" 
         value={search} 
         onChange={handleSearchEvent}
         placeholder="상품명을 입력해주세요."
         />
-        <label htmlFor="search">검색😎</label>
+        <FaSearch />
+        </div>
       </form>
     </SearchBarContainer>
   )

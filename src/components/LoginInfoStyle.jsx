@@ -12,6 +12,7 @@ export const UserInfoContainer = styled.div`
       gap: 10px;
       p {
         font-weight: 600;
+        font-size : 16px;
       }
       cursor: pointer;
       position: relative;
@@ -40,6 +41,7 @@ export const UserInfoContainer = styled.div`
         left:-65px;
         top: 65px;
         background-color:white;
+        z-index: 10;
         div {
           border:1px solid #dedede;
           padding:12px 24px;
