@@ -8,7 +8,6 @@ export default function HomePage() {
       <ProductItems />
       <ProductItems />
       <ProductItems />
-      <ProductItems />
     </>
   );
 }
