@@ -61,6 +61,9 @@ export const UserInfoContainer = styled.div`
     gap: 30px;
     transform: scale(0.8);
     .user-logo {
+      p {
+        display: none;
+      }
       .sub-menu {
         transform: scale(0.8);
         top: 50px;

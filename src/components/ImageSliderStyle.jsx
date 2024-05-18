@@ -56,7 +56,8 @@ export const SwiperContainer = styled.div`
     }
   }
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1150px) {
+    display: none;
     .img-wrap {
       img {
         width: 50%;

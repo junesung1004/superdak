@@ -34,7 +34,7 @@ export const SearchBarContainer = styled.div`
   @media (max-width: 1100px) {
     form {
       .input-wrap {
-        width: 300px;
+        width: 400px;
       }
     }
   }
@@ -42,7 +42,7 @@ export const SearchBarContainer = styled.div`
   @media (max-width: 768px) {
     form {
       .input-wrap {
-        width: 200px;
+        width: 220px;
       }
     }
   }

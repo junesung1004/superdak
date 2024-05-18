@@ -56,8 +56,8 @@ export const Nav = styled.nav`
         display: flex;
         align-items: center;
         img {
-          width: 100px;
-          height: 100px;
+          width: 60px;
+          height: 60px;
         }
         span {
           display: none;
