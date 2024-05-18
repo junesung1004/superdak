@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function ProductPage() {
@@ -60,8 +61,12 @@ export default function ProductPage() {
 
             {/* 장바구니 및 바로구매 버튼 */}
             <div className="button-wrap">
-              <button>장바구니</button>
-              <button>바로구매</button>
+              <Link to={"/cart"}>
+                <button className="cart-btn">장바구니</button>
+              </Link>
+              <Link>
+                <button className="buy-btn">바로구매</button>
+              </Link>
             </div>
           </form>
         </div>
@@ -160,37 +165,70 @@ const ProductItemContainer = styled.div`
           padding: 15px 20px;
         }
         .button-wrap {
+          margin-top: 20px;
           display: flex;
+          justify-content: center;
           width: 100%;
           gap: 20px;
-          button {
-            margin-top: 20px;
-            display: flex;
-            flex: 1;
-            padding: 15px 30px;
-            justify-content: center;
-            font-weight: 600;
-            border: 1px solid #dedede;
-            border-radius: 8px;
+          .cart-btn {
+            height: 50px;
             cursor: pointer;
-            transition: 0.5s;
-          }
-          button:first-child {
+            width: 230px;
+            font-weight: bold;
+            padding: 10px 80px;
+            border: 1px solid #ededed;
             background-color: white;
+            transition: 0.5s;
+            border-radius: 8px;
             &:hover {
-              background-color: #f7e9e9;
+              background-color: rgba(244, 193, 193, 0.5);
             }
           }
-
-          button:last-of-type {
-            background-color: rgba(249, 101, 8, 0.6);
+          .buy-btn {
+            cursor: pointer;
             color: white;
+            height: 50px;
+            width: 230px;
+            font-weight: bold;
+            padding: 10px 30px;
+            border: 1px solid #ededed;
+            background-color: aqua;
+            transition: 0.5s;
+            border-radius: 8px;
             &:hover {
-              background-color: rgba(249, 101, 8, 1);
+              background-color: rgba(138, 127, 241, 0.5);
             }
           }
         }
       }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    transform: scale(0.85);
+    .img-wrapper {
+      img:last-child {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 820px) {
+    transform: scale(0.8);
+    .img-wrapper {
+      img:last-child {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: relative;
+    top: -100px;
+    .product-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 `;

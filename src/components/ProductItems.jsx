@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ProductItemsContainer } from "./ProductItemStyle";
 
 export default function ProductItems() {
@@ -10,18 +11,20 @@ export default function ProductItems() {
         {/* 야이템 틀*/}
         <div className="item-container">
           {/* 아이템 */}
-          <div className="product-item-wrap">
-            <div className="img-wrap">
-              <img src="/protein-1.jpg" alt="아이템 상품" />
+          <Link to={"/productlist/product"}>
+            <div className="product-item-wrap">
+              <div className="img-wrap">
+                <img src="/protein-1.jpg" alt="아이템 상품" />
+              </div>
+              <div className="item-content">
+                <p>팩당 1,650원! 단백질 35g 💪 맛있는 보충제</p>
+                <p>슈퍼닭 소화잘되는 근육증가 보충제</p>
+                <p>
+                  <span>25,500</span>원
+                </p>
+              </div>
             </div>
-            <div className="item-content">
-              <p>팩당 1,650원! 단백질 35g 💪 맛있는 보충제</p>
-              <p>슈퍼닭 소화잘되는 근육증가 보충제</p>
-              <p>
-                <span>25,500</span>원
-              </p>
-            </div>
-          </div>
+          </Link>
 
           {/* 아이템 */}
           <div className="product-item-wrap">

@@ -87,9 +87,6 @@ export const ProductItemsContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    transform: scale(0.9);
-    position: relative;
-    top: -100px;
     .category-title {
       font-size: 1.2rem;
     }
