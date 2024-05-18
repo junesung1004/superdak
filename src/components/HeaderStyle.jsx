@@ -40,6 +40,7 @@ export const Nav = styled.nav`
   }
 
   @media (max-width: 980px) {
+    padding: 2rem 2rem;
     .header-container {
       .logo-cont {
         span {
@@ -51,7 +52,6 @@ export const Nav = styled.nav`
 
   @media (max-width: 768px) {
     .header-container {
-      padding: 2rem 3rem;
       .logo-cont {
         display: flex;
         align-items: center;
