@@ -1,7 +1,14 @@
+import styled from "styled-components"
 
 
 export default function ProductPage() {
   return (
-    <div>ProductPage</div>
+    <ProductItemContainer>
+      asdasd
+    </ProductItemContainer>
   )
 }
+
+const ProductItemContainer = styled.div`
+  
+`
