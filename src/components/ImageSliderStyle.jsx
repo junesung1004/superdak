@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const SwiperContainer = styled.div`
   width: 100%;
-  overflow:hidden;
+  overflow: hidden;
   position: relative;
 
-  //이전버튼, 다음버튼 css코드 
-  .swiper-button-next, .swiper-button-prev {
-    color: #fff ;
-    background: rgba(0, 0, 0, 0.5) ;
+  //이전버튼, 다음버튼 css코드
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -17,20 +18,19 @@ export const SwiperContainer = styled.div`
     align-items: center;
     position: absolute;
     &:hover {
-      background: rgba(0, 0, 0, 0.9) ;
+      background: rgba(0, 0, 0, 0.9);
     }
     &:after {
       font-size: 35px;
     }
   }
- 
 
   //페이지 순서를 dot 형태의 이미지로 표시하는 css
   .swiper-pagination {
     display: flex !important;
     gap: 20px !important;
     justify-content: center !important;
-    position:absolute;
+    position: absolute;
     bottom: 30px;
   }
 
@@ -46,6 +46,7 @@ export const SwiperContainer = styled.div`
     background: #007aff;
   }
 
+  //페이지의 위치를 스크롤바로 표시해주는 css
   .swiper-scrollbar {
     background: rgba(0, 0, 0, 0.1);
     height: 5px;
@@ -54,14 +55,13 @@ export const SwiperContainer = styled.div`
       background: #da6acf;
     }
   }
-  
 
-  @media (max-width:1280px) {
+  @media (max-width: 1280px) {
     .img-wrap {
       img {
         width: 50%;
-        height: 50%; 
+        height: 50%;
       }
     }
   }
-`
+`;

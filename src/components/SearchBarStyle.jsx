@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-
 export const SearchBarContainer = styled.div`
   form {
     .input-wrap {
-      width: 600px;
+      width: 500px;
       height: 40px;
       display: flex;
       gap: 10px;
@@ -24,9 +23,7 @@ export const SearchBarContainer = styled.div`
     }
   }
 
-  
-
-  @media (max-width:1260px) {
+  @media (max-width: 1260px) {
     form {
       .input-wrap {
         width: 450px;
@@ -34,7 +31,7 @@ export const SearchBarContainer = styled.div`
     }
   }
 
-  @media (max-width:1100px) {
+  @media (max-width: 1100px) {
     form {
       .input-wrap {
         width: 300px;
@@ -42,12 +39,11 @@ export const SearchBarContainer = styled.div`
     }
   }
 
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     form {
       .input-wrap {
-        width: 250px;
+        width: 200px;
       }
     }
   }
-  
-`
+`;

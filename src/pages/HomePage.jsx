@@ -1,14 +1,14 @@
 import ImageSlider from "../components/ImageSlider";
-
-
-
+import ProductItems from "../components/ProductItems";
 
 export default function HomePage() {
-
   return (
     <>
-    <ImageSlider />
+      <ImageSlider />
+      <ProductItems />
+      <ProductItems />
+      <ProductItems />
+      <ProductItems />
     </>
-  )
+  );
 }
-
