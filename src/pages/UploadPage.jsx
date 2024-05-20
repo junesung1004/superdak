@@ -25,8 +25,8 @@ export default function UploadPage() {
     setDescription(e.target.value);
   };
 
-  const handleImageChange = () => {
-    setFile(file);
+  const handleImageChange = (e) => {
+    setFile(e.target.file);
   };
 
   const uploadSubmitEvent = async (e) => {
