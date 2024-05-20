@@ -26,8 +26,8 @@ export default function UploadPage() {
   };
 
   const handleImageChange = (e) => {
-    setFile(e.target.file);
-    console.log("setFile(e.target.file) :", setFile(e.target.file));
+    setFile(e.target.files[0]);
+    console.log("setFile(e.target.file) :", e.target.files[0]);
   };
 
   //console.log("setFile(e.target.file) :", setFile(e.target.file));
