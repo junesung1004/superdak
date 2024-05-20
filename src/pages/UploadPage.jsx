@@ -25,6 +25,10 @@ export default function UploadPage() {
     setDescription(e.target.value);
   };
 
+  const handleImageChange = (e) => {
+    setFile(e.target.value);
+  };
+
   const uploadSubmitEvent = async (e) => {
     e.preventDefault();
     try {
@@ -67,7 +71,7 @@ export default function UploadPage() {
           {/* 상품 이미지 */}
           <div className="upload-item-image">
             <label htmlFor="image">상품 이미지</label>
-            <input type="file" id="image" name="image" accept="image/*" />
+            <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} />
           </div>
 
           {/* 상품 업로드 버튼 */}
