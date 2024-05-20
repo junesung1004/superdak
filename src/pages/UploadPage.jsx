@@ -27,14 +27,14 @@ export default function UploadPage() {
 
   const handleImageChange = (e) => {
     setFile(e.target.file);
+    console.log("setFile(e.target.file) :", setFile(e.target.file));
   };
 
+  //console.log("setFile(e.target.file) :", setFile(e.target.file));
   const uploadSubmitEvent = async (e) => {
     e.preventDefault();
-    console.log("file : ", file);
     try {
       const url = await uploadImages(file);
-      console.log("file : ", file);
       const item = await addProducts(title, price, quantity, description, url);
     } catch (err) {
       console.error("상품 업로드 에러 : ", err);
