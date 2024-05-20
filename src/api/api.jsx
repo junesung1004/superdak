@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
+import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 import { adminUser } from "../service/admin";
 import { v4 as uuid } from "uuid";
 
@@ -9,6 +10,7 @@ const firebaseConfig = {
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
 };
 
 // Initialize Firebase
@@ -16,6 +18,7 @@ const app = initializeApp(firebaseConfig); //firebaseConfig를 기반으로 fire
 const auth = getAuth(app); // 초기화된 앱을 기반으로 firebase인증 객체 생성(사용자 인증 관리)
 const provider = new GoogleAuthProvider(); //구글 로그인 기능을 사용할때 추가하는 프로바이더 객체 생성
 const database = getDatabase();
+const storage = getStorage();
 
 //이메일, 비밀번호 회원가입 api
 export async function joinEmail(email, password) {
@@ -81,8 +84,23 @@ export async function logOut() {
   }
 }
 
-//상품을 데이터베이스에 업로드 하는 api
-export async function addProducts(title, price, quantity, description) {
+//상품 이미지를 스토리지에 저장하는 api
+export async function uploadImages(file) {
+  try {
+    const id = uuid();
+    const imgRef = storageRef(storage, `images/${id}`);
+    console.log("imgRef : ", imgRef);
+    console.log("이미지 id : ", id);
+    await uploadBytes(imgRef, file);
+    const imgUrl = await getDownloadURL(imgRef);
+    return imgUrl;
+  } catch (err) {
+    console.error("상품 이미지 스토리지에 올리는 작업 에러 : ", err);
+  }
+}
+
+//상품을 이미지 url과 함께 데이터베이스에 업로드 하는 api
+export async function addProducts(title, price, quantity, description, imgUrl) {
   try {
     const id = uuid();
     console.log("id : ", id);
@@ -92,10 +110,28 @@ export async function addProducts(title, price, quantity, description) {
       price,
       quantity,
       description,
+      image: imgUrl,
     });
-    console.log("item : ", item);
   } catch (err) {
     console.log("상품 업데이트 에러 : ", err);
+  }
+}
+
+//상품을 데이터베이스에 업로드된 item을 가져오는 api
+export async function getProducts() {
+  try {
+    const itemRef = ref(database, "products");
+    const snapshot = await get(itemRef);
+    if (snapshot.exists()) {
+      const item = Object.values(snapshot.val());
+      console.log("item : ", item);
+      return item;
+    } else {
+      return [];
+    }
+  } catch (err) {
+    console.error("상품 받아오는 작업 에러 : ", err);
+    return [];
   }
 }
 

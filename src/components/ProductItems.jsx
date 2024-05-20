@@ -1,7 +1,25 @@
 import { Link } from "react-router-dom";
 import { ProductItemsContainer } from "./ProductItemStyle";
+import { useEffect, useState } from "react";
+import { getProducts } from "../api/api";
 
 export default function ProductItems() {
+  const [products, setProducts] = useState([]);
+  console.log("products : ", products);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const productItem = await getProducts();
+        console.log("fire base에 등록된 아이템을 get 하는 아이템 : ", productItem);
+        setProducts(productItem);
+      } catch (err) {
+        console.error("상품 받아오는 작업 에러 : ", err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <ProductItemsContainer>
@@ -9,65 +27,32 @@ export default function ProductItems() {
           🔥<span>HOT!</span> 맛있고 가성비 좋은 슈퍼닭 모든 아이템 !⭐
         </h1>
         {/* 야이템 틀*/}
-        <div className="item-container">
-          {/* 아이템 */}
-          <Link to={"/productlist/product"}>
-            <div className="product-item-wrap">
-              <div className="img-wrap">
-                <img src="/protein-1.jpg" alt="아이템 상품" />
-              </div>
-              <div className="item-content">
-                <p>팩당 1,650원! 단백질 35g 💪 맛있는 보충제</p>
-                <p>슈퍼닭 소화잘되는 근육증가 보충제</p>
-                <p>
-                  <span>25,500</span>원
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          {/* 아이템 */}
-          <div className="product-item-wrap">
-            <div className="img-wrap">
-              <img src="/protein-1.jpg" alt="아이템 상품" />
-            </div>
-            <div className="item-content">
-              <p>팩당 1,650원! 단백질 35g 💪 맛있는 보충제</p>
-              <p>슈퍼닭 소화잘되는 근육증가 보충제</p>
-              <p>
-                <span>25,500원</span>
-              </p>
-            </div>
-          </div>
-
-          {/* 아이템 */}
-          <div className="product-item-wrap">
-            <div className="img-wrap">
-              <img src="/protein-1.jpg" alt="아이템 상품" />
-            </div>
-            <div className="item-content">
-              <p>팩당 1,650원! 단백질 35g 💪 맛있는 보충제</p>
-              <p>슈퍼닭 소화잘되는 근육증가 보충제</p>
-              <p>
-                <span>25,500원</span>
-              </p>
-            </div>
-          </div>
-
-          {/* 아이템 */}
-          <div className="product-item-wrap">
-            <div className="img-wrap">
-              <img src="/protein-1.jpg" alt="아이템 상품" />
-            </div>
-            <div className="item-content">
-              <p>팩당 1,650원! 단백질 35g 💪 맛있는 보충제</p>
-              <p>슈퍼닭 소화잘되는 근육증가 보충제</p>
-              <p>
-                <span>25,500</span>원
-              </p>
-            </div>
-          </div>
-        </div>
+        {products.length === 0 ? (
+          <p>현재 상품이 없습니다. 상품을 추가해주세요.</p>
+        ) : (
+          <>
+            {products.map((products, idx) => {
+              return (
+                <div className="item-container" key={idx}>
+                  <Link to={"/productlist/product"}>
+                    <div className="product-item-wrap">
+                      <div className="img-wrap">
+                        <img src={products.image} alt="아이템 상품" />
+                      </div>
+                      <div className="item-content">
+                        <p>{products.title}</p>
+                        <p>{products.description}</p>
+                        <p>
+                          <span>{products.price}</span>원
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
+          </>
+        )}
       </ProductItemsContainer>
     </>
   );

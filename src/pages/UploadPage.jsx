@@ -1,12 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { addProducts } from "../api/api";
+import { addProducts, uploadImages } from "../api/api";
 
 export default function UploadPage() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -27,8 +28,8 @@ export default function UploadPage() {
   const uploadSubmitEvent = async (e) => {
     e.preventDefault();
     try {
-      const item = await addProducts(title, price, quantity, description);
-      console.log("item : ", item);
+      const url = await uploadImages(file);
+      const item = await addProducts(title, price, quantity, description, url);
     } catch (err) {
       console.error("상품 업로드 에러 : ", err);
     }
@@ -64,10 +65,10 @@ export default function UploadPage() {
           </div>
 
           {/* 상품 이미지 */}
-          {/* <div className="upload-item-image">
+          <div className="upload-item-image">
             <label htmlFor="image">상품 이미지</label>
-            <input type="file" id="image" name="image" />
-          </div> */}
+            <input type="file" id="image" name="image" accept="image/*" />
+          </div>
 
           {/* 상품 업로드 버튼 */}
           <div className="button-wrap">
