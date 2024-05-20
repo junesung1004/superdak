@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getDatabase } from 'firebase/database'
-import { adminUser } from '../service/admin'
+import { getDatabase, ref, set } from "firebase/database";
+import { adminUser } from "../service/admin";
+import { v4 as uuid } from "uuid";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -20,8 +21,8 @@ const database = getDatabase();
 export async function joinEmail(email, password) {
   try {
     const userData = await createUserWithEmailAndPassword(auth, email, password);
-    console.log("userData : ", userData)
-    return userData
+    console.log("userData : ", userData);
+    return userData;
   } catch (err) {
     console.error("회원가입 에러 : ", err);
   }
@@ -30,56 +31,72 @@ export async function joinEmail(email, password) {
 //이메일, 비밀번호 로그인 api
 export async function loginEmail(email, password) {
   try {
-    const userData = await signInWithEmailAndPassword(auth, email, password)
-    console.log("userData : ", userData)
-    return userData
-  } catch(err) {
-    console.error("로그인 에러 : " , err)
+    const userData = await signInWithEmailAndPassword(auth, email, password);
+    console.log("userData : ", userData);
+    return userData;
+  } catch (err) {
+    console.error("로그인 에러 : ", err);
   }
 }
 
 //구글 자동 로그인 방지
 provider.setCustomParameters({
-  prompt : 'select_account'
-})
+  prompt: "select_account",
+});
 
 //구글 로그인 api
 export async function googleLogin() {
   try {
-    const userData = await signInWithPopup(auth, provider)
-    return userData
-  } catch(err) {
-    console.error("구글 로그인 에러 : ", err)
+    const userData = await signInWithPopup(auth, provider);
+    return userData;
+  } catch (err) {
+    console.error("구글 로그인 에러 : ", err);
   }
 }
 
 //로그인 유지(새로고침 해도 로그인 유지) api
-export  function onUserLoginState(callback) {
-  onAuthStateChanged (auth, async(user) => {
+export function onUserLoginState(callback) {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
-        const updateUser = await adminUser(user)
-        callback(updateUser)
-      } catch(err) {
-        console.log("로그인 유지 에러 : ", err)
-        callback(user)
+        const updateUser = await adminUser(user);
+        callback(updateUser);
+      } catch (err) {
+        console.log("로그인 유지 에러 : ", err);
+        callback(user);
       }
     } else {
-      //user 없다면 로그아웃 
-      callback(null)
+      //user 없다면 로그아웃
+      callback(null);
     }
-  })
+  });
 }
-
 
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
   try {
-    await signOut(auth)
-  } catch(err) {
-    console.error("로그아웃 에러 : ", err)
+    await signOut(auth);
+  } catch (err) {
+    console.error("로그아웃 에러 : ", err);
   }
 }
 
+//상품을 데이터베이스에 업로드 하는 api
+export async function addProducts(title, price, quantity, description) {
+  try {
+    const id = uuid();
+    console.log("id : ", id);
+    const item = await set(ref(database, `products/${id}`), {
+      id,
+      title,
+      price,
+      quantity,
+      description,
+    });
+    console.log("item : ", item);
+  } catch (err) {
+    console.log("상품 업데이트 에러 : ", err);
+  }
+}
 
-export {database}
+export { database };
