@@ -34,7 +34,7 @@ export default function ProductItems() {
             <div className="item-container">
               {products.map((product, idx) => {
                 return (
-                  <Link to={"/productlist/detail"} key={idx}>
+                  <Link to={`/productlist/${product.id}`} key={idx}>
                     <div className="product-item-wrap">
                       <div className="img-wrap">
                         <img src={product.image} alt="아이템 상품" />
