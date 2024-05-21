@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getProducts } from "../api/api";
+import { addProducts, getProducts } from "../api/api";
 
 export default function ProductDetailPage() {
   const [products, setProducts] = useState([]);
   console.log("products : ", products);
 
   const { id } = useParams();
+  const navigage = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,6 +23,16 @@ export default function ProductDetailPage() {
   }, []);
 
   const product = products.find((product) => product.id.toString() === id);
+
+  const goToCartEvent = async (e) => {
+    e.preventDefault();
+    try {
+      const fetchData = await addProducts();
+      navigage("/cart");
+    } catch (err) {
+      console.error("장바구니 추가 기능 에러 : ", err);
+    }
+  };
 
   return (
     <ProductItemContainer>
@@ -85,9 +96,9 @@ export default function ProductDetailPage() {
 
                 {/* 장바구니 및 바로구매 버튼 */}
                 <div className="button-wrap">
-                  <Link to={"/cart"}>
-                    <button className="cart-btn">장바구니</button>
-                  </Link>
+                  <button className="cart-btn" onClick={goToCartEvent}>
+                    장바구니
+                  </button>
                   <Link>
                     <button className="buy-btn">바로구매</button>
                   </Link>
