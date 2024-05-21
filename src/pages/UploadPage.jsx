@@ -33,9 +33,16 @@ export default function UploadPage() {
   //console.log("setFile(e.target.file) :", setFile(e.target.file));
   const uploadSubmitEvent = async (e) => {
     e.preventDefault();
+
     try {
+      const product = {
+        title: title,
+        price: price,
+        quantity: quantity,
+        description: description,
+      };
       const url = await uploadImages(file);
-      const item = await addProducts(title, price, quantity, description, url);
+      const item = await addProducts(product, url);
     } catch (err) {
       console.error("상품 업로드 에러 : ", err);
     }

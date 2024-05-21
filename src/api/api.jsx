@@ -109,7 +109,6 @@ export async function addProducts(product, imgUrl) {
       id,
       ...product,
       image: imgUrl,
-      price: product.price,
     });
   } catch (err) {
     console.log("상품 업데이트 에러 : ", err);
