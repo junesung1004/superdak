@@ -89,8 +89,8 @@ export async function uploadImages(file) {
   try {
     const id = uuid();
     const imgRef = storageRef(storage, `images/${id}`);
-    console.log("imgRef : ", imgRef);
-    console.log("이미지 id : ", id);
+    //console.log("imgRef : ", imgRef);
+    //console.log("이미지 id : ", id);
     await uploadBytes(imgRef, file);
     const imgUrl = await getDownloadURL(imgRef);
     return imgUrl;
@@ -103,7 +103,7 @@ export async function uploadImages(file) {
 export async function addProducts(title, price, quantity, description, imgUrl) {
   try {
     const id = uuid();
-    console.log("id : ", id);
+    //console.log("id : ", id);
     const item = await set(ref(database, `products/${id}`), {
       id,
       title,
@@ -124,7 +124,7 @@ export async function getProducts() {
     const snapshot = await get(itemRef);
     if (snapshot.exists()) {
       const item = Object.values(snapshot.val());
-      console.log("item : ", item);
+      //console.log("item : ", item);
       return item;
     } else {
       return [];

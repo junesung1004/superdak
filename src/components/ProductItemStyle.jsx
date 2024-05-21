@@ -10,7 +10,7 @@ export const ProductItemsContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1300px;
   /* 카테고리 제목 */
   .category-title {
     margin-top: 80px;

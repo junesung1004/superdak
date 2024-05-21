@@ -1,13 +1,11 @@
 import ImageSlider from "../components/ImageSlider";
-import ProductItems from "../components/ProductItems";
+import ProductListPage from "./ProductListPage";
 
 export default function HomePage() {
   return (
     <>
       <ImageSlider />
-      <ProductItems />
-      <ProductItems />
-      <ProductItems />
+      <ProductListPage />
     </>
   );
 }

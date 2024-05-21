@@ -5,13 +5,13 @@ import { getProducts } from "../api/api";
 
 export default function ProductItems() {
   const [products, setProducts] = useState([]);
-  console.log("products : ", products);
+  //console.log("products : ", products);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const productItem = await getProducts();
-        console.log("fire base에 등록된 아이템을 get 하는 아이템 : ", productItem);
+        //console.log("fire base에 등록된 아이템을 get 하는 아이템 : ", productItem);
         setProducts(productItem);
       } catch (err) {
         console.error("상품 받아오는 작업 에러 : ", err);
@@ -31,26 +31,26 @@ export default function ProductItems() {
           <p>현재 상품이 없습니다. 상품을 추가해주세요.</p>
         ) : (
           <>
-            {products.map((products, idx) => {
-              return (
-                <div className="item-container" key={idx}>
-                  <Link to={"/productlist/product"}>
+            <div className="item-container">
+              {products.map((product, idx) => {
+                return (
+                  <Link to={"/productlist/detail"} key={idx}>
                     <div className="product-item-wrap">
                       <div className="img-wrap">
-                        <img src={products.image} alt="아이템 상품" />
+                        <img src={product.image} alt="아이템 상품" />
                       </div>
                       <div className="item-content">
-                        <p>{products.title}</p>
-                        <p>{products.description}</p>
+                        <p>{product.title}</p>
+                        <p>{product.description}</p>
                         <p>
-                          <span>{products.price}</span>원
+                          <span>{product.price}</span>원
                         </p>
                       </div>
                     </div>
                   </Link>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </>
         )}
       </ProductItemsContainer>
