@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref as databaseRef, set, get } from "firebase/database";
 import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 import { adminUser } from "../service/admin";
 import { v4 as uuid } from "uuid";
@@ -100,17 +100,16 @@ export async function uploadImages(file) {
 }
 
 //상품을 이미지 url과 함께 데이터베이스에 업로드 하는 api
-export async function addProducts(title, price, quantity, description, imgUrl) {
+export async function addProducts(product, imgUrl) {
+  console.log("product : ", product);
   try {
     const id = uuid();
     //console.log("id : ", id);
-    const item = await set(ref(database, `products/${id}`), {
+    const item = await set(databaseRef(database, `products/${id}`), {
       id,
-      title,
-      price,
-      quantity,
-      description,
+      ...product,
       image: imgUrl,
+      price: product.price,
     });
   } catch (err) {
     console.log("상품 업데이트 에러 : ", err);
@@ -120,7 +119,7 @@ export async function addProducts(title, price, quantity, description, imgUrl) {
 //상품을 데이터베이스에 업로드된 item을 가져오는 api
 export async function getProducts() {
   try {
-    const itemRef = ref(database, "products");
+    const itemRef = databaseRef(database, "products");
     const snapshot = await get(itemRef);
     if (snapshot.exists()) {
       const item = Object.values(snapshot.val());
@@ -134,5 +133,12 @@ export async function getProducts() {
     return [];
   }
 }
+
+//메인에 등록된 아이템을 장바구니에 담는 api
+// export async function updateCart(userId, product) {
+//   try {
+//     const cartRef = databaseRef(database, `cart/${userId}/${product.id}`)
+//   }
+// }
 
 export { database };
