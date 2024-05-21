@@ -134,10 +134,31 @@ export async function getProducts() {
 }
 
 //메인에 등록된 아이템을 장바구니에 담는 api
-// export async function updateCart(userId, product) {
-//   try {
-//     const cartRef = databaseRef(database, `cart/${userId}/${product.id}`)
-//   }
-// }
+export async function updateCart(product) {
+  try {
+    const id = uuid();
+    const cartRef = databaseRef(database, `cart/${id}/${product.id}`);
+    await set(cartRef, product);
+  } catch (err) {
+    console.error("상품을 장바구니에 추가하는 기능 에러 : ", err);
+  }
+}
+
+//장바구니에 담긴 데이타를 가져오는 api
+export async function getCart(id) {
+  try {
+    const snapshot = await get(databaseRef(database, `cart/${id}`));
+    if (snapshot.exists()) {
+      const item = snapshot.val();
+      return Object.values(item);
+    } else {
+      //스냅샷이 존재하지 않으면 빈 배열 반환
+      return [];
+    }
+  } catch (err) {
+    console.error("장바구니에 담긴 data를 가져오는 기능 에러 : ", err);
+    return [];
+  }
+}
 
 export { database };

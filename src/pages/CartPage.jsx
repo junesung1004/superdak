@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
-import { getProducts } from "../api/api";
+import { getCart } from "../api/api";
+import { useParams } from "react-router-dom";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
   console.log("products : ", products);
 
+  const { id } = useParams();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productItem = await getProducts();
-        setProducts(productItem);
+        if (id) {
+          const productItem = await getCart(id);
+          setProducts(productItem);
+        }
       } catch (err) {
         console.error("장바구니 아이템 가져오는 기능 에러 : ", err);
       }
     };
     fetchProducts();
-  }, []);
+  }, [id]);
 
   return (
     <CartPageContainer>
@@ -42,48 +47,49 @@ export default function CartPage() {
               </div>
             </div>
 
-            {products.map((products, idx) => {
-              return (
-                <div key={idx}>
-                  {/* 카트상품 */}
-                  <div className="cart-item-wrap">
-                    <div className="checkbox-wrap">
-                      <input type="checkbox" />
+            {products.length > 0 &&
+              products.map((products, idx) => {
+                return (
+                  <div key={idx}>
+                    {/* 카트상품 */}
+                    <div className="cart-item-wrap">
+                      <div className="checkbox-wrap">
+                        <input type="checkbox" />
+                      </div>
+                      <div className="cart-img-wrap">
+                        <img src={products.image} alt={products.title} />
+                      </div>
+                      <div className="cart-item-content-wrap">
+                        <p>{products.title}</p>
+                        <p>{products.description}</p>
+                        <p>
+                          <span>{products.price}</span>원
+                        </p>
+                      </div>
+                      <div className="cart-item-count-wrap">
+                        <button>-</button>
+                        <div>1</div>
+                        <button>+</button>
+                      </div>
+                      <div className="cart-item-price-wrap">
+                        <p>
+                          <span>{products.price}</span>원
+                        </p>
+                      </div>
+                      <div className="delete-btn-wrap">
+                        <button>x</button>
+                      </div>
                     </div>
-                    <div className="cart-img-wrap">
-                      <img src={products.image} alt={products.title} />
-                    </div>
-                    <div className="cart-item-content-wrap">
-                      <p>{products.title}</p>
-                      <p>{products.description}</p>
-                      <p>
-                        <span>{products.price}</span>원
-                      </p>
-                    </div>
-                    <div className="cart-item-count-wrap">
-                      <button>-</button>
-                      <div>1</div>
-                      <button>+</button>
-                    </div>
+
+                    {/* 카트 상품 가격 표시 콘테이너 */}
                     <div className="cart-item-price-wrap">
                       <p>
-                        <span>{products.price}</span>원
+                        상품<span>{products.price}</span>원 총 가격 : <span className="price">{products.price}</span>원
                       </p>
                     </div>
-                    <div className="delete-btn-wrap">
-                      <button>x</button>
-                    </div>
                   </div>
-
-                  {/* 카트 상품 가격 표시 콘테이너 */}
-                  <div className="cart-item-price-wrap">
-                    <p>
-                      상품<span>{products.price}</span>원 총 가격 : <span className="price">{products.price}</span>원
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </form>
       </div>

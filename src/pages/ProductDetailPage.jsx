@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { addProducts, getProducts } from "../api/api";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProducts, updateCart } from "../api/api";
 import { ProductItemContainer } from "./ProductDetailPageStyle";
 
 export default function ProductDetailPage() {
@@ -8,7 +8,8 @@ export default function ProductDetailPage() {
   console.log("products : ", products);
 
   const { id } = useParams();
-  const navigage = useNavigate();
+  console.log("id: ", id);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,8 +28,13 @@ export default function ProductDetailPage() {
   const goToCartEvent = async (e) => {
     e.preventDefault();
     try {
-      const fetchData = await addProducts();
-      navigage("/cart");
+      if (product) {
+        await updateCart(product);
+        console.log("장바구니에 상품이 추가되었습니다.");
+        navigate("/cart"); // 장바구니 페이지로 이동
+      } else {
+        console.log("상품을 찾을 수 없습니다.");
+      }
     } catch (err) {
       console.error("장바구니 추가 기능 에러 : ", err);
     }
