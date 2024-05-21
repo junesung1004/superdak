@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getDatabase, ref as databaseRef, set, get } from "firebase/database";
+import { getDatabase, ref as databaseRef, set, get, remove } from "firebase/database";
 import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 import { adminUser } from "../service/admin";
 import { v4 as uuid } from "uuid";
@@ -137,7 +137,7 @@ export async function getProducts() {
 export async function updateCart(product) {
   try {
     const id = uuid();
-    const cartRef = databaseRef(database, `cart/${id}/${product.id}`);
+    const cartRef = databaseRef(database, `cart/${id}`);
     await set(cartRef, product);
   } catch (err) {
     console.error("상품을 장바구니에 추가하는 기능 에러 : ", err);
@@ -145,19 +145,29 @@ export async function updateCart(product) {
 }
 
 //장바구니에 담긴 데이타를 가져오는 api
-export async function getCart(id) {
+export async function getCart() {
   try {
-    const snapshot = await get(databaseRef(database, `cart/${id}`));
+    const cartRef = databaseRef(database, "cart");
+    const snapshot = await get(cartRef);
     if (snapshot.exists()) {
       const item = snapshot.val();
       return Object.values(item);
     } else {
-      //스냅샷이 존재하지 않으면 빈 배열 반환
       return [];
     }
   } catch (err) {
     console.error("장바구니에 담긴 data를 가져오는 기능 에러 : ", err);
     return [];
+  }
+}
+
+//장바구니에 담긴 데이터를 삭제하는 api
+export async function deleteCart() {
+  try {
+    const cartRef = await remove(databaseRef(database, "cart"));
+    return cartRef;
+  } catch (err) {
+    console.error("장바구니 삭제 기능 에러 : ", err);
   }
 }
 

@@ -1,27 +1,30 @@
 import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
-import { getCart } from "../api/api";
-import { useParams } from "react-router-dom";
+import { deleteCart, getCart } from "../api/api";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
   console.log("products : ", products);
 
-  const { id } = useParams();
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        if (id) {
-          const productItem = await getCart(id);
-          setProducts(productItem);
-        }
+        const productItem = await getCart();
+        setProducts(productItem);
       } catch (err) {
         console.error("장바구니 아이템 가져오는 기능 에러 : ", err);
       }
     };
     fetchProducts();
-  }, [id]);
+  }, []);
+
+  const clickDeleteBtn = async () => {
+    try {
+      const deleteItem = deleteCart();
+    } catch (err) {
+      console.error("장바구니 삭제기능 에러 :", err);
+    }
+  };
 
   return (
     <CartPageContainer>
@@ -77,7 +80,7 @@ export default function CartPage() {
                         </p>
                       </div>
                       <div className="delete-btn-wrap">
-                        <button>x</button>
+                        <button onClick={clickDeleteBtn}>x</button>
                       </div>
                     </div>
 
