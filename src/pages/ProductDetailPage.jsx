@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getProducts, updateCart } from "../api/api";
 import { ProductItemContainer } from "./ProductDetailPageStyle";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function ProductDetailPage() {
   const [products, setProducts] = useState([]);
   console.log("products : ", products);
 
-  const { id } = useParams();
-  console.log("userid: ", id);
+  const state = useLocation().state;
+  console.log("state : ", state);
+
+  const { user } = useAuthContext();
+  //console.log("userid: ", user.uid);
 
   const navigate = useNavigate();
 
@@ -24,14 +28,11 @@ export default function ProductDetailPage() {
     fetchProducts();
   }, []);
 
-  const product = products.find((product) => product.id.toString() === id);
-  //console.log("product : ", product);
-
   const goToCartEvent = async (e) => {
     e.preventDefault();
     try {
-      if (product) {
-        await updateCart(product, id);
+      if (products) {
+        await updateCart(products, id);
         console.log("장바구니에 상품이 추가되었습니다.");
         navigate("/cart"); // 장바구니 페이지로 이동
       } else {
@@ -45,11 +46,11 @@ export default function ProductDetailPage() {
   return (
     <ProductItemContainer>
       <div className="product-container">
-        {product ? (
+        {products ? (
           <>
             {/* 이미지 */}
             <div className="img-wrapper">
-              <img src={product.image} alt="상품이미지" />
+              <img src={products.image} alt="상품이미지" />
               <img src="/delivery.jpg" alt="배송이미지" />
             </div>
 
@@ -57,10 +58,10 @@ export default function ProductDetailPage() {
             <div className="product-wrap">
               {/* 상품 제목, 가격, 정보 */}
               <div className="product-content-wrap">
-                <h1>{product.title}</h1>
-                <p>{product.description}</p>
+                <h1>{products.title}</h1>
+                <p>{products.description}</p>
                 <p>
-                  {product.price}
+                  {products.price}
                   <span>원</span>
                 </p>
               </div>

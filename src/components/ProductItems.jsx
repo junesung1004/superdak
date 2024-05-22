@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProductItemsContainer } from "./ProductItemStyle";
 import { useEffect, useState } from "react";
 import { getProducts } from "../api/api";
@@ -6,6 +6,8 @@ import { getProducts } from "../api/api";
 export default function ProductItems() {
   const [products, setProducts] = useState([]);
   //console.log("products : ", products);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -19,6 +21,26 @@ export default function ProductItems() {
     };
     fetchProducts();
   }, []);
+
+  // const data = {
+  //   id: products.id,
+  //   title: products.title,
+  //   price: products.price,
+  //   description: products.description,
+  //   image: products.image,
+  // };
+
+  const goToEvent = () => {
+    navigate(`/productlist/${products.id}`, {
+      state: {
+        id: products.id,
+        title: products.title,
+        price: products.price,
+        description: products.description,
+        image: products.image,
+      },
+    });
+  };
 
   return (
     <>
@@ -34,7 +56,7 @@ export default function ProductItems() {
             <div className="item-container">
               {products.map((product, idx) => {
                 return (
-                  <Link to={`/productlist/${product.id}`} key={idx}>
+                  <div to={`/productlist/${product.id}`} key={idx} onClick={goToEvent}>
                     <div className="product-item-wrap">
                       <div className="img-wrap">
                         <img src={product.image} alt="아이템 상품" />
@@ -47,7 +69,7 @@ export default function ProductItems() {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 );
               })}
             </div>

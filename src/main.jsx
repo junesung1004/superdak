@@ -13,7 +13,7 @@ import ProductListPage from "./pages/ProductListPage";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import UploadPage from "./pages/UploadPage.jsx";
-import { AuthContextProvider } from "./context/authContext.jsx";
+import { AuthContextProvider } from "../src/context/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthContextProvider>

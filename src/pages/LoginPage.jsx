@@ -52,8 +52,8 @@ export default function LoginPage() {
       console.log("userData :", userData);
       if (userData) {
         alert("로그인에 성공했습니다.");
-        sessionStorage.setItem(userData);
-        localStorage.setItem(userData);
+        sessionStorage.setItem("userData", userData);
+        localStorage.setItem("userData", userData);
         console.log("로그인 유저 : ", userData);
         navigate("/");
       } else {
