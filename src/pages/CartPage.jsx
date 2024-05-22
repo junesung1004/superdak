@@ -6,12 +6,10 @@ import { useParams } from "react-router-dom";
 export default function CartPage() {
   const [products, setProducts] = useState([]);
 
-  const { id } = useParams();
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productItem = await getCart(id);
+        const productItem = await getCart(products);
         setProducts(productItem);
       } catch (err) {
         console.error("장바구니 아이템 가져오는 기능 에러 : ", err);
@@ -22,8 +20,7 @@ export default function CartPage() {
 
   const clickDeleteBtn = async () => {
     try {
-      const delete1 = await deleteCart();
-      console.log("삭제 : ", delete1);
+      const delete1 = await deleteCart(products);
     } catch (err) {
       console.error("장바구니 삭제기능 에러 :", err);
     }

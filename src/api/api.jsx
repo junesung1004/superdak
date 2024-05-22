@@ -134,9 +134,11 @@ export async function getProducts() {
 }
 
 //메인에 등록된 아이템을 장바구니에 담는 api
-export async function updateCart(product, userId) {
+export async function updateCart(userId, product) {
   try {
-    const cartRef = databaseRef(database, `cart/${userId}/${product.id}`);
+    const user = sessionStorage.getItem("user");
+    const userObject = JSON.parse(user);
+    const cartRef = databaseRef(database, `cart/${userObject.uid}/${product.id}`);
     await set(cartRef, product);
   } catch (err) {
     console.error("상품을 장바구니에 추가하는 기능 에러 : ", err);
@@ -146,7 +148,9 @@ export async function updateCart(product, userId) {
 //장바구니에 담긴 데이타를 가져오는 api
 export async function getCart(userId) {
   try {
-    const cartRef = databaseRef(database, `cart/${userId}`);
+    const user = sessionStorage.getItem("user");
+    const userObject = JSON.parse(user);
+    const cartRef = databaseRef(database, `cart/${userObject.uid}`);
     const snapshot = await get(cartRef);
     if (snapshot.exists()) {
       const item = snapshot.val();

@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { getProducts, updateCart } from "../api/api";
+import { useLocation, useNavigate } from "react-router-dom";
+import { updateCart } from "../api/api";
 import { ProductItemContainer } from "./ProductDetailPageStyle";
-import { useAuthContext } from "../context/AuthContext";
+// import { useAuthContext } from "../context/AuthContext";
 
 export default function ProductDetailPage() {
   const [products, setProducts] = useState([]);
   console.log("products : ", products);
 
   const state = useLocation().state;
-  console.log("state : ", state);
+  //console.log("state : ", state);
 
-  const { user } = useAuthContext();
-  //console.log("userid: ", user.uid);
+  // const { user } = useAuthContext();
+  // console.log("userid: ", user.uid);
 
   const navigate = useNavigate();
 
@@ -30,8 +30,10 @@ export default function ProductDetailPage() {
   const goToCartEvent = async (e) => {
     e.preventDefault();
     try {
+      const user = sessionStorage.getItem("user");
+      const userObject = JSON.parse(user);
       if (products) {
-        await updateCart(products, id);
+        await updateCart(userObject.uid, products);
         console.log("장바구니에 상품이 추가되었습니다.");
         navigate("/cart"); // 장바구니 페이지로 이동
       } else {
@@ -91,7 +93,7 @@ export default function ProductDetailPage() {
 
               <form className="option-container">
                 {/* 수량옵션 */}
-                <label htmlFor="option">상품수량</label>
+                {/* <label htmlFor="option">상품수량</label>
                 <select name="" id="option">
                   <option disabled selected>
                     상품옵션선택
@@ -100,7 +102,7 @@ export default function ProductDetailPage() {
                   <option value="3">3팩</option>
                   <option value="5">5팩</option>
                   <option value="10">10팩</option>
-                </select>
+                </select> */}
 
                 {/* 장바구니 및 바로구매 버튼 */}
                 <div className="button-wrap">

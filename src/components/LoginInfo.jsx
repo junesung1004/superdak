@@ -32,7 +32,6 @@ export default function LoginInfo() {
   //로그아웃 로직
   const clickLogoutEvent = async () => {
     alert("로그아웃 되었습니다.");
-    localStorage.clear();
     sessionStorage.clear();
     await logOut();
     navigate("/");
@@ -57,7 +56,7 @@ export default function LoginInfo() {
   return (
     <>
       <UserInfoContainer>
-        <li className="user-logo" onClick={() => clickShowEvent()}>
+        <li className="user-logo">
           <FaUserCircle />
           {user ? <p>슈퍼닭!</p> : <p>로그인</p>}
           <ul className={`sub-menu ${showSubMenu ? "visible" : ""}`}>
