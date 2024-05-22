@@ -5,7 +5,7 @@ import { getProducts } from "../api/api";
 
 export default function ProductItems() {
   const [products, setProducts] = useState([]);
-  //console.log("products : ", products);
+  console.log("productsitem : ", products);
 
   const navigate = useNavigate();
 
@@ -30,14 +30,14 @@ export default function ProductItems() {
   //   image: products.image,
   // };
 
-  const goToEvent = () => {
-    navigate(`/productlist/${products.id}`, {
+  const goToEvent = (product) => {
+    navigate(`/productlist/${product.id}`, {
       state: {
-        id: products.id,
-        title: products.title,
-        price: products.price,
-        description: products.description,
-        image: products.image,
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        description: product.description,
+        image: product.image,
       },
     });
   };
@@ -56,7 +56,7 @@ export default function ProductItems() {
             <div className="item-container">
               {products.map((product, idx) => {
                 return (
-                  <div to={`/productlist/${product.id}`} key={idx} onClick={goToEvent}>
+                  <div key={idx} onClick={() => goToEvent(product)}>
                     <div className="product-item-wrap">
                       <div className="img-wrap">
                         <img src={product.image} alt="아이템 상품" />

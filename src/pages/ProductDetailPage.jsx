@@ -19,8 +19,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productItem = await getProducts();
-        setProducts(productItem);
+        setProducts(state);
       } catch (err) {
         console.error("상품 디테일 페이지 받아오는 작업 에러 : ", err);
       }
