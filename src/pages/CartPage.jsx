@@ -20,7 +20,8 @@ export default function CartPage() {
 
   const clickDeleteBtn = async () => {
     try {
-      const deleteItem = deleteCart();
+      const delete1 = await deleteCart();
+      console.log("삭제 : ", delete1);
     } catch (err) {
       console.error("장바구니 삭제기능 에러 :", err);
     }
@@ -37,7 +38,7 @@ export default function CartPage() {
               <input type="checkbox" id="all" />
               <label htmlFor="all">전체 선택</label>
             </div>
-            <button>선택삭제</button>
+            <button type="button">선택삭제</button>
           </div>
 
           {/* 장바구니 아이템 콘테이너 */}
@@ -51,7 +52,7 @@ export default function CartPage() {
             </div>
 
             {products.length > 0 &&
-              products.map((products, idx) => {
+              products.map((product, idx) => {
                 return (
                   <div key={idx}>
                     {/* 카트상품 */}
@@ -60,13 +61,13 @@ export default function CartPage() {
                         <input type="checkbox" />
                       </div>
                       <div className="cart-img-wrap">
-                        <img src={products.image} alt={products.title} />
+                        <img src={product.image} alt={product.title} />
                       </div>
                       <div className="cart-item-content-wrap">
-                        <p>{products.title}</p>
-                        <p>{products.description}</p>
+                        <p>{product.title}</p>
+                        <p>{product.description}</p>
                         <p>
-                          <span>{products.price}</span>원
+                          <span>{product.price}</span>원
                         </p>
                       </div>
                       <div className="cart-item-count-wrap">
@@ -76,18 +77,20 @@ export default function CartPage() {
                       </div>
                       <div className="cart-item-price-wrap">
                         <p>
-                          <span>{products.price}</span>원
+                          <span>{product.price}</span>원
                         </p>
                       </div>
                       <div className="delete-btn-wrap">
-                        <button onClick={clickDeleteBtn}>x</button>
+                        <button type="button" onClick={clickDeleteBtn}>
+                          x
+                        </button>
                       </div>
                     </div>
 
                     {/* 카트 상품 가격 표시 콘테이너 */}
                     <div className="cart-item-price-wrap">
                       <p>
-                        상품<span>{products.price}</span>원 총 가격 : <span className="price">{products.price}</span>원
+                        상품<span>{product.price}</span>원 총 가격 : <span className="price">{products.price}</span>원
                       </p>
                     </div>
                   </div>

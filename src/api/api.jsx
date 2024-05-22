@@ -134,10 +134,9 @@ export async function getProducts() {
 }
 
 //메인에 등록된 아이템을 장바구니에 담는 api
-export async function updateCart(product) {
+export async function updateCart(product, userId) {
   try {
-    const id = uuid();
-    const cartRef = databaseRef(database, `cart/${id}`);
+    const cartRef = databaseRef(database, `cart/${userId}/${product.id}`);
     await set(cartRef, product);
   } catch (err) {
     console.error("상품을 장바구니에 추가하는 기능 에러 : ", err);
@@ -147,7 +146,8 @@ export async function updateCart(product) {
 //장바구니에 담긴 데이타를 가져오는 api
 export async function getCart() {
   try {
-    const cartRef = databaseRef(database, "cart");
+    const id = uuid();
+    const cartRef = databaseRef(database, `cart/${id}`);
     const snapshot = await get(cartRef);
     if (snapshot.exists()) {
       const item = snapshot.val();
@@ -164,7 +164,7 @@ export async function getCart() {
 //장바구니에 담긴 데이터를 삭제하는 api
 export async function deleteCart() {
   try {
-    const cartRef = await remove(databaseRef(database, "cart"));
+    const cartRef = await remove(databaseRef(database, `cart`));
     return cartRef;
   } catch (err) {
     console.error("장바구니 삭제 기능 에러 : ", err);

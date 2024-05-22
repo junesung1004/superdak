@@ -33,7 +33,6 @@ export default function UploadPage() {
   //console.log("setFile(e.target.file) :", setFile(e.target.file));
   const uploadSubmitEvent = async (e) => {
     e.preventDefault();
-
     try {
       const product = {
         title: title,

@@ -29,7 +29,7 @@ export default function ProductDetailPage() {
     e.preventDefault();
     try {
       if (product) {
-        await updateCart(product);
+        await updateCart(product, id);
         console.log("장바구니에 상품이 추가되었습니다.");
         navigate("/cart"); // 장바구니 페이지로 이동
       } else {
