@@ -144,10 +144,9 @@ export async function updateCart(product, userId) {
 }
 
 //장바구니에 담긴 데이타를 가져오는 api
-export async function getCart() {
+export async function getCart(userId) {
   try {
-    const id = uuid();
-    const cartRef = databaseRef(database, `cart/${id}`);
+    const cartRef = databaseRef(database, `cart/${userId}`);
     const snapshot = await get(cartRef);
     if (snapshot.exists()) {
       const item = snapshot.val();

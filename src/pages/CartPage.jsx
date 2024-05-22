@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
 import { deleteCart, getCart } from "../api/api";
+import { useParams } from "react-router-dom";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
-  console.log("products : ", products);
+
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productItem = await getCart();
+        const productItem = await getCart(id);
         setProducts(productItem);
       } catch (err) {
         console.error("장바구니 아이템 가져오는 기능 에러 : ", err);

@@ -8,7 +8,8 @@ export default function ProductDetailPage() {
   console.log("products : ", products);
 
   const { id } = useParams();
-  console.log("id: ", id);
+  console.log("userid: ", id);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function ProductDetailPage() {
   }, []);
 
   const product = products.find((product) => product.id.toString() === id);
+  //console.log("product : ", product);
 
   const goToCartEvent = async (e) => {
     e.preventDefault();
