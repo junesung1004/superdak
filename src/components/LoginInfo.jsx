@@ -1,5 +1,4 @@
 import { BiCart } from "react-icons/bi";
-import { Nav } from "./HeaderStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { logOut, onUserLoginState } from "../api/api";
@@ -41,9 +40,9 @@ export default function LoginInfo() {
   };
 
   //모바일에서 손으로 조작을 할시 호버는 안되니 클릭 이벤트 추가!
-  const clickShowEvent = () => {
-    setShowSubMenu((prev) => !prev);
-  };
+  // const clickShowEvent = () => {
+  //   setShowSubMenu((prev) => !prev);
+  // };
 
   //로그인 상태 유무에 따라서 서로 다른 기능을 구현하는 로직
   const goToCartPage = () => {
@@ -58,7 +57,7 @@ export default function LoginInfo() {
   return (
     <>
       <UserInfoContainer>
-        <li className="user-logo" onClick={clickShowEvent}>
+        <li className="user-logo" onClick={() => clickShowEvent()}>
           <FaUserCircle />
           {user ? <p>슈퍼닭!</p> : <p>로그인</p>}
           <ul className={`sub-menu ${showSubMenu ? "visible" : ""}`}>
