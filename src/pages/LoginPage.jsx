@@ -52,6 +52,8 @@ export default function LoginPage() {
       console.log("userData :", userData);
       if (userData) {
         alert("로그인에 성공했습니다.");
+        sessionStorage.setItem(userData);
+        localStorage.setItem(userData);
         console.log("로그인 유저 : ", userData);
         navigate("/");
       } else {
@@ -74,6 +76,8 @@ export default function LoginPage() {
       if (userData) {
         alert("구글 로그인에 성공했습니다.");
         console.log("로그인 유저 : ", userData);
+        sessionStorage.setItem("userData");
+        localStorage.setItem(userData);
         navigate("/");
       }
     } catch (err) {

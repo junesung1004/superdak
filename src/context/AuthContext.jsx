@@ -1,6 +1,4 @@
-"use client";
-
-import { googleLogin, logOut, onUserState } from "../api/api";
+import { googleLogin, logOut, onUserLoginState } from "../api/api";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -8,7 +6,7 @@ const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(); //로그인 사용자 값 저장 상태변수
-  const [unSubScribe, setUnSubScribe] = useState(); //상태 변경 감지 (firebase에서 사용자 인증상태 )
+  const [unSubScribe, setUnSubScribe] = useState(); //상태 변경 감지 (firebase에서 사용자 인증상태)
   const [isLoading, setIsLoading] = useState(true); // 로딩 감지
 
   useEffect(() => {
@@ -34,7 +32,7 @@ export function AuthContextProvider({ children }) {
         //로그아웃을 하면 세션 스토리지에 있는 정보를 삭제
       }
     };
-    const unSubScribeFun = onUserState(userChange);
+    const unSubScribeFun = onUserLoginState(userChange);
     //위에서 업데이트 된 사용자를 onUserState에 넘김
 
     setUnSubScribe(() => unSubScribeFun);
