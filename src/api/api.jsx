@@ -48,12 +48,12 @@ export async function joinEmail(email, password, name) {
 
 //이메일, 비밀번호 로그인 api
 export async function loginEmail(email, password) {
+  const auth = getAuth();
   try {
-    const auth = getAuth();
     const userData = await signInWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
     const user = userData.user;
-    return user;
+    return userData;
   } catch (err) {
     console.error("로그인 에러 : ", err);
   }
@@ -66,8 +66,8 @@ provider.setCustomParameters({
 
 //구글 로그인 api
 export async function googleLogin() {
+  const auth = getAuth();
   try {
-    const auth = getAuth();
     const userData = await signInWithPopup(auth, provider);
     return userData;
   } catch (err) {
@@ -76,26 +76,26 @@ export async function googleLogin() {
 }
 
 //로그인 유지(새로고침 해도 로그인 유지) api
-export function onUserLoginState(callback) {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const auth1 = getAuth();
-        const updateUser = await adminUser(user);
-        callback(updateUser);
-      } catch (err) {
-        console.log("로그인 유지 에러 : ", err);
-        callback(user);
-      }
-    } else {
-      //user 없다면 로그아웃
-      callback(null);
-    }
-  });
-}
+// export function onUserLoginState(callback) {
+//   onAuthStateChanged(auth, async (user) => {
+//     if (user) {
+//       try {
+//         const updateUser = await adminUser(user);
+//         callback(updateUser);
+//       } catch (err) {
+//         console.log("로그인 유지 에러 : ", err);
+//         callback(user);
+//       }
+//     } else {
+//       //user 없다면 로그아웃
+//       callback(null);
+//     }
+//   });
+// }
 
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
+  const auth = getAuth();
   try {
     await signOut(auth);
   } catch (err) {
