@@ -94,9 +94,12 @@ export async function googleLogin() {
 
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
-  signOut(auth)
-    .then(() => console.log("로그아웃"))
-    .catch((error) => console.error("error :", error));
+  try {
+    await signOut(auth);
+    console.log("로그아웃 성공");
+  } catch (error) {
+    console.error("로그아웃 에러 :", error);
+  }
 }
 
 //상품 이미지를 스토리지에 저장하는 api
