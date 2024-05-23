@@ -3,10 +3,9 @@ import { recoilPersist } from "recoil-persist";
 import { onAuthStateChanged } from "firebase/auth";
 import { adminUser } from "../service/admin"; // 관리자 체크를 위한 함수
 import { auth } from "../api/api";
+// import { getAuth } from "../api/api";
 
 const { persistAtom } = recoilPersist();
-
-const auth1 = auth;
 
 export const userState = atom({
   key: "userState",
@@ -19,6 +18,7 @@ export function useUserState() {
 }
 
 export function onUserLoginState(callback) {
+  const auth = auth;
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
