@@ -31,7 +31,6 @@ const storage = getStorage();
 
 //이메일, 비밀번호 회원가입 api
 export async function joinEmail(email, password, name) {
-  const auth = getAuth();
   try {
     const userData = await createUserWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
@@ -48,7 +47,6 @@ export async function joinEmail(email, password, name) {
 
 //이메일, 비밀번호 로그인 api
 export async function loginEmail(email, password) {
-  const auth = getAuth();
   try {
     const userData = await signInWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
@@ -66,7 +64,6 @@ provider.setCustomParameters({
 
 //구글 로그인 api
 export async function googleLogin() {
-  const auth = getAuth();
   try {
     const userData = await signInWithPopup(auth, provider);
     const user = userData.user;
@@ -97,8 +94,6 @@ export async function googleLogin() {
 
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
-  const auth = getAuth();
-
   signOut(auth)
     .then(() => console.log("로그아웃"))
     .catch((error) => console.error("error :", error));
@@ -190,4 +185,4 @@ export async function deleteCart() {
   }
 }
 
-export { database };
+export { database, auth };

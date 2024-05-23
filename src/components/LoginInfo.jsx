@@ -35,8 +35,8 @@ export default function LoginInfo() {
   //로그아웃 로직
   const clickLogoutEvent = async () => {
     try {
+      // await logOut();
       setUser(null);
-      await logOut();
       alert("로그아웃 되었습니다.");
       navigate("/");
     } catch (err) {
