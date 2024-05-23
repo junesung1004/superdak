@@ -39,8 +39,8 @@ export async function joinEmail(email, password, name) {
     await updateProfile(user, {
       displayName: name,
     });
-    // await signOut(auth);
-    return userData;
+    await signOut(auth);
+    return user;
   } catch (err) {
     console.error("회원가입 에러 : ", err);
   }

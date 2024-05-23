@@ -64,7 +64,7 @@ export default function LoginInfo() {
       <UserInfoContainer>
         <li className="user-logo">
           <FaUserCircle />
-          {user ? <p>{user.user.displayName}님</p> : <p>로그인</p>}
+          {user ? <p>{user.displayName}님</p> : <p>로그인</p>}
           <ul className={`sub-menu ${showSubMenu ? "visible" : ""}`}>
             {user && user.isAdmin && (
               <>
