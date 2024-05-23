@@ -16,7 +16,7 @@ export default function CartPage() {
         const productItem = await getCart(products);
         setProducts(productItem);
       } catch (err) {
-        console.error("장바구니 아이템 가져오는 기능 에러 : ", err);
+        console.error("장바구니 아이템 가져오는 기능 에러! : ", err);
       }
     };
     fetchProducts();
