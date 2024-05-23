@@ -2,12 +2,12 @@ import { atom } from "recoil";
 import { useRecoilState } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-const { persistAtom } = recoilPersist();
+// const { persistAtom } = recoilPersist();
 
 export const userState = atom({
   key: "userState",
   default: null,
-  effects_UNSTABLE: [persistAtom],
+  // effects_UNSTABLE: [persistAtom],
 });
 
 export function useUserState() {

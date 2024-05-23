@@ -82,7 +82,7 @@ export function onUserLoginState(callback) {
     if (user) {
       try {
         const updateUser = await adminUser(user);
-        callback(updateUser);
+        callback({ ...updateUser });
       } catch (err) {
         console.log("로그인 유지 에러 : ", err);
         callback(user);
