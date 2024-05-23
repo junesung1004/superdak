@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
 import { deleteCart, getCart } from "../api/api";
 import { useParams } from "react-router-dom";
+import { useUserState } from "../recoil/authLoginAtom";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
+  const [user, setUser] = useUserState();
+  console.log("카트 페이지 products : ", products);
+  console.log("카트페이지 user : ", user);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -16,7 +20,7 @@ export default function CartPage() {
       }
     };
     fetchProducts();
-  }, []);
+  }, [user]);
 
   const clickDeleteBtn = async () => {
     try {

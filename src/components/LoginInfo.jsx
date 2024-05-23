@@ -9,7 +9,7 @@ import { onUserLoginState, useUserState } from "../recoil/authLoginAtom";
 export default function LoginInfo() {
   const [user, setUser] = useUserState();
 
-  console.log("user : ", user);
+  //console.log("user : ", user);
 
   const [showSubMenu, setShowSubMenu] = useState(false);
   const navigate = useNavigate();
@@ -23,15 +23,15 @@ export default function LoginInfo() {
   }, [setUser]);
 
   //관리자 계정으로 접속했을때 콘솔 찍어보는 코드
-  useEffect(() => {
-    if (user && user.isAdmin) {
-      const timer = setTimeout(() => {
-        console.log("Admin user : ", user);
-      }, 1000);
+  // useEffect(() => {
+  //   if (user && user.isAdmin) {
+  //     const timer = setTimeout(() => {
+  //       console.log("Admin user : ", user);
+  //     }, 1000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [user]); // user가 변경될 때마다 실행
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [user]); // user가 변경될 때마다 실행
 
   //로그아웃 로직
   const clickLogoutEvent = async () => {

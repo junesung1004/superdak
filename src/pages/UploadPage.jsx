@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { addProducts, uploadImages } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadPage() {
   const [title, setTitle] = useState("");
@@ -8,6 +9,8 @@ export default function UploadPage() {
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -42,6 +45,12 @@ export default function UploadPage() {
       };
       const url = await uploadImages(file);
       const item = await addProducts(product, url);
+      if (!url && !item) {
+        alert("제품 정보를 빠지지 말고 입력해주세요.");
+      } else {
+        alert("상품을 등록 했습니다.");
+        navigate("/");
+      }
     } catch (err) {
       console.error("상품 업로드 에러 : ", err);
     }

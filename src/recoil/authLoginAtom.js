@@ -11,6 +11,7 @@ const { persistAtom } = recoilPersist();
 export const userState = atom({
   key: "userState",
   default: null,
+  dangerouslyAllowMutability: true,
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -24,7 +25,7 @@ export function onUserLoginState(callback) {
       try {
         const updateUser = await adminUser(user);
         const userCopy = cloneDeep(updateUser); // 깊은 복사
-        console.log(userCopy);
+        //console.log(userCopy);
         callback(userCopy);
       } catch (err) {
         console.log("로그인 유지 에러 : ", err);
