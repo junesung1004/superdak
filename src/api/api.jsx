@@ -190,4 +190,4 @@ export async function deleteCart() {
   }
 }
 
-export { database };
+export { database, onUserLoginState };
