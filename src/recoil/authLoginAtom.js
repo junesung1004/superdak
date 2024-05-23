@@ -18,7 +18,7 @@ export function useUserState() {
 }
 
 export function onUserLoginState(callback) {
-  const auth = auth;
+  // const auth = auth;
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
