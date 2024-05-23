@@ -8,6 +8,7 @@ import { onUserLoginState, useUserState } from "../recoil/authLoginAtom";
 
 export default function LoginInfo() {
   const [user, setUser] = useUserState();
+
   console.log("user : ", user);
 
   const [showSubMenu, setShowSubMenu] = useState(false);
@@ -19,7 +20,7 @@ export default function LoginInfo() {
       //console.log("User state updated:", user)
       setUser(user);
     });
-  }, []);
+  }, [setUser]);
 
   //관리자 계정으로 접속했을때 콘솔 찍어보는 코드
   useEffect(() => {
