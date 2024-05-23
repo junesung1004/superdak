@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ProductItemsContainer } from "./ProductItemStyle";
 import { useEffect, useState } from "react";
 import { getProducts } from "../api/api";

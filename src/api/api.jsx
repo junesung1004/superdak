@@ -73,22 +73,22 @@ export async function googleLogin() {
 }
 
 //로그인 유지(새로고침 해도 로그인 유지) api
-export function onUserLoginState(callback) {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const updateUser = await adminUser(user);
-        callback(updateUser);
-      } catch (err) {
-        console.log("로그인 유지 에러 : ", err);
-        callback(user);
-      }
-    } else {
-      //user 없다면 로그아웃
-      callback(null);
-    }
-  });
-}
+// export function onUserLoginState(callback) {
+//   onAuthStateChanged(auth, async (user) => {
+//     if (user) {
+//       try {
+//         const updateUser = await adminUser(user);
+//         callback(updateUser);
+//       } catch (err) {
+//         console.log("로그인 유지 에러 : ", err);
+//         callback(user);
+//       }
+//     } else {
+//       //user 없다면 로그아웃
+//       callback(null);
+//     }
+//   });
+// }
 
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
@@ -149,11 +149,9 @@ export async function getProducts() {
 }
 
 //메인에 등록된 아이템을 장바구니에 담는 api
-export async function updateCart(userId, product) {
+export async function updateCart(product) {
   try {
-    const user = sessionStorage.getItem("user");
-    const userObject = JSON.parse(user);
-    const cartRef = databaseRef(database, `cart/${userObject.uid}/${product.id}`);
+    const cartRef = databaseRef(database, `cart/${product.id}`);
     await set(cartRef, product);
   } catch (err) {
     console.error("상품을 장바구니에 추가하는 기능 에러 : ", err);
@@ -161,11 +159,9 @@ export async function updateCart(userId, product) {
 }
 
 //장바구니에 담긴 데이타를 가져오는 api
-export async function getCart(userId) {
+export async function getCart() {
   try {
-    const user = sessionStorage.getItem("user");
-    const userObject = JSON.parse(user);
-    const cartRef = databaseRef(database, `cart/${userObject.uid}`);
+    const cartRef = databaseRef(database, `cart`);
     const snapshot = await get(cartRef);
     if (snapshot.exists()) {
       const item = snapshot.val();

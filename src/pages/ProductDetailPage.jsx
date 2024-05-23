@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateCart } from "../api/api";
 import { ProductItemContainer } from "./ProductDetailPageStyle";
+import { useUserState } from "../recoil/authLoginAtom";
 // import { useAuthContext } from "../context/AuthContext";
 
 export default function ProductDetailPage() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useUserState();
   console.log("products : ", products);
 
   const state = useLocation().state;
-  //console.log("state : ", state);
+  console.log("state : ", state);
 
   // const { user } = useAuthContext();
   // console.log("userid: ", user.uid);
@@ -30,7 +31,6 @@ export default function ProductDetailPage() {
   const goToCartEvent = async (e) => {
     e.preventDefault();
     try {
-      const user = sessionStorage.getItem("user");
       const userObject = JSON.parse(user);
       if (products) {
         await updateCart(userObject.uid, products);
