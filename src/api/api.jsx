@@ -97,11 +97,10 @@ export function onUserLoginState(callback) {
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
   const auth = getAuth();
-  try {
-    await signOut(auth);
-  } catch (err) {
-    console.error("로그아웃 에러! : ", err);
-  }
+
+  signOut(auth)
+    .then(() => console.log("로그아웃"))
+    .catch((error) => console.error("error :", error));
 }
 
 //상품 이미지를 스토리지에 저장하는 api
@@ -190,4 +189,4 @@ export async function deleteCart() {
   }
 }
 
-export { database, onUserLoginState };
+export { database };
