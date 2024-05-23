@@ -4,6 +4,8 @@ import { FaUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { LoginContainer, ContentWrap, JoinWrap, GoogleLoginButton } from "./LoginPageStyle";
 import { googleLogin, loginEmail } from "../api/api";
+// import { useRecoilState } from "recoil";
+import { userState } from "../recoil/authLoginAtom";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -15,6 +17,9 @@ export default function LoginPage() {
   const [passwordValid, setPasswordValid] = useState(false);
 
   const [notAllow, setNotAllow] = useState(true);
+
+  //리코일 로그인 전역상태 관리 코드
+  const [user, setUser] = useState(userState);
 
   // 이메일 입력창
   const handleEmailChange = (e) => {
@@ -48,11 +53,12 @@ export default function LoginPage() {
   const handleLoginEvent = async (e) => {
     e.preventDefault();
     try {
-      const userData = await loginEmail(email, password);
+      const userData = await loginEmail(email, password, name);
       console.log("userData :", userData);
       if (userData) {
         alert("로그인에 성공했습니다.");
-        sessionStorage.setItem("userData", userData);
+        //sessionStorage.setItem("userData", userData);
+        setUser(userData);
         console.log("로그인 유저 : ", userData);
         navigate("/");
       } else {
@@ -75,7 +81,7 @@ export default function LoginPage() {
       if (userData) {
         alert("구글 로그인에 성공했습니다.");
         console.log("로그인 유저 : ", userData);
-        sessionStorage.setItem("userData", userData);
+        //sessionStorage.setItem("userData", userData);
         navigate("/");
       }
     } catch (err) {

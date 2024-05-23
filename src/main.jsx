@@ -13,10 +13,10 @@ import ProductListPage from "./pages/ProductListPage";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import UploadPage from "./pages/UploadPage.jsx";
-import { AuthContextProvider } from "../src/context/AuthContext.jsx";
+import { RecoilRoot } from "recoil";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthContextProvider>
+  <RecoilRoot>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
@@ -34,5 +34,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </Route>
       </Routes>
     </BrowserRouter>
-  </AuthContextProvider>
+  </RecoilRoot>
 );

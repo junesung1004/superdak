@@ -1,27 +1,27 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-export const LoginContainer = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  width:100%;
-  max-width:400px;
+export const JoinContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 400px;
   margin: auto;
   overflow: hidden;
   padding: 10px;
   .title-wrap {
-  margin-top: 50px;
-  color: #262626;
-  h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom:10px;
+    margin-top: 50px;
+    color: #262626;
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 0.8rem;
+    }
   }
-  p {
-    font-size: 0.8rem
-  }
-}
-`
+`;
 
 export const ContentWrap = styled.form`
   width: 100%;
@@ -56,7 +56,7 @@ export const ContentWrap = styled.form`
         width: 150px;
         border: none;
         padding: 8px;
-        background-color:rgb(108, 175, 234);
+        background-color: rgb(108, 175, 234);
         color: white;
         font-weight: bold;
         border-radius: 8px;
@@ -68,29 +68,26 @@ export const ContentWrap = styled.form`
         height: 1rem;
         font-size: 0.9rem;
         font-weight: 400;
-      &::placeholder {
-        color: #dadada;
+        &::placeholder {
+          color: #dadada;
         }
       }
       &:focus-within {
         border: 1px solid #9e30f4;
       }
     }
-  
   }
   .error-message-wrap {
     color: #ef0000;
-
   }
-  
-`
+`;
 
 export const ButtonWrap = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
-button {
+  button {
     cursor: pointer;
     width: 150px;
     height: 48px;
@@ -104,4 +101,4 @@ button {
     background-color: #dadada;
     color: white;
   }
-`
+`;

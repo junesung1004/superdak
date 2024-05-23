@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { logOut, onUserLoginState } from "../api/api";
 import { FaUserCircle } from "react-icons/fa";
 import { UserInfoContainer } from "./LoginInfoStyle";
+import { useRecoilState } from "recoil";
+import { userState } from "../recoil/authLoginAtom";
 
 export default function LoginInfo() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
+  console.log("user :", user);
   const [showSubMenu, setShowSubMenu] = useState(false);
   const navigate = useNavigate();
 

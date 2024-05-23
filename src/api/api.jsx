@@ -21,9 +21,9 @@ const database = getDatabase();
 const storage = getStorage();
 
 //이메일, 비밀번호 회원가입 api
-export async function joinEmail(email, password) {
+export async function joinEmail(email, password, name) {
   try {
-    const userData = await createUserWithEmailAndPassword(auth, email, password);
+    const userData = await createUserWithEmailAndPassword(auth, email, password, name);
     console.log("userData : ", userData);
     return userData;
   } catch (err) {
@@ -32,9 +32,9 @@ export async function joinEmail(email, password) {
 }
 
 //이메일, 비밀번호 로그인 api
-export async function loginEmail(email, password) {
+export async function loginEmail(email, password, name) {
   try {
-    const userData = await signInWithEmailAndPassword(auth, email, password);
+    const userData = await signInWithEmailAndPassword(auth, email, password, name);
     console.log("userData : ", userData);
     return userData;
   } catch (err) {
