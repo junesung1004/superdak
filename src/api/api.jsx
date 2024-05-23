@@ -100,7 +100,7 @@ export async function logOut() {
   try {
     await signOut(auth);
   } catch (err) {
-    console.error("로그아웃 에러 : ", err);
+    console.error("로그아웃 에러! : ", err);
   }
 }
 
