@@ -8,7 +8,7 @@ import { useUserState } from "../recoil/authLoginAtom";
 
 export default function LoginInfo() {
   const [user, setUser] = useUserState();
-  console.log(user);
+  console.log("user : ", user);
 
   const [showSubMenu, setShowSubMenu] = useState(false);
   const navigate = useNavigate();

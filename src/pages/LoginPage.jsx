@@ -19,6 +19,7 @@ export default function LoginPage() {
 
   //리코일 로그인 전역상태 관리 코드
   const [user, setUser] = useUserState();
+  console.log("user : ", user);
 
   // 이메일 입력창
   const handleEmailChange = (e) => {
@@ -79,6 +80,7 @@ export default function LoginPage() {
       const userData = await googleLogin();
       if (userData) {
         alert("구글 로그인에 성공했습니다.");
+        setUser(userData);
         console.log("로그인 유저 : ", userData);
         //sessionStorage.setItem("userData", userData);
         navigate("/");

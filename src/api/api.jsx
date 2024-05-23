@@ -51,7 +51,8 @@ export async function loginEmail(email, password) {
   try {
     const userData = await signInWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
-    return userData;
+    const user = userData.user;
+    return user;
   } catch (err) {
     console.error("로그인 에러 : ", err);
   }

@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateCart } from "../api/api";
 import { ProductItemContainer } from "./ProductDetailPageStyle";
-import { useUserState } from "../recoil/authLoginAtom";
+// import { useUserState } from "../recoil/authLoginAtom";
 // import { useAuthContext } from "../context/AuthContext";
 
 export default function ProductDetailPage() {
-  const [products, setProducts] = useUserState();
+  const [products, setProducts] = useState();
   console.log("products : ", products);
 
   const state = useLocation().state;
@@ -31,9 +31,8 @@ export default function ProductDetailPage() {
   const goToCartEvent = async (e) => {
     e.preventDefault();
     try {
-      const userObject = JSON.parse(user);
       if (products) {
-        await updateCart(userObject.uid, products);
+        await updateCart(products);
         console.log("장바구니에 상품이 추가되었습니다.");
         navigate("/cart"); // 장바구니 페이지로 이동
       } else {
