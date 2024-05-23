@@ -75,23 +75,24 @@ export async function googleLogin() {
   }
 }
 
-//로그인 유지(새로고침 해도 로그인 유지) api
-// export function onUserLoginState(callback) {
-//   onAuthStateChanged(auth, async (user) => {
-//     if (user) {
-//       try {
-//         const updateUser = await adminUser(user);
-//         callback(updateUser);
-//       } catch (err) {
-//         console.log("로그인 유지 에러 : ", err);
-//         callback(user);
-//       }
-//     } else {
-//       //user 없다면 로그아웃
-//       callback(null);
-//     }
-//   });
-// }
+// 로그인 유지(새로고침 해도 로그인 유지) api
+export function onUserLoginState(callback) {
+  const auth = getAuth();
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const updateUser = await adminUser(user);
+        callback(updateUser);
+      } catch (err) {
+        console.log("로그인 유지 에러 : ", err);
+        callback(user);
+      }
+    } else {
+      //user 없다면 로그아웃
+      callback(null);
+    }
+  });
+}
 
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
