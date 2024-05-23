@@ -1,10 +1,10 @@
 import { BiCart } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { logOut, onUserLoginState } from "../api/api";
+import { logOut } from "../api/api";
 import { FaUserCircle } from "react-icons/fa";
 import { UserInfoContainer } from "./LoginInfoStyle";
-import { useUserState } from "../recoil/authLoginAtom";
+import { onUserLoginState, useUserState } from "../recoil/authLoginAtom";
 
 export default function LoginInfo() {
   const [user, setUser] = useUserState();
