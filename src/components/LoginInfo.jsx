@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import { logOut, onUserLoginState } from "../api/api";
 import { FaUserCircle } from "react-icons/fa";
 import { UserInfoContainer } from "./LoginInfoStyle";
-import { useRecoilState } from "recoil";
-import { userState } from "../recoil/authLoginAtom";
+import { useUserState } from "../recoil/authLoginAtom";
 
 export default function LoginInfo() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useUserState();
   console.log("user :", user);
   const [showSubMenu, setShowSubMenu] = useState(false);
   const navigate = useNavigate();
@@ -34,11 +33,14 @@ export default function LoginInfo() {
 
   //로그아웃 로직
   const clickLogoutEvent = async () => {
-    alert("로그아웃 되었습니다.");
-    sessionStorage.clear();
-    await logOut();
-    navigate("/");
-    setUser(null);
+    try {
+      await logOut();
+      setUser(null);
+      alert("로그아웃 되었습니다.");
+      navigate("/");
+    } catch (err) {
+      console.error("로그아웃 기능 에러 : ", err);
+    }
   };
 
   //모바일에서 손으로 조작을 할시 호버는 안되니 클릭 이벤트 추가!
@@ -61,7 +63,7 @@ export default function LoginInfo() {
       <UserInfoContainer>
         <li className="user-logo">
           <FaUserCircle />
-          {user ? <p>슈퍼닭!</p> : <p>로그인</p>}
+          {user ? <p>{user.displayName}님</p> : <p>로그인</p>}
           <ul className={`sub-menu ${showSubMenu ? "visible" : ""}`}>
             {user && user.isAdmin && (
               <>

@@ -1,5 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import { getDatabase, ref as databaseRef, set, get, remove } from "firebase/database";
 import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 import { adminUser } from "../service/admin";
@@ -22,9 +31,15 @@ const storage = getStorage();
 
 //이메일, 비밀번호 회원가입 api
 export async function joinEmail(email, password, name) {
+  const auth = getAuth();
   try {
-    const userData = await createUserWithEmailAndPassword(auth, email, password, name);
+    const userData = await createUserWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
+    const user = userData.user;
+    await updateProfile(user, {
+      displayName: name,
+    });
+    // await signOut(auth);
     return userData;
   } catch (err) {
     console.error("회원가입 에러 : ", err);
@@ -32,9 +47,9 @@ export async function joinEmail(email, password, name) {
 }
 
 //이메일, 비밀번호 로그인 api
-export async function loginEmail(email, password, name) {
+export async function loginEmail(email, password) {
   try {
-    const userData = await signInWithEmailAndPassword(auth, email, password, name);
+    const userData = await signInWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
     return userData;
   } catch (err) {
