@@ -1,7 +1,7 @@
 import { BiCart } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { logOut } from "../api/api";
+import { logOut, onUserLoginState } from "../api/api";
 import { FaUserCircle } from "react-icons/fa";
 import { UserInfoContainer } from "./LoginInfoStyle";
 import { useUserState } from "../recoil/authLoginAtom";
@@ -13,13 +13,13 @@ export default function LoginInfo() {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   //로그인 상태 확인 및 유저 정보 설정
-  //   onUserLoginState((user) => {
-  //     //console.log("User state updated:", user)
-  //     setUser(user);
-  //   });
-  // }, []);
+  useEffect(() => {
+    //로그인 상태 확인 및 유저 정보 설정
+    onUserLoginState((user) => {
+      //console.log("User state updated:", user)
+      setUser(user);
+    });
+  }, []);
 
   //관리자 계정으로 접속했을때 콘솔 찍어보는 코드
   useEffect(() => {
