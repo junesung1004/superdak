@@ -6,12 +6,14 @@ import { useUserState } from "../recoil/authLoginAtom";
 export default function CartPage() {
   const [products, setProducts] = useState([]);
   const [user] = useUserState();
-  console.log("카트 페이지 products : ", products);
+  //console.log("카트 페이지 products : ", products);
   //console.log("카트페이지 user : ", user);
   // console.log("product.id : ", products[1].id);
 
   const uid = user ? user.uid : null;
-  console.log("uid : ", uid);
+  //console.log("uid : ", uid);
+
+  const [selectProducts, setSelectProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,13 +27,19 @@ export default function CartPage() {
     fetchProducts();
   }, [uid]);
 
-  const clickDeleteBtn = async () => {
+  const clickDeleteBtn = async (productId) => {
     console.log("버튼을 눌렀습니다.");
     try {
-      const remove = await deleteCart(uid, products.id);
+      await deleteCart(uid, products.id);
+      setProducts((prev) => prev.filter((product) => product.id !== productId));
     } catch (err) {
       console.error("장바구니 삭제기능 에러 :", err);
     }
+  };
+
+  const handleSelectCheck = (productId) => {
+    console.log("productId : ", productId);
+    setProducts((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]));
   };
 
   return (
@@ -65,7 +73,7 @@ export default function CartPage() {
                     {/* 카트상품 */}
                     <div className="cart-item-wrap">
                       <div className="checkbox-wrap">
-                        <input type="checkbox" />
+                        <input type="checkbox" checked={selectProducts.includes(product.id)} onChange={() => handleSelectCheck(product.id)} />
                       </div>
                       <div className="cart-img-wrap">
                         <img src={product.image} alt={product.title} />
@@ -88,7 +96,7 @@ export default function CartPage() {
                         </p>
                       </div>
                       <div className="delete-btn-wrap">
-                        <button type="button" onClick={clickDeleteBtn}>
+                        <button type="button" onClick={() => clickDeleteBtn(product.id)}>
                           x
                         </button>
                       </div>

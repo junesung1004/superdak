@@ -204,5 +204,5 @@ export async function deleteCart(userId, productId) {
 export { database, auth };
 
 //CartPage 31번라인 : products state값이 복수여서 products.id 가 undefined현상이 발생.
-// 특정 products.id만 추출하여 하나의 아이템만 삭제하려고 하는데 어떻게 해야할지 모르겠다..
+//특정 products.id만 추출하여 하나의 아이템만 삭제하려고 하는데 어떻게 해야할지 모르겠다..
 //filter를 사용해야되는건지..? 복수개여서 음.. 이부분이 안되고 있음.
