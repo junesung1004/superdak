@@ -124,7 +124,7 @@ export default function ProductDetailPage() {
                 </div>
                 <div className="info-wrap">
                   <p>공지사항</p>
-                  <p>금방 품절되니 주문을 서두르세요.</p>
+                  <p>금방 품절되니 주문을 서두르세요..!</p>
                 </div>
               </div>
 
