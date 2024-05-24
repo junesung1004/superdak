@@ -15,6 +15,8 @@ export default function CartPage() {
 
   const [selectProducts, setSelectProducts] = useState([]);
 
+  const [isAll, setIsAll] = useState(false);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -36,7 +38,6 @@ export default function CartPage() {
       console.error("장바구니 삭제기능 에러 :", err);
     }
   };
-
   const handleSelectCheck = (productId) => {
     //console.log("productId : ", productId);
     setSelectProducts((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]));
@@ -56,6 +57,13 @@ export default function CartPage() {
     }
   };
 
+  const checkedAllEvent = () => {
+    //선택된 체크박스의 갯수와 상품 아이템의 갯수가 같을때 속성을 바꿔준다.
+    if (selectProducts.length === products.length) {
+      setIsAll(true);
+    }
+  };
+
   return (
     <CartPageContainer>
       <h1>장바구니</h1>
@@ -64,7 +72,7 @@ export default function CartPage() {
           {/* 전체 체크박스 및 선택삭제 버튼*/}
           <div className="all-check-wrap">
             <div className="all-check">
-              <input type="checkbox" id="all" />
+              <input type="checkbox" id="all" onChange={checkedAllEvent} checked={isAll} />
               <label htmlFor="all">전체 선택</label>
             </div>
             <button type="button" onClick={handleSelectDelete}>
