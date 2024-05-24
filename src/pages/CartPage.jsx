@@ -30,7 +30,7 @@ export default function CartPage() {
   const clickDeleteBtn = async (productId) => {
     console.log("버튼을 눌렀습니다.");
     try {
-      await deleteCart(uid, products.id);
+      await deleteCart(uid, productId);
       setProducts((prev) => prev.filter((product) => product.id !== productId));
     } catch (err) {
       console.error("장바구니 삭제기능 에러 :", err);
@@ -38,8 +38,19 @@ export default function CartPage() {
   };
 
   const handleSelectCheck = (productId) => {
-    console.log("productId : ", productId);
-    setProducts((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]));
+    //console.log("productId : ", productId);
+    setSelectProducts((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]));
+  };
+
+  const handleSelectDelete = async () => {
+    console.log(selectProducts);
+    console.log(setSelectProducts);
+    try {
+      await Promise.all(setSelectProducts.map((productId) => deleteCart(uid, productId)));
+      setProducts((prev) => prev.filter((product) => !selectProducts.includes(products.id)));
+    } catch (err) {
+      console.error("삭제 기능 에러 : ", err);
+    }
   };
 
   return (
@@ -53,7 +64,9 @@ export default function CartPage() {
               <input type="checkbox" id="all" />
               <label htmlFor="all">전체 선택</label>
             </div>
-            <button type="button">선택삭제</button>
+            <button type="button" onClick={handleSelectDelete}>
+              선택삭제
+            </button>
           </div>
 
           {/* 장바구니 아이템 콘테이너 */}
