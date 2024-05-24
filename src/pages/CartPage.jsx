@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
 import { deleteCart, getCart } from "../api/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUserState } from "../recoil/authLoginAtom";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
-  const [user, setUser] = useUserState();
+  const [user] = useUserState();
   console.log("카트 페이지 products : ", products);
-  console.log("카트페이지 user : ", user);
+  //console.log("카트페이지 user : ", user);
+  const uid = user.uid;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!uid) {
+      alert("장바구니에 담은 상품이 없습니다 아이템을 추가해주세요.");
+      navigate("/");
+      return;
+    }
+
     const fetchProducts = async () => {
       try {
-        const productItem = await getCart(products);
+        const productItem = await getCart(uid);
         setProducts(productItem);
       } catch (err) {
         console.error("장바구니 아이템 가져오는 기능 에러! : ", err);
       }
     };
     fetchProducts();
-  }, [user]);
+  }, [uid]);
 
   const clickDeleteBtn = async () => {
     try {

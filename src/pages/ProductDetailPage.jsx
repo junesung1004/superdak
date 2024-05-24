@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateCart } from "../api/api";
+import { getProductId, updateCart } from "../api/api";
 import { ProductItemContainer } from "./ProductDetailPageStyle";
-// import { useUserState } from "../recoil/authLoginAtom";
-// import { useAuthContext } from "../context/AuthContext";
+import { useUserState } from "../recoil/authLoginAtom";
 
 export default function ProductDetailPage() {
   const [products, setProducts] = useState();
@@ -12,27 +11,47 @@ export default function ProductDetailPage() {
   const state = useLocation().state;
   console.log("state : ", state);
 
-  // const { user } = useAuthContext();
-  // console.log("userid: ", user.uid);
+  const [user, setUser] = useUserState();
+  // console.log("user :", user);
+  // console.log("user.uid : ", user.uid);
+  const uid = user.uid;
 
   const navigate = useNavigate();
+
+  //useLocation() : 현재 url에 대한 정보를 제공하는 훅
+  const location = useLocation();
+
+  //location 현재 url에 대한 정보를 담은 변수를 활용해 pathname의 속성을 추출한다.
+  const pathName = location.pathname;
+
+  //문자열을 / 기준으로 나눈 후에 마지막 요소를 추출하여 id 변수에 할당
+  const id = pathName.split("/").pop();
+  // console.log("id : ", id);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setProducts(state);
+        const data = await getProductId(id);
+        if (data) {
+          setProducts(data);
+        }
       } catch (err) {
         console.error("상품 디테일 페이지 받아오는 작업 에러 : ", err);
       }
     };
     fetchProducts();
-  }, []);
+  }, [id]);
 
   const goToCartEvent = async (e) => {
     e.preventDefault();
+    if (!user) {
+      alert("회원전용 기능입니다. 회원가입 페이지로 이동하겠습니다.");
+      navigate("/login");
+      return;
+    }
     try {
       if (products) {
-        await updateCart(products);
+        await updateCart(uid, products);
         console.log("장바구니에 상품이 추가되었습니다.");
         navigate("/cart"); // 장바구니 페이지로 이동
       } else {

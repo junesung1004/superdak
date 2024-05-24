@@ -151,10 +151,23 @@ export async function getProducts() {
   }
 }
 
-//메인에 등록된 아이템을 장바구니에 담는 api
-export async function updateCart(product) {
+//메인페이지에 등록된 아이템의 id와 디테일페이지에서 전달받은 id를 이용해서 database에 있는 동일한 id의 제품과 매칭하여 디테일 페이지에 가져오기
+export async function getProductId(productId) {
   try {
-    const cartRef = databaseRef(database, `cart/${product.id}`);
+    const detailRef = databaseRef(database, `products/${productId}`);
+    const snapshot = await get(detailRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    }
+  } catch (err) {
+    console.error("디테일 페이지 아이템 가져오기 기능 에러 : ", err);
+  }
+}
+
+//메인에 등록된 아이템을 장바구니에 담는 api
+export async function updateCart(userId, product) {
+  try {
+    const cartRef = databaseRef(database, `cart/${userId}/${product.id}`);
     await set(cartRef, product);
   } catch (err) {
     console.error("상품을 장바구니에 추가하는 기능 에러 : ", err);
@@ -162,9 +175,9 @@ export async function updateCart(product) {
 }
 
 //장바구니에 담긴 데이타를 가져오는 api
-export async function getCart() {
+export async function getCart(userId) {
   try {
-    const cartRef = databaseRef(database, `cart`);
+    const cartRef = databaseRef(database, `cart/${userId}`);
     const snapshot = await get(cartRef);
     if (snapshot.exists()) {
       const item = snapshot.val();
