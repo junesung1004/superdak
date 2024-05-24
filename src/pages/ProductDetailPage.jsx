@@ -28,8 +28,11 @@ export default function ProductDetailPage() {
   const id = pathName.split("/").pop();
   // console.log("id : ", id);
 
-  //수량 갯수
+  //옵션 문구
   const option = ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개", "9개", "10개"];
+
+  //수량 갯수
+  const [selectQuantity, setSelectQuantity] = useState(1);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -45,6 +48,10 @@ export default function ProductDetailPage() {
     fetchProducts();
   }, [id]);
 
+  const handleQuantityChange = (e) => {
+    setSelectQuantity(Number(e.target.value));
+  };
+
   const goToCartEvent = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -52,11 +59,12 @@ export default function ProductDetailPage() {
       navigate("/login");
       return;
     }
+
     try {
       if (products) {
         // products가 존재하는 경우
-        if (products.quantity > option.length) {
-          // 상품의 수량이 옵션의 길이를 초과하는 경우
+        if (selectQuantity > products.quantity) {
+          // 선택한 수량의 갯수가 등록한 아이템의 갯수를 초과할때
           alert("총 물량의 재고를 넘게 살 수 없습니다.");
         } else {
           // 장바구니에 상품을 추가하고 이동
@@ -91,7 +99,7 @@ export default function ProductDetailPage() {
                 <h1>{products.title}</h1>
                 <p>{products.description}</p>
                 <p>
-                  {products.price}
+                  {products.price * selectQuantity}
                   <span>원</span>
                 </p>
               </div>
@@ -123,7 +131,7 @@ export default function ProductDetailPage() {
               <form className="option-container">
                 {/* 수량옵션 */}
                 <label htmlFor="option">상품수량</label>
-                <select name="" id="option">
+                <select name="" id="option" value={selectQuantity} onChange={handleQuantityChange}>
                   <option disabled selected>
                     상품옵션선택
                   </option>
