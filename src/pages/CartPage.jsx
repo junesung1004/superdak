@@ -51,7 +51,7 @@ export default function CartPage() {
       //setProducts((prev) => prev.filter((product) => !selectProducts.includes(products.id)));
       const updateProducts = products.filter((product) => !selectProducts.includes(product.id));
       setProducts(updateProducts);
-      //setSelectProducts([]);
+      setSelectProducts([]);
     } catch (err) {
       console.error("삭제 기능 에러 : ", err);
     }
@@ -60,7 +60,9 @@ export default function CartPage() {
   const checkedAllEvent = () => {
     //선택된 체크박스의 갯수와 상품 아이템의 갯수가 같을때 속성을 바꿔준다.
     if (selectProducts.length === products.length) {
-      setIsAll(true);
+      setSelectProducts([]);
+    } else {
+      setSelectProducts(products.map((product) => product.id));
     }
   };
 
@@ -72,7 +74,7 @@ export default function CartPage() {
           {/* 전체 체크박스 및 선택삭제 버튼*/}
           <div className="all-check-wrap">
             <div className="all-check">
-              <input type="checkbox" id="all" onChange={checkedAllEvent} checked={isAll} />
+              <input type="checkbox" id="all" onChange={checkedAllEvent} checked={selectProducts.length === products.length} />
               <label htmlFor="all">전체 선택</label>
             </div>
             <button type="button" onClick={handleSelectDelete}>
@@ -85,7 +87,7 @@ export default function CartPage() {
             {/* 슈퍼닭 분류 로고 */}
             <div className="logo-wrap">
               <div className="all-check">
-                <input type="checkbox" id="all" />
+                <input type="checkbox" id="all" onChange={checkedAllEvent} checked={selectProducts.length === products.length} />
                 <label htmlFor="all">슈퍼닭</label>
               </div>
             </div>
