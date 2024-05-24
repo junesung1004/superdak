@@ -14,7 +14,7 @@ export default function ProductDetailPage() {
   const [user, setUser] = useUserState();
   // console.log("user :", user);
   // console.log("user.uid : ", user.uid);
-  const uid = user.uid;
+  const uid = user ? user.uid : null;
 
   const navigate = useNavigate();
 

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
 import { deleteCart, getCart } from "../api/api";
-import { useNavigate, useParams } from "react-router-dom";
 import { useUserState } from "../recoil/authLoginAtom";
 
 export default function CartPage() {
@@ -9,17 +8,12 @@ export default function CartPage() {
   const [user] = useUserState();
   console.log("카트 페이지 products : ", products);
   //console.log("카트페이지 user : ", user);
-  const uid = user.uid;
+  // console.log("product.id : ", products[1].id);
 
-  const navigate = useNavigate();
+  const uid = user ? user.uid : null;
+  console.log("uid : ", uid);
 
   useEffect(() => {
-    if (!uid) {
-      alert("장바구니에 담은 상품이 없습니다 아이템을 추가해주세요.");
-      navigate("/");
-      return;
-    }
-
     const fetchProducts = async () => {
       try {
         const productItem = await getCart(uid);
@@ -32,8 +26,9 @@ export default function CartPage() {
   }, [uid]);
 
   const clickDeleteBtn = async () => {
+    console.log("버튼을 눌렀습니다.");
     try {
-      const delete1 = await deleteCart(products);
+      const remove = await deleteCart(uid, products.id);
     } catch (err) {
       console.error("장바구니 삭제기능 에러 :", err);
     }
@@ -83,9 +78,9 @@ export default function CartPage() {
                         </p>
                       </div>
                       <div className="cart-item-count-wrap">
-                        <button>-</button>
+                        <button type="button">-</button>
                         <div>1</div>
-                        <button>+</button>
+                        <button type="button">+</button>
                       </div>
                       <div className="cart-item-price-wrap">
                         <p>
