@@ -22,24 +22,8 @@ export default function ProductItems() {
     fetchProducts();
   }, []);
 
-  // const data = {
-  //   id: products.id,
-  //   title: products.title,
-  //   price: products.price,
-  //   description: products.description,
-  //   image: products.image,
-  // };
-
   const goToEvent = (product) => {
-    navigate(`/productlist/${product.id}`, {
-      state: {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        description: product.description,
-        image: product.image,
-      },
-    });
+    navigate(`/productlist/${product.id}`);
   };
 
   return (

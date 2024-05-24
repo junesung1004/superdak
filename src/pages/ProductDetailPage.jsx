@@ -6,10 +6,7 @@ import { useUserState } from "../recoil/authLoginAtom";
 
 export default function ProductDetailPage() {
   const [products, setProducts] = useState();
-  console.log("products : ", products);
-
-  const state = useLocation().state;
-  console.log("state : ", state);
+  console.log("디테일 페이지 products : ", products);
 
   const [user, setUser] = useUserState();
   // console.log("user :", user);
@@ -33,6 +30,7 @@ export default function ProductDetailPage() {
 
   //수량 갯수
   const [selectQuantity, setSelectQuantity] = useState(1);
+  console.log("selectQuantity : ", selectQuantity);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -68,7 +66,8 @@ export default function ProductDetailPage() {
           alert("총 물량의 재고를 넘게 살 수 없습니다.");
         } else {
           // 장바구니에 상품을 추가하고 이동
-          await updateCart(uid, products);
+          const updataProducts = { ...products, selected: selectQuantity };
+          await updateCart(uid, updataProducts, selectQuantity);
           console.log("장바구니에 상품이 추가되었습니다.");
           navigate("/cart");
         }

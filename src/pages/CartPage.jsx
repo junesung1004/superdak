@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
 import { deleteCart, getCart } from "../api/api";
 import { useUserState } from "../recoil/authLoginAtom";
+import { useLocation } from "react-router-dom";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
   const [user] = useUserState();
-  //console.log("카트 페이지 products : ", products);
+  console.log("카트 페이지 products : ", products);
   //console.log("카트페이지 user : ", user);
-  // console.log("product.id : ", products[1].id);
 
+  // 유저가 있으면 user.uid를 가져오고 없으면 null 로 비워둬서 에러를 방지
   const uid = user ? user.uid : null;
   //console.log("uid : ", uid);
 
+  //선택된 제품의 갯수를 변수에 담아서 활용하는 코드
   const [selectProducts, setSelectProducts] = useState([]);
 
-  const [isAll, setIsAll] = useState(false);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,6 +40,7 @@ export default function CartPage() {
       console.error("장바구니 삭제기능 에러 :", err);
     }
   };
+
   const handleSelectCheck = (productId) => {
     //console.log("productId : ", productId);
     setSelectProducts((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]));
@@ -64,6 +67,21 @@ export default function CartPage() {
     } else {
       setSelectProducts(products.map((product) => product.id));
     }
+  };
+
+  //상품 갯수 추가 * 빼기
+  const clickPlusEvent = (productId) => {
+    console.log("버튼이 동작되나?");
+    products.map((product) => {
+      console.log("map product : ", product);
+      if (product.id === productId) setCount((prev) => prev + 1);
+    });
+  };
+
+  const clickMinusEvent = (productId) => {
+    products.map((product) => {
+      if (product.id === productId) setCount((prev) => prev - 1);
+    });
   };
 
   return (
@@ -108,17 +126,21 @@ export default function CartPage() {
                         <p>{product.title}</p>
                         <p>{product.description}</p>
                         <p>
-                          <span>{product.price}</span>원
+                          <span>{product.price * count}</span>원
                         </p>
                       </div>
                       <div className="cart-item-count-wrap">
-                        <button type="button">-</button>
-                        <div>1</div>
-                        <button type="button">+</button>
+                        <button type="button" onClick={() => clickMinusEvent(product.id)}>
+                          -
+                        </button>
+                        <div>{product.selected}</div>
+                        <button type="button" onClick={() => clickPlusEvent(product.id)}>
+                          +
+                        </button>
                       </div>
                       <div className="cart-item-price-wrap">
                         <p>
-                          <span>{product.price}</span>원
+                          <span>{product.price * count}</span>원
                         </p>
                       </div>
                       <div className="delete-btn-wrap">

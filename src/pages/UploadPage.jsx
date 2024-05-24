@@ -39,8 +39,8 @@ export default function UploadPage() {
     try {
       const product = {
         title: title,
-        price: price,
-        quantity: quantity,
+        price: Number(price),
+        quantity: Number(quantity),
         description: description,
       };
       const url = await uploadImages(file);
