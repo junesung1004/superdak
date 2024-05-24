@@ -46,7 +46,7 @@ export default function CartPage() {
     console.log(selectProducts);
     console.log(setSelectProducts);
     try {
-      await Promise.all(setSelectProducts.map((productId) => deleteCart(uid, productId)));
+      await Promise.all(selectProducts.map((productId) => deleteCart(uid, productId)));
       setProducts((prev) => prev.filter((product) => !selectProducts.includes(products.id)));
     } catch (err) {
       console.error("삭제 기능 에러 : ", err);
