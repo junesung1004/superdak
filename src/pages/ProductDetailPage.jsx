@@ -28,6 +28,9 @@ export default function ProductDetailPage() {
   const id = pathName.split("/").pop();
   // console.log("id : ", id);
 
+  //수량 갯수
+  const option = ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개", "9개", "10개"];
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -51,10 +54,18 @@ export default function ProductDetailPage() {
     }
     try {
       if (products) {
-        await updateCart(uid, products);
-        console.log("장바구니에 상품이 추가되었습니다.");
-        navigate("/cart"); // 장바구니 페이지로 이동
+        // products가 존재하는 경우
+        if (products.quantity > option.length) {
+          // 상품의 수량이 옵션의 길이를 초과하는 경우
+          alert("총 물량의 재고를 넘게 살 수 없습니다.");
+        } else {
+          // 장바구니에 상품을 추가하고 이동
+          await updateCart(uid, products);
+          console.log("장바구니에 상품이 추가되었습니다.");
+          navigate("/cart");
+        }
       } else {
+        // products가 존재하지 않는 경우
         console.log("상품을 찾을 수 없습니다.");
       }
     } catch (err) {
@@ -111,16 +122,19 @@ export default function ProductDetailPage() {
 
               <form className="option-container">
                 {/* 수량옵션 */}
-                {/* <label htmlFor="option">상품수량</label>
+                <label htmlFor="option">상품수량</label>
                 <select name="" id="option">
                   <option disabled selected>
                     상품옵션선택
                   </option>
-                  <option value="1">1팩</option>
-                  <option value="3">3팩</option>
-                  <option value="5">5팩</option>
-                  <option value="10">10팩</option>
-                </select> */}
+                  {option.map((el, idx) => {
+                    return (
+                      <>
+                        <option value={idx}>{el}</option>
+                      </>
+                    );
+                  })}
+                </select>
 
                 {/* 장바구니 및 바로구매 버튼 */}
                 <div className="button-wrap">
