@@ -132,7 +132,7 @@ export default function ProductDetailPage() {
                 {/* 수량옵션 */}
                 <label htmlFor="option">상품수량</label>
                 <select name="" id="option" value={selectQuantity} onChange={handleQuantityChange}>
-                  <option disabled selected>
+                  <option disabled value="">
                     상품옵션선택
                   </option>
                   {option.map((el, idx) => {
