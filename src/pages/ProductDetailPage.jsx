@@ -137,9 +137,9 @@ export default function ProductDetailPage() {
                   </option>
                   {option.map((el, idx) => {
                     return (
-                      <>
-                        <option value={idx}>{el}</option>
-                      </>
+                      <option value={idx + 1} key={idx}>
+                        {el}
+                      </option>
                     );
                   })}
                 </select>
