@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
 import { deleteCart, getCart } from "../api/api";
 import { useUserState } from "../recoil/authLoginAtom";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
+  console.log("");
   const [user] = useUserState();
   console.log("카트 페이지 products : ", products);
   //console.log("카트페이지 user : ", user);
@@ -16,8 +17,6 @@ export default function CartPage() {
 
   //선택된 제품의 갯수를 변수에 담아서 활용하는 코드
   const [selectProducts, setSelectProducts] = useState([]);
-
-  const [count, setCount] = useState(1);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -70,18 +69,22 @@ export default function CartPage() {
   };
 
   //상품 갯수 추가 * 빼기
-  const clickPlusEvent = (productId) => {
+  const clickPlusEvent = (productId, productQuantity, productSelected) => {
     console.log("버튼이 동작되나?");
-    products.map((product) => {
-      console.log("map product : ", product);
-      if (product.id === productId) setCount((prev) => prev + 1);
-    });
+
+    if (productSelected > productQuantity - 1) {
+      alert("등록된 아이템의 수량을 초과하였습니다.");
+    } else {
+      setProducts((prevProducts) => prevProducts.map((product) => (product.id === productId ? { ...product, selected: product.selected + 1 } : product)));
+    }
+    // products.map((product) => {
+    //   console.log("click plus : ", product);
+    //   if (product.id === productId) setProducts((prev) => prev + 1);
+    // });
   };
 
   const clickMinusEvent = (productId) => {
-    products.map((product) => {
-      if (product.id === productId) setCount((prev) => prev - 1);
-    });
+    setProducts((prevProducts) => prevProducts.map((product) => (product.id === productId ? { ...product, selected: product.selected - 1 } : product)));
   };
 
   return (
@@ -126,21 +129,21 @@ export default function CartPage() {
                         <p>{product.title}</p>
                         <p>{product.description}</p>
                         <p>
-                          <span>{product.price * count}</span>원
+                          <span>{(product.price * product.selected).toLocaleString()}</span>원
                         </p>
                       </div>
                       <div className="cart-item-count-wrap">
-                        <button type="button" onClick={() => clickMinusEvent(product.id)}>
+                        <button type="button" onClick={() => clickMinusEvent(product.id)} disabled={product.selected <= 1}>
                           -
                         </button>
                         <div>{product.selected}</div>
-                        <button type="button" onClick={() => clickPlusEvent(product.id)}>
+                        <button type="button" onClick={() => clickPlusEvent(product.id, product.quantity, product.selected)}>
                           +
                         </button>
                       </div>
                       <div className="cart-item-price-wrap">
                         <p>
-                          <span>{product.price * count}</span>원
+                          <span>{product.price * product.selected}</span>원
                         </p>
                       </div>
                       <div className="delete-btn-wrap">
