@@ -49,7 +49,7 @@ export default function ProductItems() {
                         <p>{product.title}</p>
                         <p>{product.description}</p>
                         <p>
-                          <span>{product.price}</span>원
+                          <span>{product.price.toLocaleString()}</span>원
                         </p>
                       </div>
                     </div>

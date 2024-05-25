@@ -98,7 +98,7 @@ export default function ProductDetailPage() {
                 <h1>{products.title}</h1>
                 <p>{products.description}</p>
                 <p>
-                  {products.price * selectQuantity}
+                  {(products.price * selectQuantity).toLocaleString()}
                   <span>원</span>
                 </p>
               </div>

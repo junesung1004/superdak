@@ -143,7 +143,7 @@ export default function CartPage() {
                       </div>
                       <div className="cart-item-price-wrap">
                         <p>
-                          <span>{product.price * product.selected}</span>원
+                          <span>{(product.price * product.selected).toLocaleString()}</span>원
                         </p>
                       </div>
                       <div className="delete-btn-wrap">
@@ -156,7 +156,8 @@ export default function CartPage() {
                     {/* 카트 상품 가격 표시 콘테이너 */}
                     <div className="cart-item-price-wrap">
                       <p>
-                        상품<span>{product.price}</span>원 총 가격 : <span className="price">{products.price}</span>원
+                        상품<span>{(product.price * product.selected).toLocaleString()}</span>원 총 가격 :{" "}
+                        <span className="price">{(product.price * product.selected).toLocaleString()}</span>원
                       </p>
                     </div>
                   </div>

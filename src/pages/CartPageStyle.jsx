@@ -95,7 +95,7 @@ export const CartPageContainer = styled.div`
         flex-direction: column;
         gap: 15px;
         font-size: 1.2rem;
-        width: 400px;
+        width: 500px;
 
         p:nth-child(1) {
         }
@@ -119,7 +119,7 @@ export const CartPageContainer = styled.div`
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 10px 20px;
-        margin-right: 60px;
+        /* margin-right: 60px; */
         button {
           cursor: pointer;
           background-color: white;
@@ -150,6 +150,17 @@ export const CartPageContainer = styled.div`
         font-weight: bold;
         font-size: 1.2rem;
         color: black;
+      }
+    }
+  }
+
+  @media (max-width: 578px) {
+    .cart-item-wrap {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      .cart-item-count-wrap {
+        margin-right: 0;
       }
     }
   }
