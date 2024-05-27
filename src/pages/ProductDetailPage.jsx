@@ -80,6 +80,17 @@ export default function ProductDetailPage() {
     }
   };
 
+  const goToBuyEvent = () => {
+    if (!user) {
+      alert("회원전용 기능입니다. 회원가입 페이지로 이동하겠습니다.");
+      navigate("/login");
+      return;
+    } else {
+      alert("주문해주셔서 감사합니다. 총알배송으로 찾아가겠습니다~!");
+      navigate("/");
+    }
+  };
+
   return (
     <ProductItemContainer>
       <div className="product-container">
@@ -148,7 +159,9 @@ export default function ProductDetailPage() {
                   <button className="cart-btn" onClick={goToCartEvent}>
                     장바구니
                   </button>
-                  <button className="buy-btn">바로구매</button>
+                  <button className="buy-btn" onClick={goToBuyEvent}>
+                    바로구매
+                  </button>
                 </div>
               </form>
             </div>

@@ -63,6 +63,23 @@ export default function CartPage() {
     }
   };
 
+  const handleSelectBuy = async () => {
+    try {
+      if (selectProducts.length < 1) {
+        alert("주문하실 상품을 선택해주세요.");
+        return;
+      } else {
+        await Promise.all(selectProducts.map((productId) => deleteCart(uid, productId)));
+        const updateProducts = products.filter((product) => !selectProducts.includes(product.id));
+        setProducts(updateProducts);
+        setSelectProducts([]);
+        alert("상품을 주문해주셔서 감사합니다. 총알배송으로 찾아가겠습니다!");
+      }
+    } catch (err) {
+      console.error("장바구니 구매 기능 에러 : ", err);
+    }
+  };
+
   const checkedAllEvent = () => {
     //선택된 체크박스의 갯수와 상품 아이템의 갯수가 같을때 속성을 바꿔준다.
     if (selectProducts.length === products.length) {
@@ -102,9 +119,14 @@ export default function CartPage() {
               <input type="checkbox" id="all" onChange={checkedAllEvent} checked={selectProducts.length === products.length} />
               <label htmlFor="all">전체 선택</label>
             </div>
-            <button type="button" onClick={handleSelectDelete}>
-              선택삭제
-            </button>
+            <div className="btn-wrap">
+              <button type="button" onClick={handleSelectBuy}>
+                선택상품 주문
+              </button>
+              <button type="button" onClick={handleSelectDelete}>
+                선택삭제
+              </button>
+            </div>
           </div>
 
           {/* 장바구니 아이템 콘테이너 */}

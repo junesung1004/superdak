@@ -1,3 +1,4 @@
+import Banner from "../components/Banner";
 import CategoryLogoList from "../components/CategoryLogoList";
 import ImageSlider from "../components/ImageSlider";
 import MainCategoryList from "../components/MainCategoryList";
@@ -9,6 +10,7 @@ export default function HomePage() {
       <ImageSlider />
       <CategoryLogoList />
       {/* <ProductList /> */}
+      <Banner />
       <MainCategoryList category={"NEW"} />
       <MainCategoryList category={"BEST"} />
       <MainCategoryList category={"닭가슴살"} />

@@ -18,14 +18,18 @@ export const CartPageContainer = styled.div`
     align-items: center;
     gap: 10px;
     justify-content: space-between;
-    button {
-      background-color: white;
-      color: #837a7a;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 10px 20px;
-      cursor: pointer;
+    .btn-wrap {
+      display: flex;
+      button {
+        background-color: white;
+        color: #837a7a;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
     }
+
     .all-check {
       display: flex;
       align-items: center;
@@ -154,7 +158,14 @@ export const CartPageContainer = styled.div`
     }
   }
 
-  @media (max-width: 578px) {
+  @media (max-width: 830px) {
+    .all-check-wrap {
+      .btn-wrap {
+        button {
+          transform: scale(0.8);
+        }
+      }
+    }
     .cart-item-wrap {
       flex-direction: column;
       align-items: center;

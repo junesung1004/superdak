@@ -39,7 +39,7 @@ export const MainCategoryListContainer = styled.div`
       border-radius: 10px;
       overflow: hidden;
       gap: 20px;
-
+      height: 480px;
       .img-wrap {
         width: 100%;
         img {
