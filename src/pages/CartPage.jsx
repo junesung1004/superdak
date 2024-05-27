@@ -33,8 +33,12 @@ export default function CartPage() {
   const clickDeleteBtn = async (productId) => {
     console.log("버튼을 눌렀습니다.");
     try {
-      await deleteCart(uid, productId);
-      setProducts((prev) => prev.filter((product) => product.id !== productId));
+      if (!selectProducts) {
+        alert("선택한 상품이 없습니다.");
+      } else {
+        await deleteCart(uid, productId);
+        setProducts((prev) => prev.filter((product) => product.id !== productId));
+      }
     } catch (err) {
       console.error("장바구니 삭제기능 에러 :", err);
     }

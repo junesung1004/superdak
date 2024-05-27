@@ -40,7 +40,7 @@ export default function Header() {
           </li>
 
           <li>NEW</li>
-          <li>HOT</li>
+          <li>BEST</li>
           <li>닭가슴살</li>
           <li>보충제</li>
           <li>도시락, 볶음밥</li>
