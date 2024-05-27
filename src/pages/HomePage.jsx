@@ -1,13 +1,13 @@
 import CategoryLogoList from "../components/CategoryLogoList";
 import ImageSlider from "../components/ImageSlider";
-import ProductListPage from "./ProductListPage";
+import MainCategoryList from "../components/MainCategoryList";
 
 export default function HomePage() {
   return (
     <>
       <ImageSlider />
       <CategoryLogoList />
-      <ProductListPage />
+      <MainCategoryList category={"닭가슴살"} />
     </>
   );
 }

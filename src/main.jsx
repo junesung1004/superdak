@@ -14,25 +14,28 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import UploadPage from "./pages/UploadPage.jsx";
 import { RecoilRoot } from "recoil";
+import { categoryContext } from "./context/categoryContext.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RecoilRoot>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="productlist">
-            <Route index element={<ProductListPage />} />
-            <Route path=":id" element={<ProductDetailPage />} />
+    <categoryContext.Provider value={{ categoryList: ["NEW", "BEST", "닭가슴살", "보충제", "도시락", "간편분식"] }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<HomePage />} />
+            <Route path="productlist">
+              <Route index element={<ProductListPage />} />
+              <Route path=":id" element={<ProductDetailPage />} />
+            </Route>
+            <Route path="join" element={<JoinPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="mypage" element={<MyPage />} />
+            <Route path="upload" element={<UploadPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-          <Route path="join" element={<JoinPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="mypage" element={<MyPage />} />
-          <Route path="upload" element={<UploadPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </categoryContext.Provider>
   </RecoilRoot>
 );

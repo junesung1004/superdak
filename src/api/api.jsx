@@ -1,17 +1,7 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  updateProfile,
-} from "firebase/auth";
-import { getDatabase, ref as databaseRef, set, get, remove } from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { getDatabase, ref as databaseRef, set, get, remove, query, orderByChild, equalTo } from "firebase/database";
 import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
-import { adminUser } from "../service/admin";
 import { v4 as uuid } from "uuid";
 
 const firebaseConfig = {
@@ -73,25 +63,6 @@ export async function googleLogin() {
   }
 }
 
-// 로그인 유지(새로고침 해도 로그인 유지) api
-// export function onUserLoginState(callback) {
-//   const auth = getAuth();
-//   onAuthStateChanged(auth, async (user) => {
-//     if (user) {
-//       try {
-//         const updateUser = await adminUser(user);
-//         callback({ ...updateUser });
-//       } catch (err) {
-//         console.log("로그인 유지 에러 : ", err);
-//         callback(user);
-//       }
-//     } else {
-//       //user 없다면 로그아웃
-//       callback(null);
-//     }
-//   });
-// }
-
 // 구글, 이메일 로그인 후 로그아웃 api
 export async function logOut() {
   try {
@@ -147,6 +118,44 @@ export async function getProducts() {
     }
   } catch (err) {
     console.error("상품 받아오는 작업 에러 : ", err);
+    return [];
+  }
+}
+
+//카테고리별로 아이템을 구분해서 출력 : 클라이언트 필터링 버전.
+//데이터의 양이 작을때에는 상관 없지만 데이터의 양이 많을 경우에는 클라이언트 필터링이 불리해지는 부분이 생김
+/*
+  모든 데이터를 클라이언트로 전송하는 로직이기 때문에 클라이언트 자체의 메모리 처리에있어
+  과부하의 문제가 생김
+  데이터의 전송량 문제 : 데이터가 클수록 네트워크 데이터 사용량이 증가
+
+  해결방법 : 서버측 필터링으로 대체
+  -api서버 자체에서 필터링을 거친 후 결과값만 클라이언트로 전송되기 때문에 데이터의 속도나 사용량에 차이가 많이 생김
+  데이터의 양이 클수록 클라이언트 필터링보다는 서버 필터링을 추천
+*/
+
+export async function getCategoryProduct(category) {
+  try {
+    const productRef = databaseRef(database, "products");
+    //데이터베이스 안에 있는 products 폴더를 참조해서 변수에 저장
+    //데이터베이스에 있는 products의 경로를 참조
+
+    //category를 기준으로 쿼리를 생성하고 필드에 주어진 값이 전송받은 category와 같은 값만 조회
+    //즉 주어진 productRef 의 참조하는 정보의 경로안에서 쿼리 조건문을 적용
+    //orderByChild = 쿼리문에서 조건(자식요소 안에 있는 키(category)를 기준으로 데이터를 정렬)
+    //equalTo = 지정된 값과 일치하는 데이터만 반환
+    const q = query(productRef, orderByChild("category"), equalTo(category));
+    console.log("q : ", q);
+
+    const snapshot = await get(q);
+    //현재 순간의 데이터를 캡쳐한다 즉 가져온다. snapshot
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    } else {
+      return [];
+    }
+  } catch (err) {
+    console.error("카테고리 정보 가져오는 기능 에러 : ", err);
     return [];
   }
 }

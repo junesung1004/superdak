@@ -1,16 +1,20 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useContext, useState } from "react";
 import { addProducts, uploadImages } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { UploadContainer } from "./UploadPageStyle";
+import { categoryContext } from "../context/categoryContext";
 
 export default function UploadPage() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
 
   const navigate = useNavigate();
+
+  const { categoryList } = useContext(categoryContext);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -28,12 +32,15 @@ export default function UploadPage() {
     setDescription(e.target.value);
   };
 
-  const handleImageChange = (e) => {
-    setFile(e.target.files[0]);
-    console.log("setFile(e.target.file) :", e.target.files[0]);
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
   };
 
-  //console.log("setFile(e.target.file) :", setFile(e.target.file));
+  const handleImageChange = (e) => {
+    setFile(e.target.files[0]);
+    //console.log("setFile(e.target.file) :", e.target.files);
+  };
+
   const uploadSubmitEvent = async (e) => {
     e.preventDefault();
     try {
@@ -42,6 +49,7 @@ export default function UploadPage() {
         price: Number(price),
         quantity: Number(quantity),
         description: description,
+        category: category,
       };
       const url = await uploadImages(file);
       const item = await addProducts(product, url);
@@ -85,6 +93,19 @@ export default function UploadPage() {
             <input type="text" id="description" value={description} name="description" onChange={handleDescriptionChange} />
           </div>
 
+          {/* 상품 종류 */}
+          <div className="upload-item-category">
+            <label htmlFor="category">상품 종류</label>
+            <select name="" id="category" onChange={handleCategoryChange}>
+              <option disabled value="">
+                상품옵션선택
+              </option>
+              {categoryList.map((el, idx) => {
+                return <option key={idx}>{el}</option>;
+              })}
+            </select>
+          </div>
+
           {/* 상품 이미지 */}
           <div className="upload-item-image">
             <label htmlFor="image">상품 이미지</label>
@@ -102,93 +123,3 @@ export default function UploadPage() {
     </UploadContainer>
   );
 }
-
-const UploadContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 520px;
-  margin: 30px auto;
-  .upload-container {
-    display: flex;
-    flex-direction: column;
-    .upload-title {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-    }
-
-    .upload-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      .upload-item-title {
-        display: flex;
-        align-items: center;
-        label {
-          width: 140px;
-        }
-        input {
-          padding: 10px 20px;
-          width: 100%;
-        }
-      }
-
-      .upload-item-price {
-        display: flex;
-        align-items: center;
-        label {
-          width: 140px;
-        }
-        input {
-          padding: 10px 20px;
-          width: 100%;
-        }
-      }
-
-      .upload-item-quantity {
-        display: flex;
-        align-items: center;
-        label {
-          width: 140px;
-        }
-        input {
-          padding: 10px 20px;
-          width: 100%;
-        }
-      }
-
-      .upload-item-description {
-        display: flex;
-        align-items: center;
-        label {
-          width: 140px;
-        }
-        input {
-          padding: 10px 20px;
-          width: 100%;
-        }
-      }
-
-      .upload-item-image {
-        label {
-          margin-right: 30px;
-        }
-      }
-
-      .button-wrap {
-        .upload-btn {
-          outline: none;
-          border: none;
-          background-color: tomato;
-          padding: 20px 35px;
-          width: 100%;
-          border-radius: 12px;
-          font-weight: bold;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-`;
