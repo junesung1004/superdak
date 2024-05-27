@@ -1,7 +1,12 @@
 import { FaBars } from "react-icons/fa";
 import { CategoryNavContainer } from "./CategoryNavStyle";
+import { useContext } from "react";
+import { categoryContext } from "../context/categoryContext";
 
 export default function CategoryNav() {
+  //catagoryContext 파일에서 useContext로 context를 가져온다.
+  const { categoryList } = useContext(categoryContext);
+
   return (
     <CategoryNavContainer>
       <nav className="category-nav-wrap">
@@ -10,19 +15,14 @@ export default function CategoryNav() {
             <FaBars />
             <p>카테고리</p>
             <ul className="category-submenu">
-              <li>서브메뉴</li>
-              <li>서브메뉴</li>
-              <li>서브메뉴</li>
-              <li>서브메뉴</li>
+              {categoryList.map((el, idx) => {
+                return <li key={idx}>{el}</li>;
+              })}
             </ul>
           </li>
-
-          <li>NEW</li>
-          <li>BEST</li>
-          <li>닭가슴살</li>
-          <li>보충제</li>
-          <li>도시락, 볶음밥</li>
-          <li>간편분식</li>
+          {categoryList.map((el, idx) => {
+            return <li key={idx}>{el}</li>;
+          })}
         </ul>
       </nav>
     </CategoryNavContainer>
