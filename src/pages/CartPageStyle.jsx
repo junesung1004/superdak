@@ -27,6 +27,7 @@ export const CartPageContainer = styled.div`
         border-radius: 6px;
         padding: 10px 20px;
         cursor: pointer;
+        margin-right: 20px;
       }
     }
 
