@@ -80,6 +80,7 @@ export const ProductItemsContainer = styled.div`
   @media (max-width: 1050px) {
     .category-title {
       font-size: 1.4rem;
+      margin-top: 50px;
     }
     .item-container {
       grid-template-columns: repeat(2, minmax(280px, 40%));
@@ -89,6 +90,7 @@ export const ProductItemsContainer = styled.div`
   @media (max-width: 768px) {
     .category-title {
       font-size: 1.2rem;
+      margin-top: 50px;
     }
     .item-container {
       grid-template-columns: repeat(1, minmax(280px, 320px));

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { CategoryLogoListContainer } from "./CategoryLogoListStyle";
 
 export default function CategoryLogoList() {
   return (
@@ -27,9 +27,16 @@ export default function CategoryLogoList() {
 
         <div className="logo-cont">
           <li>
+            <img src="/protein-logo.png" alt="카테고리 이미지" />
+          </li>
+          <p>보충제</p>
+        </div>
+
+        <div className="logo-cont">
+          <li>
             <img src="/rice-logo.png" alt="카테고리 이미지" />
           </li>
-          <p>도시락, 볶음밥</p>
+          <p>도시락</p>
         </div>
 
         <div className="logo-cont">
@@ -42,27 +49,3 @@ export default function CategoryLogoList() {
     </CategoryLogoListContainer>
   );
 }
-
-const CategoryLogoListContainer = styled.div`
-  .catagory-logo-wrap {
-    padding: 60px;
-    padding-bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 80px;
-    .logo-cont {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      li {
-        cursor: pointer;
-        background-color: #f7f7f7;
-        padding: 20px;
-        border-radius: 30px;
-      }
-    }
-  }
-`;
