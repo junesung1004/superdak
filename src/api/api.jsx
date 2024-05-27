@@ -135,8 +135,10 @@ export async function getProducts() {
 */
 
 export async function getCategoryProduct(category) {
+  console.log("서버 catagory :", category);
   try {
     const productRef = databaseRef(database, "products");
+    console.log("productRef : ", productRef);
     //데이터베이스 안에 있는 products 폴더를 참조해서 변수에 저장
     //데이터베이스에 있는 products의 경로를 참조
 

@@ -2,23 +2,28 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getCategoryProduct } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { MainCategoryListContainer } from "./MainCategoryListStyle";
 
 export default function MainCategoryList({ category }) {
   const [products, setProducts] = useState([]);
   console.log("메인 카테고리 products : ", products);
+  console.log("category : ", category);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const productItem = await getCategoryProduct(category);
-        setProducts(productItem);
-      } catch (err) {
-        console.error("카테고리별 아이템 가져오는 기능 에러 : ", err);
-      }
-    };
-    fetchProducts();
+    if (category) {
+      const fetchProducts = async () => {
+        try {
+          const productItem = await getCategoryProduct(category);
+          setProducts(productItem);
+        } catch (err) {
+          console.error("카테고리별 아이템 가져오는 기능 에러:", err);
+        }
+      };
+
+      fetchProducts();
+    }
   }, [category]);
 
   const goToEvent = (product) => {
@@ -33,7 +38,7 @@ export default function MainCategoryList({ category }) {
       ) : (
         <>
           <h1 className="category-title">
-            🔥<span>HOT!</span> 맛있고 가성비 좋은 슈퍼닭 모든 아이템 !⭐
+            🔥핫하다~! 슈퍼닭에서만 주어지는 상품은 바로! <span>{category}</span> ⭐
           </h1>
           <div className="item-container">
             {products.map((product, idx) => {
@@ -60,5 +65,3 @@ export default function MainCategoryList({ category }) {
     </MainCategoryListContainer>
   );
 }
-
-const MainCategoryListContainer = styled.div``;
