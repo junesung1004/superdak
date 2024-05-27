@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { HeaderContainer } from "./HeaderStyle";
 import LoginInfo from "./LoginInfo";
 import SearchBar from "./SearchBar";
-import { FaBars } from "react-icons/fa";
+import CategoryNav from "./CategoryNav";
 
 export default function Header() {
   return (
@@ -26,27 +26,7 @@ export default function Header() {
       </nav>
 
       {/* category nav wrap */}
-      <nav className="category-nav-wrap">
-        <ul className="category-wrap">
-          <li className="category-mainmenu">
-            <FaBars />
-            <p>카테고리</p>
-            <ul className="category-submenu">
-              <li>서브메뉴</li>
-              <li>서브메뉴</li>
-              <li>서브메뉴</li>
-              <li>서브메뉴</li>
-            </ul>
-          </li>
-
-          <li>NEW</li>
-          <li>BEST</li>
-          <li>닭가슴살</li>
-          <li>보충제</li>
-          <li>도시락, 볶음밥</li>
-          <li>간편분식</li>
-        </ul>
-      </nav>
+      <CategoryNav />
     </HeaderContainer>
   );
 }
