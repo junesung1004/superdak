@@ -34,7 +34,7 @@ export default function CartPage() {
   }, [uid]);
 
   const clickDeleteBtn = async (productId) => {
-    console.log("버튼을 눌렀습니다.!");
+    console.log("버튼을 눌렀습니다.!!!!!!!!!!!!!!!!!!!!!!!1");
     try {
       if (!selectProducts) {
         alert("선택한 상품이 없습니다.");
