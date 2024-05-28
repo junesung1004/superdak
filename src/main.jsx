@@ -20,13 +20,7 @@ import { useContext } from "react";
 
 const CategoryRoute = () => {
   const { categoryList } = useContext(categoryContext);
-  return (
- 
-      {categoryList.map((el, idx) => (
-        <Route key={idx} path={`category:${el}`} element={<MainCategoryList />} />
-      ))}
-    
-  );
+  return categoryList.map((el, idx) => <Route key={idx} path={`category:${el}`} element={<MainCategoryList />} />);
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
