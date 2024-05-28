@@ -135,10 +135,10 @@ export async function getProducts() {
 */
 
 export async function getCategoryProduct(category) {
-  console.log("서버 catagory :", category);
+  //console.log("서버 catagory :", category);
   try {
     const productRef = databaseRef(database, "products");
-    console.log("productRef : ", productRef);
+    //console.log("productRef : ", productRef);
     //데이터베이스 안에 있는 products 폴더를 참조해서 변수에 저장
     //데이터베이스에 있는 products의 경로를 참조
 
@@ -147,7 +147,7 @@ export async function getCategoryProduct(category) {
     //orderByChild = 쿼리문에서 조건(자식요소 안에 있는 키(category)를 기준으로 데이터를 정렬)
     //equalTo = 지정된 값과 일치하는 데이터만 반환
     const q = query(productRef, orderByChild("category"), equalTo(category));
-    console.log("q : ", q);
+    //console.log("q : ", q);
 
     const snapshot = await get(q);
     //현재 순간의 데이터를 캡쳐한다 즉 가져온다. snapshot
