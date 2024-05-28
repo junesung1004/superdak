@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function CartPage() {
   const [products, setProducts] = useState([]);
   const [user] = useUserState();
-  console.log("카트 페이지 products : ", products);
+  //console.log("카트 페이지 products : ", products);
   //console.log("카트페이지 user : ", user);
 
   // 유저가 있으면 user.uid를 가져오고 없으면 null 로 비워둬서 에러를 방지

@@ -239,3 +239,13 @@ export async function getMyPage(userId) {
     console.error("마이페이지에서 데이터를 불러오는 기능 에러 : ", err);
   }
 }
+
+//데이터베이스에 mypage 폴더에 있는 데이터를 삭제하는 api
+export async function deleteMyPage(userId, productId) {
+  try {
+    const myPageRef = await remove(databaseRef(database, `mypage/${userId}/${productId}`));
+    return myPageRef;
+  } catch (err) {
+    console.error("마이페이지에있는 데이터 삭제 기능 에러 : ", err);
+  }
+}
