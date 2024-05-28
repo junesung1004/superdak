@@ -22,9 +22,9 @@ const CategoryRoute = () => {
   const { categoryList } = useContext(categoryContext);
   return (
     <>
-      {categoryList.map((el, idx) => {
-        <Route key={idx} path={`category:${el}`} element={<MainCategoryList />} />;
-      })}
+      {categoryList.map((el, idx) => (
+        <Route key={idx} path={`category:${el}`} element={<MainCategoryList />} />
+      ))}
     </>
   );
 };
