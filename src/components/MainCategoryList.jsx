@@ -19,7 +19,24 @@ export default function MainCategoryList({ category: propsCategory }) {
       const fetchProducts = async () => {
         try {
           const productItem = await getCategoryProduct(category);
+          // const discountProduct = productItem.map((el)=> {
+          //   return (
+          //     ...el,
+          //     discountPrice : el.price * 0.9
+          //   )
+          // })
+
+          const discountProducts = productItem.map((el) => {
+            if (category === "BEST") {
+              return {
+                ...el,
+                discountPrice: el.price * 0.9,
+              };
+            }
+            return el;
+          });
           setProducts(productItem);
+          // setProducts(discountProducts);
         } catch (err) {
           console.error("카테고리별 아이템 가져오는 기능 에러:", err);
         }
@@ -55,7 +72,9 @@ export default function MainCategoryList({ category: propsCategory }) {
                       <p>{product.title}</p>
                       <p>{product.description}</p>
                       <p>
-                        <span>{product.price.toLocaleString()}</span>원
+                        <span>{product.discountPrice ? product.discountPrice.toLocaleString() : product.price.toLocaleString()}</span>원
+                        {/* <span>{product.discountPrice.toLocaleString()}</span>원 */}
+                        {product.discountPrice && <span>{product.price.toLocaleString()}원</span>}
                       </p>
                     </div>
                   </div>

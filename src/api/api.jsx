@@ -214,6 +214,12 @@ export async function deleteCart(userId, productId) {
 
 export { database, auth };
 
-//CartPage 31번라인 : products state값이 복수여서 products.id 가 undefined현상이 발생.
-//특정 products.id만 추출하여 하나의 아이템만 삭제하려고 하는데 어떻게 해야할지 모르겠다..
-//filter를 사용해야되는건지..? 복수개여서 음.. 이부분이 안되고 있음.
+//장바구니에 담긴 데이터를 주문시 데이터베이스에 업로드하는 api
+export async function uploadMyPage(userId, product) {
+  try {
+    const myPageRef = databaseRef(database, `mypage/${userId}/${product.id}`);
+    await set(myPageRef, product);
+  } catch (err) {
+    console.error("장바구니에서 아이템 주문후 마이페이지로 데이터베이스 업로드 에러 : ", err);
+  }
+}

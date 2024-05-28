@@ -63,6 +63,7 @@ export default function CartPage() {
     }
   };
 
+  //장바구니 아이템 선택 후 선택상품 주문 버튼 클릭 이벤트
   const handleSelectBuy = async () => {
     try {
       if (selectProducts.length < 1) {
