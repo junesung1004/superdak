@@ -6,7 +6,7 @@ import { useUserState } from "../recoil/authLoginAtom";
 
 export default function ProductDetailPage() {
   const [products, setProducts] = useState();
-  console.log("디테일 페이지 products : ", products);
+  //console.log("디테일 페이지 products : ", products);
 
   const [user, setUser] = useUserState();
   // console.log("user :", user);

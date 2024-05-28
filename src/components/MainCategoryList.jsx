@@ -15,7 +15,7 @@ export default function MainCategoryList({ category: propsCategory }) {
 
   useEffect(() => {
     if (category) {
-      console.log(category);
+      //console.log(category);
       const fetchProducts = async () => {
         try {
           const productItem = await getCategoryProduct(category);

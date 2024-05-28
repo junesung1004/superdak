@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { CartPageContainer } from "./CartPageStyle";
-import { deleteCart, getCart } from "../api/api";
+import { deleteCart, getCart, uploadMyPage } from "../api/api";
 import { useUserState } from "../recoil/authLoginAtom";
+import { useNavigate } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
-  console.log("");
   const [user] = useUserState();
   console.log("카트 페이지 products : ", products);
   //console.log("카트페이지 user : ", user);
@@ -17,6 +17,9 @@ export default function CartPage() {
 
   //선택된 제품의 갯수를 변수에 담아서 활용하는 코드
   const [selectProducts, setSelectProducts] = useState([]);
+  console.log("selectProducts :", selectProducts);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -70,11 +73,24 @@ export default function CartPage() {
         alert("주문하실 상품을 선택해주세요.");
         return;
       } else {
+        // 선택한 상품들의 아이디를 이용하여 주문 처리
+        await Promise.all(
+          selectProducts.map((productId) =>
+            uploadMyPage(
+              uid,
+              productId,
+              products.find((product) => product.id === productId)
+            )
+          )
+        );
+        alert("상품을 주문해주셔서 감사합니다. 총알배송으로 찾아가겠습니다.");
+        // 주문한 상품들을 장바구니에서 삭제
         await Promise.all(selectProducts.map((productId) => deleteCart(uid, productId)));
+        // 주문 후에 상품 목록을 업데이트
         const updateProducts = products.filter((product) => !selectProducts.includes(product.id));
         setProducts(updateProducts);
         setSelectProducts([]);
-        alert("상품을 주문해주셔서 감사합니다. 총알배송으로 찾아가겠습니다!");
+        navigate("/mypage");
       }
     } catch (err) {
       console.error("장바구니 구매 기능 에러 : ", err);
