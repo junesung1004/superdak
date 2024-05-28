@@ -214,7 +214,7 @@ export async function deleteCart(userId, productId) {
 
 export { database, auth };
 
-//장바구니에 담긴 데이터를 주문시 데이터베이스에 업로드하는 api
+//장바구니에 담긴 데이터를 주문시 데이터베이스에 mypage 폴더에 업로드하는 api
 export async function uploadMyPage(userId, productId, product) {
   console.log("product :", product);
   try {
@@ -222,5 +222,20 @@ export async function uploadMyPage(userId, productId, product) {
     await set(myPageRef, product);
   } catch (err) {
     console.error("장바구니에서 아이템 주문후 마이페이지로 데이터베이스 업로드 에러 : ", err);
+  }
+}
+
+//데이터베이스에 mypage에 업로드한 데이터를 불러오는 api
+export async function getMyPage(userId) {
+  try {
+    const myPageRef = databaseRef(database, `mypage/${userId}`);
+    const snapshot = await get(myPageRef);
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    } else {
+      return [];
+    }
+  } catch (err) {
+    console.error("마이페이지에서 데이터를 불러오는 기능 에러 : ", err);
   }
 }

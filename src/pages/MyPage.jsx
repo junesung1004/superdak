@@ -1,6 +1,28 @@
+import { useEffect, useState } from "react";
 import { MyPageContainer } from "./MyPageStyle";
+import { getMyPage } from "../api/api";
+import { useUserState } from "../recoil/authLoginAtom";
 
 export default function MyPage() {
+  const [buyProducts, setBuyProducts] = useState([]);
+  console.log("buyProducts : ", buyProducts);
+
+  const [user] = useUserState();
+  console.log("user : ", user);
+  const uid = user ? user.uid : null;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const item = await getMyPage(uid);
+        setBuyProducts(item);
+      } catch (err) {
+        console.error("마이페이지에서 데이터 불러오는 기능 에러 : ", err);
+      }
+    };
+    fetchData();
+  }, [uid]);
+
   return (
     <MyPageContainer>
       <h1>장바구니</h1>
@@ -13,10 +35,10 @@ export default function MyPage() {
 
         <div className="user-info">
           <p>
-            <span>user</span> 님은, [슈퍼닭] 회원이십니다.
+            <span>{user.displayName}</span> 님은, [슈퍼닭] 회원이십니다.
           </p>
           <p>
-            <span>금액</span> 원 이상 구매시, <span>0%</span>을 추가적립 받으실 수 있습니다.
+            <span>{buyProducts.price}</span> 원 이상 구매시, <span>0%</span>을 추가적립 받으실 수 있습니다.
           </p>
         </div>
       </div>
