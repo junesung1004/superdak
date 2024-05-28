@@ -27,7 +27,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="productlist">
               <Route index element={<ProductListPage />} />
               <Route path=":id" element={<ProductDetailPage />} />
-              <Route path={`category:id`} element={<MainCategoryList />} />
+              {categoryList.map((el, idx) => {
+                return <Route key={idx} path={`category:el`} element={<MainCategoryList />} />;
+              })}
             </Route>
             <Route path="join" element={<JoinPage />} />
             <Route path="login" element={<LoginPage />} />

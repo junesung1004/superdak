@@ -24,7 +24,7 @@ export default function CategoryNav() {
           {categoryList.map((el, idx) => {
             return (
               <li key={idx}>
-                <Link to={`/catagory:${el}`}>{el}</Link>
+                <Link to={`/catagory/${el}`}>{el}</Link>
               </li>
             );
           })}
