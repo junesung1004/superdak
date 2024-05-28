@@ -16,12 +16,13 @@ import UploadPage from "./pages/UploadPage.jsx";
 import { RecoilRoot } from "recoil";
 import { categoryContext } from "./context/categoryContext.js";
 import MainCategoryList from "./components/MainCategoryList.jsx";
-import { useContext } from "react";
 
-const CategoryRoute = () => {
-  const { categoryList } = useContext(categoryContext);
-  return categoryList.map((el, idx) => <Route key={idx} path={`category:${el}`} element={<MainCategoryList />} />);
-};
+// const CategoryRoute = () => {
+//   const { categoryList } = useContext(categoryContext);
+//   console.log("categoryList : ", categoryList);
+//   return categoryList.map((el, idx) => <Route key={idx} path={`/category/${el}`} element={<MainCategoryList />} />);
+// };
+// console.log("CategoryRoute : ", CategoryRoute);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RecoilRoot>
@@ -33,7 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="productlist">
               <Route index element={<ProductListPage />} />
               <Route path=":id" element={<ProductDetailPage />} />
-              <CategoryRoute />
+              <Route path="category/:category" element={<MainCategoryList />} />
             </Route>
             <Route path="join" element={<JoinPage />} />
             <Route path="login" element={<LoginPage />} />

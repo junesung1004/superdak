@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function CategoryNav() {
   //catagoryContext 파일에서 useContext로 context를 가져온다.
   const { categoryList } = useContext(categoryContext);
-  console.log("categoryList : ", categoryList);
+  //console.log("categoryList : ", categoryList);
   return (
     <CategoryNavContainer>
       <nav className="category-nav-wrap">
@@ -24,7 +24,7 @@ export default function CategoryNav() {
           {categoryList.map((el, idx) => {
             return (
               <li key={idx}>
-                <Link to={`catagory/${el}`}>{el}</Link>
+                <Link to={`productlist/category/${el}`}>{el}</Link>
               </li>
             );
           })}

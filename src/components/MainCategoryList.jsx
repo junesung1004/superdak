@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { getCategoryProduct } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MainCategoryListContainer } from "./MainCategoryListStyle";
 
-export default function MainCategoryList({ category }) {
+export default function MainCategoryList({ category: propsCategory }) {
   const [products, setProducts] = useState([]);
-  console.log("메인 카테고리 products : ", products);
-  console.log("category : ", category);
+
+  const { category: paramsCategory } = useParams();
+  const category = propsCategory || paramsCategory;
+  // console.log("메인 카테고리 products : ", products);
+  // console.log("category : ", category);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (category) {
+      console.log(category);
       const fetchProducts = async () => {
         try {
           const productItem = await getCategoryProduct(category);
