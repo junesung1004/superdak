@@ -23,7 +23,7 @@ const CategoryRoute = () => {
   return (
     <>
       {categoryList.map((el, idx) => {
-        return <Route key={idx} path={`category:${el}`} element={<MainCategoryList />} />;
+        <Route key={idx} path={`category:${el}`} element={<MainCategoryList />} />;
       })}
     </>
   );
@@ -39,7 +39,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="productlist">
               <Route index element={<ProductListPage />} />
               <Route path=":id" element={<ProductDetailPage />} />
-              <CategoryRoute />
+              <Route element={<CategoryRoute />} />
             </Route>
             <Route path="join" element={<JoinPage />} />
             <Route path="login" element={<LoginPage />} />
