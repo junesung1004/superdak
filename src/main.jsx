@@ -18,7 +18,7 @@ import { categoryContext } from "./context/categoryContext.js";
 import MainCategoryList from "./components/MainCategoryList.jsx";
 import { useContext } from "react";
 
-const categoryRoute = () => {
+const CategoryRoute = () => {
   const { categoryList } = useContext(categoryContext);
   return (
     <>
@@ -39,7 +39,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="productlist">
               <Route index element={<ProductListPage />} />
               <Route path=":id" element={<ProductDetailPage />} />
-              <categoryRoutes />
+              <CategoryRoute />
             </Route>
             <Route path="join" element={<JoinPage />} />
             <Route path="login" element={<LoginPage />} />
