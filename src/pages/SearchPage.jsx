@@ -3,11 +3,24 @@ import { SearchPageContainer } from "./SearchPageStyle";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { useLocation } from "react-router-dom";
+import { getSearchProducts } from "../api/api";
 
 export default function SearchPage() {
   const [searchItems, SetSearchItems] = useState([]);
+  console.log("searchItems : ", searchItems);
 
   const location = useLocation();
+
+  /*
+    uselocation 사용 하는 방법
+    const location = useLocation();
+    navigate(`/search?query=${text}`);
+
+    useParams 사용 하는 방법
+    navigate(`/search/{text}`);
+
+    위 둘이 경로가 차이가 나고 사용하는 법이 조금 달라진다.
+  */
 
   useEffect(() => {
     const fatchSearchResult = async () => {
@@ -17,10 +30,17 @@ export default function SearchPage() {
       const searchItem = queryParams.get("query");
       console.log("searchItem : ", searchItem);
 
-      if (searchItem) {
+      try {
+        if (searchItem) {
+          const searchProducts = await getSearchProducts(searchItem);
+          SetSearchItems(searchProducts);
+        }
+      } catch (err) {
+        console.error("검색데이터 기반 정보 가져오는 기능 에러 : ", err);
       }
     };
-  });
+    fatchSearchResult();
+  }, [location.search]);
 
   return (
     <SearchPageContainer>
