@@ -27,6 +27,7 @@ export const MainCategoryListContainer = styled.div`
       cursor: pointer;
       width: 256px;
       height: 440px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
       display: flex;
       flex-direction: column;
       border: 1px solid #f2eded;

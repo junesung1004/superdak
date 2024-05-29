@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProductItemsContainer } from "./ProductItemStyle";
 import { useEffect, useState } from "react";
 import { getProducts } from "../api/api";
+import { MdOutlineStarPurple500 } from "react-icons/md";
 
 export default function ProductItems() {
   const [products, setProducts] = useState([]);
@@ -22,41 +23,50 @@ export default function ProductItems() {
     fetchProducts();
   }, []);
 
-  const goToEvent = (product) => {
-    navigate(`/productlist/${product.id}`);
-  };
-
   return (
     <>
       <ProductItemsContainer>
-        <h1 className="category-title">
-          🔥<span>HOT!</span> 맛있고 가성비 좋은 슈퍼닭 모든 아이템 !⭐
-        </h1>
         {/* 야이템 틀*/}
         {products.length === 0 ? (
           <p>현재 상품이 없습니다. 상품을 추가해주세요.</p>
         ) : (
           <>
-            <div className="item-container">
+            <h1 className="category-title">
+              🔥<span>HOT!</span> 맛있고 가성비 좋은 슈퍼닭 모든 아이템 !⭐
+            </h1>
+            <section className="search-item-container">
               {products.map((product, idx) => {
                 return (
-                  <div key={idx} onClick={() => goToEvent(product)}>
-                    <div className="product-item-wrap">
+                  <article className="search-item-wrap" key={idx}>
+                    {/* 이미지 틀 */}
+                    <Link to={`/productlist/${product.id}`}>
                       <div className="img-wrap">
-                        <img src={product.image} alt="아이템 상품" />
+                        <img src={product.image} alt="상품이미지" />
                       </div>
-                      <div className="item-content">
-                        <p>{product.title}</p>
-                        <p>{product.description}</p>
-                        <p>
-                          <span>{product.price.toLocaleString()}</span>원
-                        </p>
+
+                      {/* 상품 정보 */}
+                      <div className="item-info">
+                        <h1>[슈퍼닭] 에어치킨</h1>
+                        <p>소스KIT 추가증정!</p>
+                        <div className="item-price">
+                          <p>{product.discountPrice ? "10%" : "0%"}</p>
+                          <p>
+                            <span>{product.discountPrice ? product.discountPrice : product.price}</span>원
+                          </p>
+                          <p>{product.price}원</p>
+                        </div>
+                        <p>1팩당 : 10% 추가할인!</p>
+                        <div className="item-review">
+                          <MdOutlineStarPurple500 />
+                          <p>4.9(1,523)</p>
+                        </div>
+                        <img src="/1.svg" alt="배송이미지" />
                       </div>
-                    </div>
-                  </div>
+                    </Link>
+                  </article>
                 );
               })}
-            </div>
+            </section>
           </>
         )}
       </ProductItemsContainer>
