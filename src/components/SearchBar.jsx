@@ -19,7 +19,8 @@ export default function SearchBar() {
   const enterChangePage = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      navigate("/search");
+      navigate(`/search?query=${text}`);
+      // navigate(`/search?keyboard=${text}`);
     }
   };
 

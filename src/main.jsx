@@ -42,7 +42,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="cart" element={<CartPage />} />
             <Route path="mypage" element={<MyPage />} />
             <Route path="upload" element={<UploadPage />} />
-            <Route path="search/" element={<SearchPage />} />
+            <Route path="search" element={<SearchPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchPageContainer } from "./SearchPageStyle";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineStarPurple500 } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
 export default function SearchPage() {
   const [searchItems, SetSearchItems] = useState([]);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const fatchSearchResult = async () => {
+      const queryParams = new URLSearchParams(location.search);
+      console.log("queryParams : ", queryParams);
+      //local../search?query="닭가슴살" = location.search 는 "닭가슴살" 을 가져온다.
+      const searchItem = queryParams.get("query");
+      console.log("searchItem : ", searchItem);
+
+      if (searchItem) {
+      }
+    };
+  });
 
   return (
     <SearchPageContainer>
