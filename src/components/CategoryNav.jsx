@@ -17,7 +17,11 @@ export default function CategoryNav() {
             <p>카테고리</p>
             <ul className="category-submenu">
               {categoryList.map((el, idx) => {
-                return <li key={idx}>{el}</li>;
+                return (
+                  <li key={idx}>
+                    <Link to={`productlist/category/${el}`}>{el}</Link>
+                  </li>
+                );
               })}
             </ul>
           </li>

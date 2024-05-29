@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const CategoryNavContainer = styled.div`
-  position: sticky;
-  top: 0;
   .category-nav-wrap {
     border-top: 1px solid #dedede;
     height: 5rem;

@@ -17,7 +17,7 @@ export default function MainCategoryList({ category: propsCategory }) {
   const categoryContent = [
     "[NEW]신상특가🌟",
     "[판매급증]💓인기상품 📈",
-    "[특등 1등급]]닭가슴살~!🔥",
+    "[특등 1등급] 세일!! 이벤트!! 닭가슴살~!🔥",
     "[음료보다 맛있다]보충제!!💸",
     "[콜라보]💓슈퍼닭에서 하림과 콜라보 합작품!!?   도시락!🐣",
     "[무조건]두말안한다... 캡숑 맛있는!!  간편분식💪",
@@ -34,25 +34,19 @@ export default function MainCategoryList({ category: propsCategory }) {
       //console.log(category);
       const fetchProducts = async () => {
         try {
-          const productItem = await getCategoryProduct(category);
-          // const discountProduct = productItem.map((el)=> {
-          //   return (
-          //     ...el,
-          //     discountPrice : el.price * 0.9
-          //   )
-          // })
+          const productItems = await getCategoryProduct(category);
 
-          // const discountProducts = productItem.map((el) => {
-          //   if (category === "BEST") {
-          //     return {
-          //       ...el,
-          //       discountPrice: el.price * 0.9,
-          //     };
-          //   }
-          //   return el;
-          // });
-          setProducts(productItem);
-          // setProducts(discountProducts);
+          const discountProducts = productItems.map((el) => {
+            if (category === "닭가슴살") {
+              return {
+                ...el,
+                discountPrice: el.price * 0.9,
+              };
+            }
+            return el;
+          });
+          // setProducts(productItem);
+          setProducts(discountProducts);
         } catch (err) {
           console.error("카테고리별 아이템 가져오는 기능 에러:", err);
         }
@@ -85,9 +79,9 @@ export default function MainCategoryList({ category: propsCategory }) {
                       <h1>[슈퍼닭] 에어치킨</h1>
                       <p>소스KIT 추가증정!</p>
                       <div className="item-price">
-                        <p>10%</p>
+                        <p>{product.discountPrice ? "10%" : "0%"}</p>
                         <p>
-                          <span>{product.price * 0.9}</span>원
+                          <span>{product.discountPrice ? product.discountPrice : product.price}</span>원
                         </p>
                         <p>{product.price}원</p>
                       </div>

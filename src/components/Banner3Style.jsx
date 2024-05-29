@@ -36,7 +36,6 @@ export const BannerContainer = styled.div`
 
     .img-wrap {
       width: 350px;
-      height: 600px;
       border-radius: 10px;
       overflow: hidden;
       img {

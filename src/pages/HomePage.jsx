@@ -12,7 +12,6 @@ export default function HomePage() {
     <>
       <ImageSlider />
       <CategoryLogoList />
-      {/* <ProductList /> */}
       <Banner />
       <MainCategoryList category={"NEW"} categoryTitle={"신상품"} />
       <Banner3 />
@@ -23,6 +22,7 @@ export default function HomePage() {
       <Banner2 />
       <MainCategoryList category={"도시락"} categoryTitle={"도시락"} />
       <MainCategoryList category={"간편분식"} categoryTitle={"간편분식"} />
+      <ProductList />
     </>
   );
 }

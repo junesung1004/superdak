@@ -33,7 +33,18 @@ export default function SearchPage() {
       try {
         if (searchItem) {
           const searchProducts = await getSearchProducts(searchItem);
-          SetSearchItems(searchProducts);
+
+          const discountProducts = searchProducts.map((el) => {
+            if (category === "닭가슴살") {
+              return {
+                ...el,
+                discountPrice: el.price * 0.9,
+              };
+            }
+            return el;
+          });
+
+          SetSearchItems(discountProducts);
         }
       } catch (err) {
         console.error("검색데이터 기반 정보 가져오는 기능 에러 : ", err);
@@ -114,9 +125,9 @@ export default function SearchPage() {
                   <h1>[슈퍼닭] 에어치킨</h1>
                   <p>소스KIT 추가증정!</p>
                   <div className="item-price">
-                    <p>10%</p>
+                    <p>{product.discountPrice ? "10%" : "0%"}</p>
                     <p>
-                      <span>{product.price * 0.9}</span>원
+                      <span>{product.discountPrice ? product.discountPrice : product.price}</span>원
                     </p>
                     <p>{product.price}원</p>
                   </div>

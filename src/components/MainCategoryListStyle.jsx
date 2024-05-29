@@ -89,4 +89,14 @@ export const MainCategoryListContainer = styled.div`
       } //상품 정보
     }
   }
+
+  /* @media (max-width: 1150px) {
+    display: none;
+    .img-wrap {
+      img {
+        width: 50%;
+        height: 50%;
+      }
+    }
+  } */
 `;
