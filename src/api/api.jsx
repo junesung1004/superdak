@@ -249,3 +249,28 @@ export async function deleteMyPage(userId, productId) {
     console.error("마이페이지에있는 데이터 삭제 기능 에러 : ", err);
   }
 }
+
+//파이어베이스 데이터베이스에 있는 products 폴더의 데이터를 참조하여 검색기능을 갖추는 api
+export async function getSearchProducts(text) {
+  try {
+    const searchRef = databaseRef(database, "products");
+    const snapshot = await get(searchRef);
+    if (snapshot.exists()) {
+      const allProducts = Object.values(snapshot.val());
+
+      if (allProducts.length === 0) {
+        return [];
+      }
+      const matchProducts = allProducts.filter((product) => {
+        const itemTitle = product.title;
+        console.log("itemTitle : ", itemTitle);
+        return itemTitle.includes(text);
+      });
+      return matchProducts;
+    } else {
+      return [];
+    }
+  } catch (err) {
+    console.error("데이터베이스 검색기능 에러 : ", err);
+  }
+}

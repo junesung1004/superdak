@@ -1,5 +1,5 @@
 import React from "react";
-import { BannerContainer } from "./BannerStyle";
+import { BannerContainer } from "./Banner1Style";
 
 export default function Banner1() {
   return (

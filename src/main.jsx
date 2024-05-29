@@ -16,6 +16,7 @@ import UploadPage from "./pages/UploadPage.jsx";
 import { RecoilRoot } from "recoil";
 import { categoryContext } from "./context/categoryContext.js";
 import MainCategoryList from "./components/MainCategoryList.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
 
 // const CategoryRoute = () => {
 //   const { categoryList } = useContext(categoryContext);
@@ -41,6 +42,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="cart" element={<CartPage />} />
             <Route path="mypage" element={<MyPage />} />
             <Route path="upload" element={<UploadPage />} />
+            <Route path="search/" element={<SearchPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
