@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SearchPageContainer } from "./SearchPageStyle";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineStarPurple500 } from "react-icons/md";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getSearchProducts } from "../api/api";
 
 export default function SearchPage() {
@@ -55,7 +55,7 @@ export default function SearchPage() {
           </div>
           <div className="search-item-info">
             <p>
-              전체 <span>50</span>
+              전체 <span>{searchItems.length}</span>
             </p>
           </div>
         </div>
@@ -100,31 +100,37 @@ export default function SearchPage() {
 
       {/* 검색 결과 아이템 */}
       <section className="search-item-container">
-        <article className="search-item-wrap">
-          {/* 이미지 틀 */}
-          <div className="img-wrap">
-            <img src="/cub-1.jpg" alt="상품이미지" />
-          </div>
+        {searchItems.map((product, idx) => {
+          return (
+            <article className="search-item-wrap" key={idx}>
+              {/* 이미지 틀 */}
+              <Link to={`/productlist/${product.id}`}>
+                <div className="img-wrap">
+                  <img src={product.image} alt="상품이미지" />
+                </div>
 
-          {/* 상품 정보 */}
-          <div className="item-info">
-            <h1>[슈퍼닭] 에어치킨</h1>
-            <p>소스KIT 추가증정!</p>
-            <div className="item-price">
-              <p>10%</p>
-              <p>
-                <span>11250</span>원
-              </p>
-              <p>12500원</p>
-            </div>
-            <p>1팩당 : 10% 추가할인!</p>
-            <div className="item-review">
-              <MdOutlineStarPurple500 />
-              <p>4.9(1,523)</p>
-            </div>
-            <img src="/1.svg" alt="배송이미지" />
-          </div>
-        </article>
+                {/* 상품 정보 */}
+                <div className="item-info">
+                  <h1>[슈퍼닭] 에어치킨</h1>
+                  <p>소스KIT 추가증정!</p>
+                  <div className="item-price">
+                    <p>10%</p>
+                    <p>
+                      <span>{product.price * 0.9}</span>원
+                    </p>
+                    <p>{product.price}원</p>
+                  </div>
+                  <p>1팩당 : 10% 추가할인!</p>
+                  <div className="item-review">
+                    <MdOutlineStarPurple500 />
+                    <p>4.9(1,523)</p>
+                  </div>
+                  <img src="/1.svg" alt="배송이미지" />
+                </div>
+              </Link>
+            </article>
+          );
+        })}
       </section>
     </SearchPageContainer>
   );

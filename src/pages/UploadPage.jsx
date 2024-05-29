@@ -15,6 +15,7 @@ export default function UploadPage() {
   const navigate = useNavigate();
 
   const { categoryList } = useContext(categoryContext);
+  console.log("categoryList : ", categoryList);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);

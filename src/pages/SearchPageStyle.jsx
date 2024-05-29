@@ -86,7 +86,9 @@ export const SearchPageContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 40px;
+
     .search-item-wrap {
+      cursor: pointer;
       width: 256px;
       height: 440px;
       display: flex;

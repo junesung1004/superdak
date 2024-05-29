@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const CategoryLogoListContainer = styled.div`
   .catagory-logo-wrap {
-    padding: 60px;
-    padding-bottom: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 80px;
+    margin: 80px auto;
+    width: 100%;
+    max-width: 1300px;
     .logo-cont {
       display: flex;
       flex-direction: column;
