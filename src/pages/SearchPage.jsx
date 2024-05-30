@@ -62,7 +62,10 @@ export default function SearchPage() {
         <div className="search-title-wrap">
           <div className="title-wrap">
             <h1>
-              <span>{searchItems.map((el) => el.category)}</span> 검색결과
+              {searchItems.map((el, idx) => {
+                return <span key={idx}>{el.category}</span>;
+              })}
+              검색결과
             </h1>
           </div>
           <div className="search-item-info">
