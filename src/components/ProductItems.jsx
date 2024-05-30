@@ -6,7 +6,7 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 
 export default function ProductItems() {
   const [products, setProducts] = useState([]);
-  console.log("productsitem : ", products);
+  //console.log("productsitem : ", products);
 
   const navigate = useNavigate();
 

@@ -76,7 +76,7 @@ export default function MainCategoryList({ category: propsCategory }) {
 
                     {/* 상품 정보 */}
                     <div className="item-info">
-                      <h1>[슈퍼닭] 에어치킨</h1>
+                      <h1>[슈퍼닭] {product.title}</h1>
                       <p>소스KIT 추가증정!</p>
                       <div className="item-price">
                         <p>{product.discountPrice ? "10%" : "0%"}</p>

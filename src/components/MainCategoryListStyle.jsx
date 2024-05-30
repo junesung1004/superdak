@@ -49,7 +49,7 @@ export const MainCategoryListContainer = styled.div`
         gap: 8px;
         border-radius: 10px;
         h1 {
-          font-size: 1.1rem;
+          font-size: 1rem;
           color: #524e4e;
         }
         p {
