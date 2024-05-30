@@ -20,7 +20,17 @@ export default function MyPage() {
     const fetchData = async () => {
       try {
         const item = await getMyPage(uid);
-        setBuyProducts(item);
+
+        const discountProducts = item.map((el) => {
+          if (el.category === "닭가슴살") {
+            return {
+              ...el,
+              discountPrice: el.price * 0.9,
+            };
+          }
+          return el;
+        });
+        setBuyProducts(discountProducts);
       } catch (err) {
         console.error("마이페이지에서 데이터 불러오는 기능 에러 : ", err);
       }
@@ -153,13 +163,13 @@ export default function MyPage() {
                     <p>{product.title}</p>
                     <p>{product.description}</p>
                     <p>
-                      <span>{product.price.toLocaleString()}</span>원
+                      <span>{product.discountPrice ? (product.discountPrice * product.selected).toLocaleString() : (product.price * product.selected).toLocaleString()}</span>원
                     </p>
                   </div>
 
                   <div className="cart-item-price-wrap">
                     <p>
-                      <span>{product.price.toLocaleString()}</span>원
+                      <span>{product.discountPrice ? (product.discountPrice * product.selected).toLocaleString() : (product.price * product.selected).toLocaleString()}</span>원
                     </p>
                   </div>
                   <div className="delete-btn-wrap">

@@ -1,11 +1,18 @@
 import styled from "styled-components";
 
-export const CategoryNavContainer = styled.div`
-  position: sticky;
-  top: 0;
+export const CategoryNavContainer = styled.nav`
   .category-nav-wrap {
+    padding: 0 200px;
+    width: 100%;
+    margin: 0 auto;
     border-top: 1px solid #dedede;
     height: 5rem;
+    z-index: 999;
+    background-color: #fff;
+    &.fixed {
+      position: fixed;
+      top: 0;
+    }
     .category-wrap {
       /* margin-top: 30px; */
       display: flex;

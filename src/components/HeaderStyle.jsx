@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.nav`
+export const HeaderContainer = styled.header`
   border-bottom: 1px solid #dedede;
   width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
-  position: relative;
+
   .logo-nav-wrap {
+    max-width: 1300px;
+    margin: 0 auto;
     button {
       border: none;
       background-color: white;
