@@ -5,7 +5,7 @@ export const CategoryNavContainer = styled.div`
     border-top: 1px solid #dedede;
     height: 5rem;
     .category-wrap {
-      margin-top: 30px;
+      /* margin-top: 30px; */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -15,7 +15,9 @@ export const CategoryNavContainer = styled.div`
       .category-mainmenu {
         position: relative;
         display: flex;
+        align-items: center;
         gap: 5px;
+        height: 80px;
         &:hover {
           .category-submenu {
             visibility: visible;
@@ -28,7 +30,7 @@ export const CategoryNavContainer = styled.div`
           flex-direction: column;
           gap: 35px;
           position: absolute;
-          margin: 49px 0;
+          top: 80px;
           padding: 20px;
           border: 1px solid #dedede;
           z-index: 99;

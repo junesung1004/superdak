@@ -11,6 +11,12 @@ export default function SearchPage() {
 
   const location = useLocation();
 
+  const queryParams = new URLSearchParams(location.search);
+  console.log("queryParams : ", queryParams);
+  //local../search?query="닭가슴살" = location.search 는 "닭가슴살" 을 가져온다.
+  const searchItem = queryParams.get("query");
+  console.log("searchItem : ", searchItem);
+
   /*
     uselocation 사용 하는 방법
     const location = useLocation();
@@ -24,28 +30,22 @@ export default function SearchPage() {
 
   useEffect(() => {
     const fatchSearchResult = async () => {
-      const queryParams = new URLSearchParams(location.search);
-      console.log("queryParams : ", queryParams);
-      //local../search?query="닭가슴살" = location.search 는 "닭가슴살" 을 가져온다.
-      const searchItem = queryParams.get("query");
-      console.log("searchItem : ", searchItem);
-
       try {
         if (searchItem) {
           const searchProducts = await getSearchProducts(searchItem);
 
           //왜 안될까..
-          // const discountProducts = searchProducts.map((el) => {
-          //   if (category === "닭가슴살") {
-          //     return {
-          //       ...el,
-          //       discountPrice: el.price * 0.9,
-          //     };
-          //   }
-          //   return el;
-          // });
+          const discountProducts = searchProducts.map((el) => {
+            if (el.category === "닭가슴살") {
+              return {
+                ...el,
+                discountPrice: el.price * 0.9,
+              };
+            }
+            return el;
+          });
 
-          SetSearchItems(searchProducts);
+          SetSearchItems(discountProducts);
         }
       } catch (err) {
         console.error("검색데이터 기반 정보 가져오는 기능 에러 : ", err);
@@ -62,10 +62,7 @@ export default function SearchPage() {
         <div className="search-title-wrap">
           <div className="title-wrap">
             <h1>
-              {searchItems.map((el, idx) => {
-                return <span key={idx}>{el.category}</span>;
-              })}
-              검색결과
+              <span>{searchItem}</span> 검색결과
             </h1>
           </div>
           <div className="search-item-info">
