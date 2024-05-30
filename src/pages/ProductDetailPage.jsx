@@ -35,8 +35,16 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getProductId(id);
+        let data = await getProductId(id);
+        console.log("data : ", data);
         if (data) {
+          if (data.category === "닭가슴살") {
+            data = {
+              ...data,
+              discountPrice: data.price * 0.9,
+            };
+          }
+
           setProducts(data);
         }
       } catch (err) {
@@ -109,7 +117,7 @@ export default function ProductDetailPage() {
                 <h1>{products.title}</h1>
                 <p>{products.description}</p>
                 <p>
-                  {(products.price * selectQuantity).toLocaleString()}
+                  {products.discountPrice ? (products.discountPrice * selectQuantity).toLocaleString() : (products.price * selectQuantity).toLocaleString()}
                   <span>원</span>
                 </p>
               </div>

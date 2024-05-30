@@ -25,7 +25,18 @@ export default function CartPage() {
     const fetchProducts = async () => {
       try {
         const productItem = await getCart(uid);
-        setProducts(productItem);
+
+        const discountProducts = productItem.map((el) => {
+          if (el.category === "닭가슴살") {
+            return {
+              ...el,
+              discountPrice: el.price * 0.9,
+            };
+          }
+          return el;
+        });
+
+        setProducts(discountProducts);
       } catch (err) {
         console.error("장바구니 아이템 가져오는 기능 에러! : ", err);
       }
@@ -172,7 +183,7 @@ export default function CartPage() {
                         <p>{product.title}</p>
                         <p>{product.description}</p>
                         <p>
-                          <span>{(product.price * product.selected).toLocaleString()}</span>원
+                          <span>{product.discountPrice ? (product.discountPrice * product.selected).toLocaleString() : (product.price * product.selected).toLocaleString()}</span>원
                         </p>
                       </div>
                       <div className="cart-item-count-wrap">
