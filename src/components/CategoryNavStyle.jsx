@@ -58,4 +58,14 @@ export const CategoryNavContainer = styled.nav`
       }
     }
   } // 카테고리 네브바 틀
+
+  @media (max-width: 1000px) {
+    .category-nav-wrap {
+      padding: 5px;
+
+      .category-wrap {
+        font-size: 0.85rem;
+      }
+    }
+  }
 `;
