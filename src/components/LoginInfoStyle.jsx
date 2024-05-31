@@ -9,8 +9,8 @@ export const UserInfoContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 10px;
-    p {
-      font-weight: 600;
+    font-weight: 600;
+    span {
       font-size: 16px;
     }
     cursor: pointer;

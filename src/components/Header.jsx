@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <HeaderContainer>
       {/* logo nav wrap */}
-      <nav className="logo-nav-wrap">
+      <div className="logo-nav-wrap">
         <ul className="header-container">
           <li>
             <Link to={"/"} className="logo-cont">
@@ -23,7 +23,7 @@ export default function Header() {
           {/* 로그인 인포 */}
           <LoginInfo />
         </ul>
-      </nav>
+      </div>
 
       {/* category nav wrap */}
       <CategoryNav />

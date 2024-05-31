@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchBarContainer } from "./SearchBarStyle";
 import { FaSearch } from "react-icons/fa";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {

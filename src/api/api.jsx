@@ -263,7 +263,7 @@ export async function getSearchProducts(text) {
       }
       const matchProducts = allProducts.filter((product) => {
         const itemTitle = product.title;
-        //console.log("itemTitle : ", itemTitle);
+        console.log("itemTitle : ", itemTitle);
         return itemTitle.includes(text);
       });
       return matchProducts;
