@@ -31,9 +31,7 @@ export default function ProductItems() {
           <p>현재 상품이 없습니다. 상품을 추가해주세요.</p>
         ) : (
           <>
-            <h1 className="category-title">
-              🔥<span>HOT!</span> 맛있고 가성비 좋은 슈퍼닭 모든 아이템 !⭐
-            </h1>
+            <h1 className="category-title">💓맛있고 가성비 좋은 슈퍼닭 모든 아이템 !⭐</h1>
             <section className="search-item-container">
               {products.map((product, idx) => {
                 return (
@@ -46,7 +44,7 @@ export default function ProductItems() {
 
                       {/* 상품 정보 */}
                       <div className="item-info">
-                        <h1>[슈퍼닭] 에어치킨</h1>
+                        <h1>[슈퍼닭] {product.title}</h1>
                         <p>소스KIT 추가증정!</p>
                         <div className="item-price">
                           <p>{product.discountPrice ? "10%" : "0%"}</p>
