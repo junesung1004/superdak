@@ -4,6 +4,7 @@ export const ProductItemContainer = styled.div`
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  min-height: 100vh;
   .product-container {
     display: flex;
     justify-content: center;
