@@ -60,6 +60,10 @@ export const ContentWrap = styled.form`
         color: white;
         font-weight: bold;
         border-radius: 8px;
+        &:disabled {
+          background-color: #dadada;
+          color: white;
+        }
       }
       input {
         width: 100%;

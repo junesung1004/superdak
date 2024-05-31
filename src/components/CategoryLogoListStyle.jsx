@@ -28,6 +28,7 @@ export const CategoryLogoListContainer = styled.div`
     .catagory-logo-wrap {
       padding: 30px 0;
       gap: 40px;
+      margin: auto;
       .logo-cont {
         transform: scale(0.8);
       }

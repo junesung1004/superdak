@@ -22,6 +22,7 @@ const storage = getStorage();
 //이메일, 비밀번호 회원가입 api
 export async function joinEmail(email, password, name) {
   try {
+    //Authentication firebase 유저 인증에 업로드 - database 업로드 x
     const userData = await createUserWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
     const user = userData.user;
@@ -29,6 +30,12 @@ export async function joinEmail(email, password, name) {
       displayName: name,
     });
     await signOut(auth);
+
+    //firebase에 database 에 업로드하기 위한 api 코드
+    await set(databaseRef(database, "users/" + user.uid), {
+      email,
+      name,
+    });
     return user;
   } catch (err) {
     console.error("회원가입 에러 : ", err);
@@ -40,6 +47,7 @@ export async function loginEmail(email, password) {
   try {
     const userData = await signInWithEmailAndPassword(auth, email, password);
     console.log("userData : ", userData);
+
     const user = userData.user;
     return user;
   } catch (err) {

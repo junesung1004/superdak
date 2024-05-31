@@ -6,7 +6,8 @@ export const CategoryNavContainer = styled.nav`
     width: 100%;
     margin: 0 auto;
     border-top: 1px solid #dedede;
-    height: 5rem;
+    border-bottom: 1px solid #dedede;
+    /* height: 5rem; */
     z-index: 999;
     background-color: #fff;
     &.fixed {
@@ -61,8 +62,7 @@ export const CategoryNavContainer = styled.nav`
 
   @media (max-width: 1000px) {
     .category-nav-wrap {
-      padding: 5px;
-
+      padding: 0 5px;
       .category-wrap {
         font-size: 0.85rem;
       }

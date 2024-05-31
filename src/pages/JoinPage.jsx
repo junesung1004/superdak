@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { ContentWrap, ButtonWrap, JoinContainer } from "./JoinPageStyle";
-import { joinEmail } from "../api/api";
+import { database, joinEmail } from "../api/api";
+import { get, ref as databaseRef } from "firebase/database";
 
 export default function JoinPage() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function JoinPage() {
   const [nameValid, setNameValid] = useState(false);
 
   const [notAllow, setNotAllow] = useState(true);
+  const [notCheckAllow, setCheckNotAllow] = useState(true);
 
   // 이메일 인풋창 이벤트
   const handleEmailChange = (e) => {
@@ -92,6 +94,31 @@ export default function JoinPage() {
     }
   };
 
+  const clickCheckEmail = async () => {
+    try {
+      const emailRef = databaseRef(database, "users");
+      const snapshot = await get(emailRef);
+      if (snapshot.exists()) {
+        const users = snapshot.val();
+        console.log("users : ", users);
+        alert("중복된 이메일입니다. 이메일을 바꿔주세요.");
+      } else {
+        alert("가입이 가능한 이메일입니다.");
+      }
+    } catch (err) {
+      console.log("이메일 중복 체크 기능 에러 : ", err);
+    }
+  };
+
+  //중복된 이메일 체크버튼 disabled 활성화 조건
+  useEffect(() => {
+    if (emailValid) {
+      setCheckNotAllow(false);
+      return;
+    }
+    setCheckNotAllow(true);
+  }, [emailValid]);
+
   //emailvalid 와 passwordvalid가 마운트될때 버튼 활성화
   useEffect(() => {
     if (emailValid && passwordValid && confirmPwValid && nameValid) {
@@ -115,7 +142,9 @@ export default function JoinPage() {
           <div className="input-wrap">
             <FaUser />
             <input id={"email"} type="text" name="email" placeholder="test@gmail.com" value={email} onChange={handleEmailChange} />
-            <button className="check-btn">중복확인</button>
+            <button className="check-btn" type="button" disabled={notCheckAllow} onClick={clickCheckEmail}>
+              중복확인
+            </button>
           </div>
         </div>
         <div className="error-message-wrap">{!emailValid && email.length > 0 && <div>올바른 이메일을 입력해주세요.</div>}</div>
@@ -156,7 +185,7 @@ export default function JoinPage() {
             가입하기
           </button>
 
-          <button type="button" disabled={notAllow} className="cancle-button">
+          <button type="button" className="cancle-button">
             <Link to={"/"}>취소하기</Link>
           </button>
         </ButtonWrap>
