@@ -7,6 +7,7 @@ import MainCategoryList from "../components/MainCategoryList";
 import Banner3 from "../components/Banner3";
 import ProductList from "../pages/ProductListPage";
 import { useRef } from "react";
+import TopDownButton from "../components/TopDownButton";
 
 export default function HomePage() {
   const newRef = useRef(null);
@@ -18,8 +19,8 @@ export default function HomePage() {
 
   const categoryRefs = {
     NEW: newRef,
-    BEST: chickenRef,
-    베스트상품: bestRef,
+    닭가슴살: chickenRef,
+    BEST: bestRef,
     보충제: supplementRef,
     도시락: lunchBoxRef,
     간편분식: snackRef,
@@ -27,6 +28,7 @@ export default function HomePage() {
 
   return (
     <>
+      <TopDownButton />
       <ImageSlider />
       <CategoryLogoList categoryRefs={categoryRefs} />
       <Banner />

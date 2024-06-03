@@ -24,12 +24,16 @@ export default function SearchBar() {
     }
   };
 
+  const handleSearchChange = () => {
+    navigate(`/search?query=${text}`);
+  };
+
   return (
     <SearchBarContainer>
       <form>
         <div className="input-wrap">
           <input type="text" id="search" name="search" value={text} onChange={handleSearchEvent} onKeyDown={enterChangePage} placeholder="상품명을 입력해주세요." />
-          <FaSearch />
+          <FaSearch onClick={handleSearchChange} className="logo" />
         </div>
       </form>
     </SearchBarContainer>

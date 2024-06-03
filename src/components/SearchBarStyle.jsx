@@ -15,6 +15,9 @@ export const SearchBarContainer = styled.div`
       &:focus-within {
         border: 1px solid blue;
       }
+      .logo {
+        cursor: pointer;
+      }
       input {
         width: 100%;
         outline: none;

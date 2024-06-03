@@ -6,6 +6,7 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 
 export default function MainCategoryList({ category: propsCategory }) {
   const [products, setProducts] = useState([]);
+  console.log("products : ", products);
 
   const { category: paramsCategory } = useParams();
   const category = propsCategory || paramsCategory;
@@ -79,11 +80,17 @@ export default function MainCategoryList({ category: propsCategory }) {
                       <h1>[슈퍼닭] {product.title}</h1>
                       <p>소스KIT 추가증정!</p>
                       <div className="item-price">
-                        <p>{product.discountPrice ? "10%" : "0%"}</p>
-                        <p>
-                          <span>{product.discountPrice ? product.discountPrice : product.price}</span>원
-                        </p>
-                        <p>{product.price}원</p>
+                        {product.discountPrice ? (
+                          <>
+                            <p>10%</p>
+                            <p>
+                              <span>{product.discountPrice}</span>원
+                            </p>
+                            <p>{product.price}원</p>
+                          </>
+                        ) : (
+                          <span>{product.price}원</span>
+                        )}
                       </div>
                       <p>1팩당 : 10% 추가할인!</p>
                       <div className="item-review">
