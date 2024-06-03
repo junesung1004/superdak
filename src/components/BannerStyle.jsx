@@ -13,8 +13,8 @@ export const BannerContainer = styled.div`
   justify-content: center;
   background-color: #efe4da;
   opacity: 0;
-  transform: translateX(100px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
+  transform: translateX(300px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
 
   &.visible {
     opacity: 1;
