@@ -14,7 +14,7 @@ export default function Banner() {
         }
       },
       {
-        threshold: 0.3, // 30%가 보일 때 트리거
+        threshold: 0.6, // 30%가 보일 때 트리거
       }
     );
 
