@@ -28,7 +28,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* <TopDownButton /> */}
+      <TopDownButton />
       <ImageSlider />
       <CategoryLogoList categoryRefs={categoryRefs} />
       <Banner />
