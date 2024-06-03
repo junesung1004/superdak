@@ -1,9 +1,37 @@
-import React from "react";
+// Banner.js
+import React, { useEffect, useRef, useState } from "react";
 import { BannerContainer } from "./BannerStyle";
 
 export default function Banner() {
+  const [isVisible, setIsVisible] = useState(false);
+  const bannerRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.3, // 30%가 보일 때 트리거
+      }
+    );
+
+    if (bannerRef.current) {
+      observer.observe(bannerRef.current);
+    }
+
+    // 컴포넌트 언마운트 시 옵저버 해제
+    return () => {
+      if (bannerRef.current) {
+        observer.unobserve(bannerRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <BannerContainer>
+    <BannerContainer ref={bannerRef} className={isVisible ? "visible" : ""}>
       <div className="logo-wrap">
         <img src="/logo.png" alt="브랜드 로고" />
       </div>

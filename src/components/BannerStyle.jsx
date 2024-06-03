@@ -1,3 +1,4 @@
+// BannerStyle.js
 import styled from "styled-components";
 
 export const BannerContainer = styled.div`
@@ -8,10 +9,18 @@ export const BannerContainer = styled.div`
   display: flex;
   gap: 80px;
   margin-top: 40px;
-  /* flex-direction:column; */
   align-items: center;
   justify-content: center;
   background-color: #efe4da;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+
+  &.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   .logo-wrap {
     width: 120px;
     height: 120px;
