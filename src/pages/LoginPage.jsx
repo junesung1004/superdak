@@ -87,6 +87,7 @@ export default function LoginPage() {
       }
     } catch (err) {
       console.error("구글 로그인 에러 : ", err);
+      alert(`구글 로그인 에러: ${err.message}`);
     }
   };
 
