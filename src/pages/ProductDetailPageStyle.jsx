@@ -131,7 +131,8 @@ export const ProductItemContainer = styled.div`
   }
 
   @media (max-width: 1100px) {
-    transform: scale(0.85);
+    /* transform: scale(0.85); */
+    padding: 0 20px;
     .img-wrapper {
       img:last-child {
         display: none;
@@ -140,7 +141,7 @@ export const ProductItemContainer = styled.div`
   }
 
   @media (max-width: 820px) {
-    transform: scale(0.8);
+    /* transform: scale(0.8); */
     .img-wrapper {
       img:last-child {
         display: none;
