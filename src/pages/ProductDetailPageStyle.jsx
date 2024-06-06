@@ -141,8 +141,8 @@ export const ProductItemContainer = styled.div`
   }
 
   @media (max-width: 820px) {
-    /* transform: scale(0.8); */
     .img-wrapper {
+      transform: scale(0.8);
       img:last-child {
         display: none;
       }
