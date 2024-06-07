@@ -5,7 +5,7 @@ import { useUserState } from "../recoil/authLoginAtom";
 
 export default function MyPage() {
   const [buyProducts, setBuyProducts] = useState([]);
-  //console.log("buyProducts : ", buyProducts);
+  console.log("buyProducts : ", buyProducts);
 
   const [user] = useUserState();
   //console.log("user : ", user);
@@ -13,7 +13,7 @@ export default function MyPage() {
 
   //체크박스 선택한 갯수 및 정보를 담는 state변수
   const [selectProductList, setSelectProductList] = useState([]);
-  console.log("selectProductList : ", selectProductList);
+  //console.log("selectProductList : ", selectProductList);
 
   //api데이터를 uid 즉 유저의id가 있을때 마운트 되어서 정보를 보여주는 코드
   useEffect(() => {

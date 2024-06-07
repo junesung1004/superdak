@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getProductId, updateCart } from "../api/api";
+import { getProductId, updateCart, uploadMyPage } from "../api/api";
 import { ProductItemContainer } from "./ProductDetailPageStyle";
 import { useUserState } from "../recoil/authLoginAtom";
 
@@ -88,14 +88,21 @@ export default function ProductDetailPage() {
     }
   };
 
-  const goToBuyEvent = () => {
-    if (!user) {
-      alert("회원전용 기능입니다. 회원가입 페이지로 이동하겠습니다.");
-      navigate("/login");
-      return;
-    } else {
-      alert("주문해주셔서 감사합니다. 총알배송으로 찾아가겠습니다~!");
-      navigate("/");
+  const goToBuyEvent = async (e) => {
+    e.preventDefault();
+    try {
+      if (!user) {
+        alert("회원전용 기능입니다. 회원가입 페이지로 이동하겠습니다.");
+        navigate("/login");
+        return;
+      } else {
+        const updataProducts = { ...products, selected: selectQuantity };
+        await uploadMyPage(uid, products.id, updataProducts);
+        alert("주문해주셔서 감사합니다. 총알배송으로 찾아가겠습니다~!");
+        navigate("/mypage");
+      }
+    } catch (err) {
+      console.log("바로구매 마이페이지로 이동 기능 에러 : ", err);
     }
   };
 
