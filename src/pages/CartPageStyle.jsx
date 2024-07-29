@@ -176,4 +176,24 @@ export const CartPageContainer = styled.div`
       }
     }
   }
+
+  @media (max-width: 390px) {
+    font-size: 12px;
+    .all-check-wrap {
+      .btn-wrap {
+        button {
+          font-size: 10px;
+          transform: scale(0.8);
+        }
+      }
+    }
+    .cart-item-wrap {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      .cart-item-count-wrap {
+        margin-right: 0;
+      }
+    }
+  }
 `;

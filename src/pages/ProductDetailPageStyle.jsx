@@ -254,6 +254,7 @@ export const ProductItemContainer = styled.div`
             padding: 15px 80px;
           }
           .button-wrap {
+            transform: scale(0.8);
             margin-top: 20px;
             display: flex;
             justify-content: center;
