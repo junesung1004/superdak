@@ -22,4 +22,8 @@ export const TopDownButtonContainer = styled.div`
     align-items: center;
     cursor: pointer;
   }
+
+  @media (max-width: 586px) {
+    display: none;
+  }
 `;

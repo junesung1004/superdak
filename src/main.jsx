@@ -4,19 +4,19 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
-import ProductDetailPage from "./pages/ProductDetailPage";
-import JoinPage from "./pages/JoinPage";
-import LoginPage from "./pages/LoginPage";
-import CartPage from "./pages/CartPage";
-import ProductListPage from "./pages/ProductListPage";
+import HomePage from "./pages/HomePage.jsx";
+import ProductDetailPage from "./pages/ProductDetailPage.jsx";
+import JoinPage from "./pages/JoinPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
+import ProductListPage from "./pages/ProductListPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import UploadPage from "./pages/UploadPage.jsx";
 import { RecoilRoot } from "recoil";
 import { categoryContext } from "./context/categoryContext.js";
-import MainCategoryList from "./components/MainCategoryList.jsx";
-import SearchPage from "./pages/SearchPage.jsx";
+import MainCategoryList from "./components/CategoryLogoList.jsx";
+import SearchPage from "./pages//SearchPage.jsx";
 
 // const CategoryRoute = () => {
 //   const { categoryList } = useContext(categoryContext);

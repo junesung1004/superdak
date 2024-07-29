@@ -49,4 +49,12 @@ export const SearchBarContainer = styled.div`
       }
     }
   }
+
+  @media (max-width: 390px) {
+    form {
+      .input-wrap {
+        transform: scale(0.8);
+      }
+    }
+  }
 `;

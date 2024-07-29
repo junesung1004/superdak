@@ -47,9 +47,9 @@ export default function CategoryNav() {
             <ul className="category-submenu">
               {categoryList.map((el, idx) => {
                 return (
-                  <li key={idx}>
-                    <Link to={`productlist/category/${el}`}>{el}</Link>
-                  </li>
+                  <ul key={idx}>
+                    <li to={`productlist/category/${el}`}>{el}</li>
+                  </ul>
                 );
               })}
             </ul>
@@ -57,7 +57,7 @@ export default function CategoryNav() {
           {categoryList.map((el, idx) => {
             return (
               <li key={idx}>
-                <Link to={`productlist/category/${el}`}>{el}</Link>
+                <li to={`productlist/category/${el}`}>{el}</li>
               </li>
             );
           })}

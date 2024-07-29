@@ -71,4 +71,22 @@ export const HeaderContainer = styled.header`
       }
     }
   }
+
+  @media (max-width: 390px) {
+    .logo-nav-wrap {
+      .header-container {
+        .logo-cont {
+          display: flex;
+          align-items: center;
+          img {
+            width: 35px;
+            height: 35px;
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 `;
