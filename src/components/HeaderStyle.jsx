@@ -73,6 +73,7 @@ export const HeaderContainer = styled.header`
   }
 
   @media (max-width: 390px) {
+    transform: scale(0.85);
     .logo-nav-wrap {
       .header-container {
         .logo-cont {
@@ -80,10 +81,10 @@ export const HeaderContainer = styled.header`
           align-items: center;
           img {
             width: 35px;
-            height: 35px;
+            /* height: 35px; */
           }
           span {
-            display: none;
+            /* display: none;/ */
           }
         }
       }

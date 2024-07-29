@@ -91,13 +91,13 @@ export const MainCategoryListContainer = styled.div`
     }
   }
 
-  /* @media (max-width: 1150px) {
-    display: none;
+  @media (max-width: 390px) {
+    /* display: none; */
     .img-wrap {
       img {
         width: 50%;
-        height: 50%;
+        height: 100%;
       }
     }
-  } */
+  }
 `;
