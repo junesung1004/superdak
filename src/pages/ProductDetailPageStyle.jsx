@@ -159,6 +159,7 @@ export const ProductItemContainer = styled.div`
   }
 
   @media (max-width: 390px) {
+    box-sizing: border-box;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
@@ -196,7 +197,7 @@ export const ProductItemContainer = styled.div`
           gap: 15px;
           padding-bottom: 30px;
           border-bottom: 1px solid #dedede;
-          padding: 0 60px;
+          padding: 0 90px;
           h1 {
             font-size: 1rem;
             font-weight: 500;
@@ -218,7 +219,7 @@ export const ProductItemContainer = styled.div`
 
         /* 상품 주의사항 콘테이너 */
         .product-info-wrap {
-          padding: 60px;
+          padding: 20px 90px;
           .info-wrap {
             display: flex;
             align-items: center;
@@ -243,9 +244,8 @@ export const ProductItemContainer = styled.div`
           gap: 10px;
           padding-top: 20px;
           border-top: 1px solid #dedede;
-
           label {
-            padding: 0 60px;
+            padding: 0 90px;
             margin-bottom: 5px;
             font-size: 1.1rem;
             font-weight: 500;
