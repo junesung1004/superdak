@@ -182,7 +182,8 @@ export default function MyPage() {
                 {/* 카트 상품 가격 표시 콘테이너 */}
                 <div className="cart-item-price-wrap">
                   <p>
-                    상품<span>{product.price.toLocaleString()}</span>원 총 가격 :<span className="price">{product.price.toLocaleString()}</span>원
+                    상품<span>{(product.price * product.selected).toLocaleString()}</span>원 총 가격 :
+                    <span className="price">{(product.price * product.selected).toLocaleString()}</span>원
                   </p>
                 </div>
               </div>

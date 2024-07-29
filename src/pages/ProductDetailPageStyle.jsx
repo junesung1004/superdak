@@ -189,7 +189,7 @@ export const ProductItemContainer = styled.div`
         display: flex;
         flex-direction: column;
         gap: 10px;
-
+        width: 390px;
         /* 상품 내용 콘테이너 */
         .product-content-wrap {
           display: flex;
@@ -251,7 +251,8 @@ export const ProductItemContainer = styled.div`
             font-weight: 500;
           }
           select {
-            padding: 15px 80px;
+            margin: 0 auto;
+            width: 250px;
           }
           .button-wrap {
             transform: scale(0.8);
@@ -260,12 +261,14 @@ export const ProductItemContainer = styled.div`
             justify-content: center;
             width: 100%;
             gap: 20px;
+
             .cart-btn {
+              font-size: 10px;
               height: 50px;
               cursor: pointer;
               width: 230px;
               font-weight: bold;
-              padding: 10px 80px;
+
               border: 1px solid #ededed;
               background-color: white;
               transition: 0.5s;
@@ -285,6 +288,7 @@ export const ProductItemContainer = styled.div`
               background-color: aqua;
               transition: 0.5s;
               border-radius: 8px;
+              font-size: 10px;
               &:hover {
                 background-color: rgba(138, 127, 241, 0.5);
               }

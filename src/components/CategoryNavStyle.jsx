@@ -83,7 +83,7 @@ export const CategoryNavContainer = styled.nav`
     }
   }
 
-  /* @media (max-width: 390px) {
+  @media (max-width: 390px) {
     display: none;
-  } */
+  }
 `;

@@ -178,6 +178,7 @@ export const CartPageContainer = styled.div`
   }
 
   @media (max-width: 390px) {
+    /* display: none; */
     font-size: 12px;
     .all-check-wrap {
       .btn-wrap {
@@ -192,7 +193,6 @@ export const CartPageContainer = styled.div`
       align-items: center;
       text-align: center;
       .cart-item-count-wrap {
-        margin-right: 0;
       }
     }
   }
