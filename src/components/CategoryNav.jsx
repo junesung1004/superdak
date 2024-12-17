@@ -48,7 +48,7 @@ export default function CategoryNav() {
               {categoryList.map((el, idx) => {
                 return (
                   <ul key={idx}>
-                    <li to={`productlist/category/${el}`}>{el}</li>
+                    <Link to={`productlist/category/${el}`}>{el}</Link>
                   </ul>
                 );
               })}
@@ -57,7 +57,7 @@ export default function CategoryNav() {
           {categoryList.map((el, idx) => {
             return (
               <li key={idx}>
-                <li to={`productlist/category/${el}`}>{el}</li>
+                <Link to={`productlist/category/${el}`}>{el}</Link>
               </li>
             );
           })}
