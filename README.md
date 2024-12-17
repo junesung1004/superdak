@@ -87,10 +87,10 @@ swiper.js 라이브러리를 사용하여 메인 배너가 자동으로 슬라�
 
 ## 프로젝트 이미지
 
-| ![메인 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/splash.png)        | ![카테고리 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/main.png)      |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| ![검색 후 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/filter.png)     | ![장바구니 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/cochimark.png) |
-| ----------------------------------------------------------------------------------------------------------    | --------------------------------------------------------------------------------------------------            |
-| ![디테일 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/menuitem.png)    | ![마이페이지 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/shop.png)    |
-| ----------------------------------------------------------------------------------------------------------    | --------------------------------------------------------------------------------------------------            |
-| ![음식 선택택 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/mypage.png) |
+| ![메인 화면](https://github.com/junesung1004/superdak/blob/master/public/views/main.png)                        | ![카테고리 화면](https://github.com/junesung1004/superdak/blob/master/public/views/category.png)         |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| ![카테고리 화면 1](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/category1.png) | ![디테일 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/detail.png) |
+| ----------------------------------------------------------------------------------------------------------      | --------------------------------------------------------------------------------------------------       |
+| ![장바구니 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/cart.png)        | ![검색 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/search.png)   |
+| ----------------------------------------------------------------------------------------------------------      | --------------------------------------------------------------------------------------------------       |
+| ![마이페이지 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/mypage.png)    | ![관리자 화면](https://github.com/junesung1004/todayEat-TeamProject/blob/develop/public/view/admin.png)  |
