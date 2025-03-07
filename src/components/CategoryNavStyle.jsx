@@ -10,10 +10,7 @@ export const CategoryNavContainer = styled.nav`
     /* height: 5rem; */
     z-index: 999;
     background-color: #fff;
-    &.fixed {
-      position: fixed;
-      top: 0;
-    }
+
     .category-wrap {
       /* margin-top: 30px; */
       display: flex;

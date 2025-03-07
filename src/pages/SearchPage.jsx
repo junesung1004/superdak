@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchPageContainer } from "./SearchPageStyle";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineStarPurple500 } from "react-icons/md";
@@ -13,20 +13,8 @@ export default function SearchPage() {
 
   const queryParams = new URLSearchParams(location.search);
   console.log("queryParams : ", queryParams);
-  //local../search?query="닭가슴살" = location.search 는 "닭가슴살" 을 가져온다.
   const searchItem = queryParams.get("query");
   console.log("searchItem : ", searchItem);
-
-  /*
-    uselocation 사용 하는 방법
-    const location = useLocation();
-    navigate(`/search?query=${text}`);
-
-    useParams 사용 하는 방법
-    navigate(`/search/{text}`);
-
-    위 둘이 경로가 차이가 나고 사용하는 법이 조금 달라진다.
-  */
 
   useEffect(() => {
     const fatchSearchResult = async () => {
@@ -128,7 +116,12 @@ export default function SearchPage() {
                   <div className="item-price">
                     <p>{product.discountPrice ? "10%" : "0%"}</p>
                     <p>
-                      <span>{product.discountPrice ? product.discountPrice : product.price}</span>원
+                      <span>
+                        {product.discountPrice
+                          ? product.discountPrice
+                          : product.price}
+                      </span>
+                      원
                     </p>
                     <p>{product.price}원</p>
                   </div>

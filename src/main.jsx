@@ -15,7 +15,7 @@ import MyPage from "./pages/MyPage.jsx";
 import UploadPage from "./pages/UploadPage.jsx";
 import { RecoilRoot } from "recoil";
 import { categoryContext } from "./context/categoryContext.js";
-import MainCategoryList from "./components/CategoryLogoList.jsx";
+import MainCategoryList from "./components/MainCategoryList.jsx";
 import SearchPage from "./pages//SearchPage.jsx";
 
 // const CategoryRoute = () => {
@@ -27,7 +27,18 @@ import SearchPage from "./pages//SearchPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RecoilRoot>
-    <categoryContext.Provider value={{ categoryList: ["NEW", "BEST", "닭가슴살", "보충제", "도시락", "간편분식"] }}>
+    <categoryContext.Provider
+      value={{
+        categoryList: [
+          "NEW",
+          "BEST",
+          "닭가슴살",
+          "보충제",
+          "도시락",
+          "간편분식",
+        ],
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
